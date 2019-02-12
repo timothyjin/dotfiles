@@ -1,0 +1,3 @@
+#!/bin/sh
+
+dmenu -fn Monospace-14 -sb "#fb4934" -sf "#1d2021" -nf "#000000" -nb "#000000" -p "$1" <&- && echo

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xrandr | grep -q 'eDP-1 connected' && compton --config ~/.config/compton.conf.intel &
+xrandr | grep -q 'DP-0 connected' && compton --config ~/.config/compton.conf.nvidia &

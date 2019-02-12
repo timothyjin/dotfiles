@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) $TERMINAL -e nmtui ;;
+esac
+
+wifi=$(grep "^\s*w" /proc/net/wireless | awk '{print int($3 * 100 / 70)"%"}')
+
+printf "%s" "$wifi"
+
