@@ -27,6 +27,8 @@ alias f="$FILE"
 alias sf='sudo "$FILE"'
 alias ssc='sudo systemctl'
 alias ff='sudo find / -name'
+alias win='sudo efibootmgr -n 0000'
+alias gs='git status'
 alias cw='calcurse --day 7'
 alias ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0'
 
