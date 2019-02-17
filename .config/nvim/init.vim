@@ -10,6 +10,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 Plug 'jreybert/vimagit'
+Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 call plug#end()
 
@@ -37,6 +38,12 @@ set wildmode=longest,list,full
 
 " ----- Disable automatic commenting ----- "
 autocmd FileType * setlocal formatoptions-=c formatoptions -=r formatoptions-=o
+
+" ----- Split navigation ----- "
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " ----- Leader key bindings ----- "
 map <leader>r :set relativenumber!<CR>
@@ -119,5 +126,4 @@ autocmd FileType vimwiki inoremap ;h2 ==<Space><Space>==<Enter><++><Esc>k03li
 autocmd FileType vimwiki inoremap ;h3 ===<Space><Space>===<Enter><++><Esc>k04li
 autocmd FileType vimwiki inoremap ;ul *<Space>
 autocmd FileType vimwiki inoremap ;l <Enter><Tab>-<Space>
-autocmd FileType vimwiki inoremap ;n
-autocmd FileType vinwiki inoremap ;n $$<++><Esc>2T$i
+autocmd FileType vimwiki inoremap ;n $$<++><Esc>2T$i
