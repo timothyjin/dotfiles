@@ -47,6 +47,7 @@ map <C-l> <C-w>l
 
 " ----- Leader key bindings ----- "
 map <leader>r :set relativenumber!<CR>
+map <leader>u :PlugUpdate<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>g :Goyo \| set linebreak<CR>
 map <leader>o :setlocal spell! spelllang=en_us<CR>
@@ -55,7 +56,7 @@ map <leader>p :!opout <c-r>%<CR><CR>
 map <leader>/ gcc
 
 " ----- Grammar check (LanguageTool) ----- "
-let g:languagetool_jar='$HOME/Repos/LanguageTool/languagetool-commandline.jar'
+let g:languagetool_jar='/usr/share/java/languagetool/languagetool.jar'
 let g:languagetool_lang="en-US"
 map <leader>l :LanguageToolCheck<CR>
 map <leader>k :LanguageToolClear<CR>
@@ -108,7 +109,8 @@ autocmd FileType tex,rmd map <leader>w :w !detex \| wc -w<CR>
 
 " ----- Markdown ----- "
 autocmd FileType markdown,rmd inoremap ;b ****<++><Esc>F*hi
-autocmd FileType markdown,rmd inoremap ;i __<++><Esc>F_i
+autocmd FileType markdown,rmd inoremap ;i **<++><Esc>F*i
+autocmd FileType markdown,rmd inoremap ;u __<++><Esc>F_i
 autocmd FileType markdown,rmd inoremap ;h1 #<Space><Enter><++><Esc>kA
 autocmd FileType markdown,rmd inoremap ;h2 ##<Space><Enter><++><Esc>kA
 autocmd FileType markdown,rmd inoremap ;h3 ###<Space><Enter><++><Esc>kA
