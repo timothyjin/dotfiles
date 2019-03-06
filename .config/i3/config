@@ -9,7 +9,7 @@ set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $shutdown sudo -A shutdown -h now
 set $reboot sudo -A reboot
-set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
+set $netrefresh sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
 
 # ----- External ----- #
@@ -85,11 +85,11 @@ bindsym $mod+Shift+q kill
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 
-bindsym $mod+e exec --no-startup-id $term -e htop
+bindsym $mod+e exec $term -e htop
 #bindsym $mod+Shift+e
 
-bindsym $mod+r exec --no-startup-id $term -e ranger
-bindsym $mod+Shift+r exec --no-startup-id $term -e sudo -A ranger
+bindsym $mod+r exec $term -e ranger
+bindsym $mod+Shift+r exec $term -e sudo -A ranger
 
 bindsym $mod+t split toggle
 bindsym $mod+Shift+t gaps inner current set 10; gaps outer current set 5
@@ -154,7 +154,7 @@ bindsym $mod+b bar mode toggle
 bindsym $mod+n exec $term -e nmtui
 #bindsym $mod+Shift+n
 
-bindsym $mod+m exec --no-startup-id $term -e ncmpcpp
+bindsym $mod+m exec $term -e ncmpcpp
 #bindsym $mod+Shift+m
 
 set $ws1 "1"
@@ -203,7 +203,7 @@ bindsym $mod+F8 exec --no-startup-id $netrefresh
 #bindsym $mod+F9
 #bindsym $mod+F10
 #bindsym $mod+F11
-bindsym $mod+F12 exec --no-startup-id $term -t "dd_calcurse" -e calcurse
+bindsym $mod+F12 exec $term -t "dd_calcurse" -e calcurse
 
 # ----- Arrow Keys ----- #
 bindsym $mod+Up focus up
