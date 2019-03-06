@@ -2,7 +2,7 @@
 
 fscrn=$(mktemp --tmpdir XXXX.png)
 
-maim $fscrn
+maim -u $fscrn
 gm mogrify -scale 10% -scale 1000% $fscrn
 
 revert() {
@@ -14,5 +14,5 @@ xset +dpms dpms 5 5 5
 sleep .2; xset dpms force off
 i3lock -ni $fscrn
 
-revert 
+revert
 rm $fscrn
