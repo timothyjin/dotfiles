@@ -9,11 +9,11 @@
 # Disable beep
 xset b off
 
-$TPOINT='TPPS/2 Elan TrackPoint'
-$TPAD='SynPS/2 Synaptics TouchPad'
-$WR_MOUSE='Logitech G403 Prodigy Wired/Wireless Gaming Mouse'
-$WL_MOUSE='Logitech USB Receiver Mouse'
-$MSPEED=0.4
+TPOINT="TPPS/2 Elan TrackPoint"
+TPAD="SynPS/2 Synaptics TouchPad"
+WR_MOUSE="Logitech G403 Prodigy Wired/Wireless Gaming Mouse"
+WL_MOUSE="Logitech USB Receiver Mouse"
+MSPEED="0.4"
 
 # TrackPoint, TouchPad, mouse settings
 xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Profile Enabled" 1, 0
