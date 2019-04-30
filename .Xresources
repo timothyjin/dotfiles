@@ -16,4 +16,8 @@
 *.color14: #8ec07c
 *.color15: #ebdbb2
 !! Transparency
-*.alpha: 150
+*.alpha: 170
+
+!! xterm colors
+xterm*background: black
+xterm*foreground: lightgray

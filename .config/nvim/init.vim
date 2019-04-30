@@ -12,6 +12,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
+Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 " ----- Themes ----- "
@@ -21,7 +22,7 @@ map <leader>t :AirlineTheme<Space>
 
 " ----- Basics ----- "
 set nocompatible
-filetype plugin on
+filetype plugin indent on
 syntax on
 set encoding=utf-8
 set number relativenumber
@@ -129,3 +130,12 @@ autocmd FileType vimwiki inoremap ;h3 ===<Space><Space>===<Enter><++><Esc>k04li
 autocmd FileType vimwiki inoremap ;ul *<Space>
 autocmd FileType vimwiki inoremap ;l <Enter><Tab>-<Space>
 autocmd FileType vimwiki inoremap ;n $$<++><Esc>2T$i
+
+" ----- Haskell ----- "
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords

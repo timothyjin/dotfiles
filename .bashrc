@@ -16,7 +16,7 @@ shopt -s autocd
 # Blue: 4
 # Cyan: 6
 # White (Gray): 7
-export PS1="\[$(tput bold)\]\[$(tput setaf 6)\][\u@\h | \W]$ \[$(tput sgr0)\]"
+export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\u@\h | \W]$ \[$(tput sgr0)\]"
 #export PS1="\[$(tput bold)\]\[$(tput setab 7)\][\u@\h | \W]$\[$(tput setab 0)\] \[$(tput sgr0)\]"
 
 # ----- Command aliases ----- #
@@ -28,6 +28,7 @@ alias sf='sudo "$FILE"'
 alias ssc='sudo systemctl'
 alias ff='sudo find / -name'
 alias win='sudo efibootmgr -n 0000'
+alias sdn='sudo shutdown -h now'
 alias gs='git status'
 alias cw='calcurse --day 7'
 alias ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0'
