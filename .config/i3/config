@@ -47,7 +47,19 @@ client.urgent           $darkred        $darkred        $black      $darkred    
 client.background       $black
 
 bar {
-    font pango:lato 9
+    # ----- i3blocks ----- #
+    # font pango:lato 9
+    # status_command i3blocks
+    # position bottom
+    # mode dock
+    # modifier none
+
+    # ----- bumblebee-status ----- #
+    font pango:DejaVu Sans Mono, FontAwesome 9
+    position bottom
+    tray_output none
+    status_command /usr/bin/bumblebee-status -m mpd pasink sensors cpu memory disk nic battery date time -p mpd.right-click="st -e ncmpcpp" memory.format="{used}/{total}" disk.path=/ disk.left-click="st -e ranger" disk.format="{used}/{size}" nic.states=^down nic.format="{ip} {ssid}" date.left-click="st -t dd_calcurse -e calcurse" date.format="%a %b %d %Y" time.format="%H:%M" -t greyish-powerline
+
     colors {
         background $darkblack
         statusline $white
@@ -57,10 +69,6 @@ bar {
         inactive_workspace $darkblack $darkblack $white
         urgent_workspace $darkblack $darkblack $white
     }
-    status_command i3blocks
-    position bottom
-    mode dock
-    modifier none
 }
 
 floating_modifier $mod
@@ -85,7 +93,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 
-bindsym $mod+e exec $term -e htop
+bindsym $mod+e exec $term -e gtop
 #bindsym $mod+Shift+e
 
 bindsym $mod+r exec $term -e ranger
@@ -155,7 +163,7 @@ bindsym $mod+n exec $term -e nmtui
 #bindsym $mod+Shift+n
 
 bindsym $mod+m exec $term -e ncmpcpp
-#bindsym $mod+Shift+m
+bindsym $mod+Shift+m exec --no-startup-id maim -u ~/Pictures/maim.png
 
 set $ws1 "1"
 set $ws2 "2"
