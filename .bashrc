@@ -27,7 +27,7 @@ alias f="$FILE"
 alias sf='sudo "$FILE"'
 alias ssc='sudo systemctl'
 alias ff='sudo find / -name'
-alias win='sudo efibootmgr -n 0000'
+alias win='sudo efibootmgr -n 0000 && sudo reboot'
 alias sdn='sudo shutdown -h now'
 alias gs='git status'
 alias cw='calcurse --day 7'
@@ -46,10 +46,6 @@ alias cf='cd ~/.config'
 alias sc='cd ~/.scripts'
 
 # ----- School directory shortcuts ----- #
-alias 338='cd ~/Documents/4-Spring2019/EECS-338'
-alias 345='cd ~/Documents/4-Spring2019/EECS-345'
-alias 391='cd ~/Documents/4-Spring2019/EECS-391'
-alias 209='cd ~/Documents/4-Spring2019/USSO-209'
 
 # ----- File shortcuts ----- #
 alias cfp='"$EDITOR" ~/.bash_profile'
