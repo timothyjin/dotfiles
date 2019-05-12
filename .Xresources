@@ -1,3 +1,6 @@
+!! Terminal font
+*.font: mono:pixelsize=14:antialias=true:autohint=true;
+
 !! "Gruvbox" colors
 *.color0: #1d2021
 *.color1: #cc341d
@@ -16,7 +19,7 @@
 *.color14: #8ec07c
 *.color15: #ebdbb2
 !! Transparency
-*.alpha: 170
+*.alpha: 0.67
 
 !! xterm colors
 xterm*background: black
