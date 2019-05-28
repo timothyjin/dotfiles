@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
+export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | tr '\n' ':')"
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"
