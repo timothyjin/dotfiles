@@ -1,6 +1,7 @@
 let mapleader=" "
 
 call plug#begin('~/.vim/plugged')
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
@@ -16,8 +17,8 @@ Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 " ----- Themes ----- "
-color pablo
-let g:airline_theme='serene'
+color peachpuff
+let g:airline_theme='ouo'
 map <leader>t :AirlineTheme<Space>
 
 " ----- Basics ----- "

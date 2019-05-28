@@ -17,6 +17,7 @@ exec --no-startup-id feh --bg-scale ~/.config/wallpaper.jpg
 # exec --no-startup-id compton --config ~/.config/compton.conf &
 exec --no-startup-id compconf
 exec --no-startup-id redshift &
+exec --no-startup-id nm-applet
 exec --no-startup-id dunst
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
 
@@ -57,8 +58,7 @@ bar {
     # ----- bumblebee-status ----- #
     font pango:DejaVu Sans Mono, FontAwesome 9
     position bottom
-    tray_output none
-    status_command /usr/bin/bumblebee-status -m mpd pasink sensors cpu memory disk nic battery date time -p mpd.right-click="st -e ncmpcpp" memory.format="{used}/{total}" disk.path=/ disk.left-click="st -e ranger" disk.format="{used}/{size}" nic.states=^down nic.format="{ip} {ssid}" date.left-click="st -t dd_calcurse -e calcurse" date.format="%a %b %d %Y" time.format="%H:%M" -t greyish-powerline
+    status_command /usr/bin/bumblebee-status -m mpd pasink sensors cpu memory disk nic battery date time -p engine.workspacewrap=false mpd.right-click="st -e ncmpcpp" mpd.format="{artist} - {title} [{position}/{duration}]" cpu.left-click="st -e gtop" memory.left-click="st -e gtop" memory.format="{used}/{total}" disk.path=/ disk.left-click="st -e ranger" disk.format="{used}/{size}" nic.states=^down nic.left-click="st -e nmtui" nic.format="{ip} {ssid}" date.left-click="st -t dd_calcurse -e calcurse" date.format="%a %b %d %Y" time.format="%H:%M" -t greyish-powerline
 
     colors {
         background $darkblack
@@ -163,7 +163,7 @@ bindsym $mod+n exec $term -e nmtui
 #bindsym $mod+Shift+n
 
 bindsym $mod+m exec $term -e ncmpcpp
-bindsym $mod+Shift+m exec --no-startup-id maim -u ~/Pictures/maim.png
+bindsym $mod+Shift+m exec --no-startup-id maim -u ~/Pictures/$(date +%s).png
 
 set $ws1 "1"
 set $ws2 "2"
