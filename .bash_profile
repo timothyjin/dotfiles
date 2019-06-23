@@ -7,7 +7,7 @@ export TERMINAL="st"
 export BROWSER="firefox"
 export FILE="ranger"
 export READER="zathura"
-export SUDO_ASKPASS="$HOME/.scripts/tools/dmenupass"
+export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 
 [[ -f ~/.bashrc ]] && source "$HOME/.bashrc"
 

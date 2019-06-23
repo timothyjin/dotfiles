@@ -43,7 +43,7 @@ alias D='cd ~/Downloads'
 alias m='cd ~/Music'
 alias p='cd ~/Pictures'
 alias cf='cd ~/.config'
-alias sc='cd ~/.scripts'
+alias lb='cd ~/.local/bin'
 
 # ----- School directory shortcuts ----- #
 
