@@ -1,4 +1,4 @@
 backend = "glx";
 glx-no-stencil = true;
 vsync = "true";
-fading = true;
+fading = false;
