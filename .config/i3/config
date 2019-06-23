@@ -41,7 +41,7 @@ set_from_resource $white        color15 #000000
 set $transparent                #00000000
 
 #                       BORDER          BACKGROUND      TEXT        INDICATOR       CHILD_BORDER
-client.focused          $darkgreen      $darkblack      $darkred    $red            $darkgreen
+client.focused          $darkgreen      $darkblack      $darkred    $red            $darkblue
 client.focused_inactive $transparent    $blue           $white      $darkblack      $darkblack
 client.unfocused        $transparent    $blue           $white      $darkblack      $darkblack
 client.urgent           $darkred        $darkred        $black      $darkred        $darkred
@@ -64,7 +64,7 @@ bar {
         background $darkblack
         statusline $white
         separator $darkred
-        focused_workspace $green $darkgreen $darkblack
+        focused_workspace $blue $darkblue $darkblack
         active_workspace $blue $blue $darkwhite
         inactive_workspace $darkblack $darkblack $white
         urgent_workspace $darkblack $darkblack $white

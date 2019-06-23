@@ -16,7 +16,7 @@ shopt -s autocd
 # Blue: 4
 # Cyan: 6
 # White (Gray): 7
-export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\u@\h | \W]$ \[$(tput sgr0)\]"
+export PS1="\[$(tput bold)\]\[$(tput setaf 4)\][\u@\h | \W]$ \[$(tput sgr0)\]"
 #export PS1="\[$(tput bold)\]\[$(tput setab 7)\][\u@\h | \W]$\[$(tput setab 0)\] \[$(tput sgr0)\]"
 
 # ----- Command aliases ----- #
