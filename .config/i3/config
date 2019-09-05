@@ -2,25 +2,28 @@
 
 # ----- Definitions ----- #
 for_window [class="^.*"] border pixel 2
-for_window [class="St" title="dd_*"] floating enable
-gaps inner 10
-gaps outer 5
+for_window [class="St" title="float_*"] floating enable
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $shutdown sudo -A shutdown -h now
 set $reboot sudo -A reboot
 set $netrefresh sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
+set $inner 10
+set $outer 0
+
+gaps inner $inner
+gaps outer $outer
 
 # ----- External ----- #
-exec --no-startup-id feh --bg-scale ~/.config/wallpaper.jpg
+exec --no-startup-id feh --bg-scale --no-fehbg ~/.config/wallpaper.jpg
 # exec --no-startup-id compton --config ~/.config/compton.conf &
 exec --no-startup-id compconf
 exec --no-startup-id redshift &
-exec --no-startup-id nm-applet
 exec --no-startup-id dunst
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
 exec --no-startup-id xautolock -time 20 -locker lock -notify 60 -notifier "notify-send --hint=int:transient:1 -t 5000 'Locking in 1 minute...'" -corners 0-00 &
+exec_always --no-startup-id ~/.config/polybar/launch-polybar
 
 # ----- Colors ----- #
 set_from_resource $darkblack    color0  #000000
@@ -42,13 +45,13 @@ set_from_resource $white        color15 #000000
 set $transparent                #00000000
 
 #                       BORDER          BACKGROUND      TEXT        INDICATOR       CHILD_BORDER
-client.focused          $darkgreen      $darkblack      $darkred    $red            $darkblue
-client.focused_inactive $transparent    $blue           $white      $darkblack      $darkblack
-client.unfocused        $transparent    $blue           $white      $darkblack      $darkblack
-client.urgent           $darkred        $darkred        $black      $darkred        $darkred
+client.focused          $darkblack      $black          $darkblack  $darkblack      $darkred
+client.focused_inactive $darkred        $darkblack      $darkred    $darkblack      $darkblack
+client.unfocused        $darkred        $darkblack      $darkred    $darkblack      $darkblack
+client.urgent           $darkblack      $darkred        $darkblack  $darkred        $darkred
 client.background       $black
 
-bar {
+# bar {
     # ----- i3blocks ----- #
     # font pango:lato 9
     # status_command i3blocks
@@ -57,20 +60,20 @@ bar {
     # modifier none
 
     # ----- bumblebee-status ----- #
-    font pango:DejaVu Sans Mono, FontAwesome 9
-    position bottom
-    status_command /usr/bin/bumblebee-status -m mpd pasink sensors cpu memory disk nic battery date time -p engine.workspacewrap=false mpd.right-click="st -e ncmpcpp" mpd.format="{artist} - {title} [{position}/{duration}]" cpu.left-click="st -e gtop" memory.left-click="st -e gtop" memory.format="{used}/{total}" disk.path=/ disk.left-click="st -e ranger" disk.format="{used}/{size}" nic.states=^down nic.left-click="st -e nmtui" nic.format="{ip} {ssid}" date.left-click="st -t dd_calcurse -e calcurse" date.format="%a %b %d %Y" time.format="%H:%M" -t greyish-powerline
+    # font pango:DejaVu Sans Mono, FontAwesome 9
+    # position bottom
+    # status_command /usr/bin/bumblebee-status -m mpd pasink sensors cpu memory disk nic battery date time -p engine.workspacewrap=false mpd.right-click="st -e ncmpcpp" mpd.format="{artist} - {title} [{position}/{duration}]" cpu.left-click="st -e gtop" memory.left-click="st -e gtop" memory.format="{used}/{total}" disk.path=/ disk.left-click="st -e ranger" disk.format="{used}/{size}" nic.states=^down nic.left-click="st -e nmtui" nic.format="{ip} {ssid}" date.left-click="st -t float_calcurse -e calcurse" date.format="%a %b %d %Y" time.format="%H:%M" interval=10 -t greyish-powerline
 
-    colors {
-        background $darkblack
-        statusline $white
-        separator $darkred
-        focused_workspace $blue $darkblue $darkblack
-        active_workspace $blue $blue $darkwhite
-        inactive_workspace $darkblack $darkblack $white
-        urgent_workspace $darkblack $darkblack $white
-    }
-}
+    # colors {
+    #     background $darkblack
+    #     statusline $white
+    #     separator $darkred
+    #     focused_workspace $blue $darkblue $darkblack
+    #     active_workspace $blue $blue $darkwhite
+    #     inactive_workspace $darkblack $darkblack $white
+    #     urgent_workspace $darkblack $darkblack $white
+    # }
+# }
 
 floating_modifier $mod
 
@@ -94,14 +97,13 @@ bindsym $mod+Shift+q kill
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 
-bindsym $mod+e exec $term -e gtop
 #bindsym $mod+Shift+e
 
 bindsym $mod+r exec $term -e ranger
 bindsym $mod+Shift+r exec $term -e sudo -A ranger
 
 bindsym $mod+t split toggle
-bindsym $mod+Shift+t gaps inner current set 10; gaps outer current set 5
+bindsym $mod+Shift+t gaps inner current set $inner; gaps outer current set $outer
 
 #bindsym $mod+y
 bindsym $mod+Shift+y exec --no-startup-id i3resize left
@@ -115,11 +117,11 @@ bindsym $mod+Shift+i exec --no-startup-id i3resize up
 #bindsym $mod+o
 bindsym $mod+Shift+o exec --no-startup-id i3resize right
 
-bindsym $mod+p exec --no-startup-id pavucontrol
-#bindsym $mod+Shift+p
+bindsym $mod+p exec $term -e pulsemixer
+bindsym $mod+Shift+p exec --no-startup-id pavucontrol
 
-bindsym $mod+a exec $term -e calcurse
-#bindsym $mod+Shift+a
+bindsym $mod+a exec $term -t float_calcurse -e calcurse
+bindsym $mod+Shift+a exec $term -e calcurse
 
 bindsym $mod+s gaps inner current plus 5
 bindsym $mod+Shift+s gaps inner current minus 5
@@ -212,7 +214,7 @@ bindsym $mod+F8 exec --no-startup-id $netrefresh
 #bindsym $mod+F9
 #bindsym $mod+F10
 #bindsym $mod+F11
-bindsym $mod+F12 exec $term -t "dd_calcurse" -e calcurse
+#bindsym $mod+F12
 
 # ----- Arrow Keys ----- #
 bindsym $mod+Up focus up
