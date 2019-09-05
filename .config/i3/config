@@ -20,6 +20,7 @@ exec --no-startup-id redshift &
 exec --no-startup-id nm-applet
 exec --no-startup-id dunst
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
+exec --no-startup-id xautolock -time 20 -locker lock -notify 60 -notifier "notify-send --hint=int:transient:1 -t 5000 'Locking in 1 minute...'" -corners 0-00 &
 
 # ----- Colors ----- #
 set_from_resource $darkblack    color0  #000000
