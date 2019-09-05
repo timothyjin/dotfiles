@@ -28,6 +28,7 @@ syntax on
 set encoding=utf-8
 set number relativenumber
 set splitbelow splitright
+set clipboard+=unnamedplus
 
 " ----- Tabs ----- "
 set tabstop=4
@@ -131,6 +132,7 @@ autocmd FileType vimwiki inoremap ;h3 ===<Space><Space>===<Enter><++><Esc>k04li
 autocmd FileType vimwiki inoremap ;ul *<Space>
 autocmd FileType vimwiki inoremap ;l <Enter><Tab>-<Space>
 autocmd FileType vimwiki inoremap ;n $$<++><Esc>2T$i
+autocmd FileType vimwiki nnoremap <leader>c :Vimwiki2HTML<Enter>
 
 " ----- Haskell ----- "
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
