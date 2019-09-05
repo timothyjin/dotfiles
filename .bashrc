@@ -19,46 +19,4 @@ shopt -s autocd
 export PS1="\[$(tput bold)\]\[$(tput setaf 4)\][\u@\h | \W]$ \[$(tput sgr0)\]"
 #export PS1="\[$(tput bold)\]\[$(tput setab 7)\][\u@\h | \W]$\[$(tput setab 0)\] \[$(tput sgr0)\]"
 
-# ----- Command aliases ----- #
-alias vim='nvim'
-alias e="$EDITOR"
-alias se='sudo "$EDITOR"'
-alias f="$FILE"
-alias sf='sudo "$FILE"'
-alias ssc='sudo systemctl'
-alias ff='sudo find / -name'
-alias win='sudo efibootmgr -n 0000 && sudo reboot'
-alias sdn='sudo shutdown -h now'
-alias gs='git status'
-alias cw='calcurse --day 7'
-alias ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0'
-
-# Graphics information
-alias glg='glxinfo | egrep "OpenGL vendor|OpenGL renderer"'
-
-# ----- Directory shortcuts ----- #
-alias h='cd ~/'
-alias d='cd ~/Documents'
-alias D='cd ~/Downloads'
-alias m='cd ~/Music'
-alias p='cd ~/Pictures'
-alias cf='cd ~/.config'
-alias lb='cd ~/.local/bin'
-
-# ----- School directory shortcuts ----- #
-
-# ----- File shortcuts ----- #
-alias cfp='"$EDITOR" ~/.bash_profile'
-alias cfs='"$EDITOR" ~/.bashrc'
-alias cft='"$EDITOR" ~/Repos/st/config.h'
-alias cfv='"$EDITOR" ~/.config/nvim/init.vim'
-alias cfi='"$EDITOR" ~/.config/i3/config'
-alias cfb='"$EDITOR" ~/.config/i3blocks/config'
-alias cfx='"$EDITOR" ~/.xinitrc'
-alias cfr='"$EDITOR" ~/.Xresources'
-alias cff='"$EDITOR" ~/.config/fontconfig/fonts.conf'
-
-# ----- Aliases for color ----- #
-alias ls='ls -hN --color=auto --group-directories-first'
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
