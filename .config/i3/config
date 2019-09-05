@@ -84,11 +84,14 @@ bindsym $mod+Return exec $term
 bindsym $mod+space floating toggle
 bindsym $mod+Shift+space focus mode_toggle
 
-bindsym $mod+Escape exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
-#bindsym $mod+Shift+Escape
+bindsym $mod+Escape exec --no-startup-id lock
+bindsym $mod+Shift+Escape exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
 
 bindsym $mod+BackSpace exec --no-startup-id prompt "Shutdown?" "$shutdown"
-bindsym $mod+Shift+BackSpace exec --no-startup-id prompt "Reboot?" "$reboot"
+# bindsym $mod+Shift+BackSpace
+
+bindsym $mod+Delete exec --no-startup-id prompt "Reboot Linux?" "$reboot"
+bindsym $mod+Shift+Delete exec --no-startup-id prompt "Reboot Windows?" winboot
 
 # ----- Letter Keys ----- #
 bindsym $mod+q kill
@@ -97,6 +100,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 
+# bindsym $mod+e
 #bindsym $mod+Shift+e
 
 bindsym $mod+r exec $term -e ranger
@@ -132,7 +136,7 @@ bindsym $mod+Shift+d exec --no-startup-id dmenu_file
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+f gaps inner current set 0; gaps outer current set 0
 
-#bindsym $mod+g
+bindsym $mod+g exec $term -e gtop
 #bindsym $mod+Shift+g
 
 bindsym $mod+h focus left
@@ -150,7 +154,7 @@ bindsym $mod+Shift+l move right 30
 #bindsym $mod+z
 #bindsym $mod+Shift+z
 
-bindsym $mod+x exec --no-startup-id lock
+#bindsym $mod+x
 #bindsym $mod+Shift+x
 
 bindsym $mod+c exec --no-startup-id showclip
