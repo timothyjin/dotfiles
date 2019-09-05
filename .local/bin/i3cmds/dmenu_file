@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find $HOME/Documents $HOME/Downloads -name '*.pdf' | dmenu -i -l 10 | xargs -r -I % "$READER" %
