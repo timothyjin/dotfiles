@@ -321,7 +321,8 @@ animation-charging-3 = 
 animation-charging-foreground = ${colors.icon}
 animation-charging-framerate = 750
 
-label-charging = %percentage% | %time%↑
+; label-charging = %percentage% | %time%↑
+label-charging = %percentage% | %time%
 ; label-charging = %percentage%% ↑%time%
 format-charging-underline = ${colors.underline}
 
@@ -338,8 +339,8 @@ ramp-capacity-7 = 
 ramp-capacity-8 = 
 ramp-capacity-foreground = ${colors.icon}
 
-label-discharging = %percentage% | %time%↓
-; label-discharging = %percentage%% ↓%time%
+label-discharging = %percentage% | %time%
+; label-discharging = %percentage% | %time%↓
 format-discharging-underline = ${colors.underline}
 
 format-full = <label-full>
