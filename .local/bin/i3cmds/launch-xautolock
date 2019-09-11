@@ -1,0 +1,13 @@
+#!/bin/sh
+
+time=20
+notify_countdown=60
+notify_message_time=5000
+notify_message="Locking in 1 minute..."
+corners="0-00"
+
+notifier='notify-send --hint=int:transient:1 -t "$notify_message_time" "$notify_message"'
+
+killall -q xautolock
+
+xautolock -time "$time" -locker $LOCKER -notify "$notify_countdown" -notifier "$notifier" -corners "$corners" &

@@ -17,13 +17,12 @@ gaps outer $outer
 
 # ----- External ----- #
 exec --no-startup-id feh --bg-scale --no-fehbg ~/.config/wallpaper.jpg
-# exec --no-startup-id compton --config ~/.config/compton.conf &
-exec --no-startup-id compconf
-exec --no-startup-id redshift &
+exec_always --no-startup-id launch-compton
+exec_always --no-startup-id launch-redshift
+exec_always --no-startup-id launch-xautolock
+exec_always --no-startup-id ~/.config/polybar/launch-polybar
 exec --no-startup-id dunst
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
-exec --no-startup-id xautolock -time 20 -locker lock -notify 60 -notifier "notify-send --hint=int:transient:1 -t 5000 'Locking in 1 minute...'" -corners 0-00 &
-exec_always --no-startup-id ~/.config/polybar/launch-polybar
 
 # ----- Colors ----- #
 set_from_resource $darkblack    color0  #000000

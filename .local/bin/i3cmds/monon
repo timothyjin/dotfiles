@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# Script to activate an external monitor with bumblebee and intel-virtual-output.
+
+if [ "$1" = "-h" ]
+then
+    echo "Usage: $(basename $0) [-h] [DISPLAY] [RATE]"
+    exit 0
+fi
+
+internal="eDP1"
+[ -z "$1" ] && external="VIRTUAL1" || external="$1"
+[ -z "$2" ] && rate=119.98 || rate="$2"
+
+print() {
+    echo "$1"
+    notify-send "$(basename $0):" "$1"
+}
+
+# Exit if VIRTUAL1 is already on
+xrandr | grep "$external" | grep -q "primary" && print "$external is the current primary display, run 'monoff' before running this script" && exit 1
+
+# Prevent running this script as root, as it leads to bad window alignment on the external display
+[ "$(whoami)" = "root" ] && echo "Do not run this script as root! Exiting..." && exit 2
+
+# Add the bbswitch kernel module so we can turn on the card
+modprobe bbswitch
+
+# Turn on the nvidia card
+echo ON | sudo tee /proc/acpi/bbswitch
+
+# Start X server on the nvidia card and start intel-virtual-output
+print "Starting Nvidia X server..."
+optirun true
+intel-virtual-output
+
+# Turn on the external display and turn off laptop display
+# When starting X server for the first time, VIRTUAL1 will be disconnected and so modes will not be available until connecting first
+xrandr --output "$external" --primary --auto --output "$internal" --off
+
+# Set peripheral properties
+[ -f ~/.xprofile ] && ~/.xprofile
+
+# Restart i3 to restart some display applications
+i3-msg restart
+
+# Find and use the monitor mode with the specified refresh rate; if not found, use xrandr's default mode
+mode=$(xrandr | grep "$rate" | awk '{print $1}')
+if [ -n "$mode" ]
+then
+    xrandr --output "$external" --primary --mode "$mode"
+else
+    echo "Error: Could not find mode with rate $rate, using default mode instead."
+fi
+
+print "Display switched to $external with rate $(xrandr | grep '*' | awk '{print $2}' | cut -d'*' -f1)"

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Remap Escape and CapsLock
+[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+
+TPOINT="TPPS/2 Elan TrackPoint"
+TPAD="SynPS/2 Synaptics TouchPad"
+MOUSE="Logitech G403"
+SPEED_PROP="libinput Accel Speed"
+MSPEED=0.4
+
+MOUSE_IDS=$(xinput list | grep "$MOUSE" | cut -d'=' -f2 | awk '{print $1}')
+
+# TrackPoint, TouchPad, mouse settings
+xinput set-prop "TPPS/2 Elan TrackPoint" "libinput Accel Profile Enabled" 1, 0
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+for id in $MOUSE_IDS
+do
+    xinput --list-props "$id" | grep -q "$SPEED_PROP" && xinput set-prop "$id" "$SPEED_PROP" "$MSPEED"
+done
+
+# Turn on NumLock
+numlockx &
