@@ -12,6 +12,7 @@ alias e='$EDITOR' \
     diff='diff --color=auto' \
     upd='yay -Syu' \
     ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
+    wttr='curl wttr.in' \
     tt='trash-put' \
     tem='trash-empty' \
     tls='trash-list' \
@@ -47,6 +48,8 @@ alias 293='cd ~/Documents/-Fall2019/EECS-293/' \
     341='cd ~/Documents/-Fall2019/EECS-341/' \
     343='cd ~/Documents/-Fall2019/DSCI-343/' \
     398='cd ~/Documents/-Fall2019/ENGL-398/'
+
+calc() { echo "$1" | bc -l ;}
 
 # Vim -> Neovim
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
