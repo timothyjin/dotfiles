@@ -10,6 +10,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf.vim'
 Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
@@ -51,15 +52,19 @@ map <C-l> <C-w>l
 " ----- Leader key bindings ----- "
 map <leader>r :set relativenumber!<CR>
 map <leader>u :PlugUpdate<CR>
-map <leader>n :NERDTreeToggle<CR>
-map <leader>g :Goyo \| set linebreak<CR>
 map <leader>o :setlocal spell! spelllang=en_us<CR>
-map <leader>c :w! \| !compiler <c-r>%<CR>
 map <leader>p :!opout <c-r>%<CR><CR>
+map <leader>f :Files<CR>
+map <leader>g :Goyo<CR>
+map <leader>c :w! \| !compiler <c-r>%<CR>
+map <leader>n :NERDTreeToggle<CR>
 map <leader>/ gcc
 
+" ----- Make fzf look through hidden directories as well ----- "
+let $FZF_DEFAULT_COMMAND="find . -printf '%P\n'"
+
 " ----- Grammar check (LanguageTool) ----- "
-let g:languagetool_jar='/usr/share/java/languagetool/languagetool.jar'
+let g:languagetool_jar='/usr/share/java/languagetool/languagetool-commandline.jar'
 let g:languagetool_lang="en-US"
 map <leader>l :LanguageToolCheck<CR>
 map <leader>k :LanguageToolClear<CR>
@@ -74,9 +79,9 @@ autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufWritePost ~/.Xresources !xrdb %
 
 " ----- Guides ----- " [Deletes guide after finding it.]
-inoremap `<Space> <Esc>/<++><Enter><Esc>4s
-vnoremap `<Space> <Esc>/<++><Enter><Esc>4s
-map `<Space> <Esc>/<++><Enter><Esc>4s
+inoremap \<leader> <Esc>/<++><Enter><Esc>4s
+vnoremap \<leader> <Esc>/<++><Enter><Esc>4s
+map \<leader> <Esc>/<++><Enter><Esc>4s
 
 " ----- LaTeX ----- "
 autocmd FileType tex inoremap ;z <Space>\\<Enter>
@@ -93,19 +98,20 @@ autocmd FileType tex inoremap ;s2 \subsection{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ;s3 \subsubsection{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ;up \usepackage{}<Enter><++><Esc>kf}i
 
-autocmd FileType tex inoremap ;n $$<++><Esc>2T$i
-autocmd FileType tex inoremap ;m <Tab>$$<Space><Space>$$<Enter><Backspace><++><Esc>k4li
-autocmd FileType tex inoremap ;sup ^{}<++><Esc>T{i
-autocmd FileType tex inoremap ;sub _{}<++><Esc>T{i
-autocmd FileType tex inoremap ;( \left(<Space><Space>\right)<Space><++><Esc>T(li
-autocmd FileType tex inoremap ;[ \left[<Space><Space>\right]<Space><++><Esc>T[li
-autocmd FileType tex inoremap ;fr \frac{}{<++>}<++><Esc>2T{i
-autocmd FileType tex inoremap ;sum \sum_{}^{<++>}<Space><++><Esc>2T{i
-autocmd FileType tex inoremap ;dc ,<Space>\dotsc,<Space>
-autocmd FileType tex inoremap ;db <Esc>vya<Space>\dotsb<Space><Esc>pa<Space>
-autocmd FileType tex inoremap ;int \int_{}^{<++>}<Space><++><Esc>2T{i
-autocmd FileType tex inoremap ;bb \mathbb{}<++><Esc>T{i
-autocmd FileType tex inoremap ;cal \mathcal{}<++><Esc>T{i
+autocmd FileType tex,rmd inoremap ;n $$<++><Esc>2T$i
+autocmd FileType tex,rmd inoremap ;m <Tab>$$<Space><Space>$$<Enter><Backspace><++><Esc>k4li
+autocmd FileType tex,rmd inoremap ;sup ^{}<++><Esc>T{i
+autocmd FileType tex,rmd inoremap ;sub _{}<++><Esc>T{i
+autocmd FileType tex,rmd inoremap ;( \left(<Space><Space>\right)<Space><++><Esc>T(li
+autocmd FileType tex,rmd inoremap ;[ \left[<Space><Space>\right]<Space><++><Esc>T[li
+autocmd FileType tex,rmd inoremap ;fr \frac{}{<++>}<++><Esc>2T{i
+autocmd FileType tex,rmd inoremap ;sum \sum_{}^{<++>}<Space><++><Esc>2T{i
+autocmd FileType tex,rmd inoremap ;dc ,<Space>\dotsc,<Space>
+autocmd FileType tex,rmd inoremap ;db <Esc>vya<Space>\dotsb<Space><Esc>pa<Space>
+autocmd FileType tex,rmd inoremap ;int \int_{}^{<++>}<Space><++><Esc>2T{i
+autocmd FileType tex,rmd inoremap ;bb \mathbb{}<++><Esc>T{i
+autocmd FileType tex,rmd inoremap ;cal \mathcal{}<++><Esc>T{i
+autocmd FileType tex,rmd inoremap ;si \SI{}{<++>}<++><Esc>2T{i
 
 " Word count in .tex and .rmd
 autocmd FileType tex,rmd map <leader>w :w !detex \| wc -w<CR>
@@ -120,8 +126,6 @@ autocmd FileType markdown,rmd inoremap ;h3 ###<Space><Enter><++><Esc>kA
 autocmd FileType rmd inoremap ;pr ---<Enter><Enter>---<Enter><Enter><++><Esc>3kA
 autocmd FileType rmd inoremap ;cs ``<++><Esc>F`i
 autocmd FileType rmd inoremap ;cc ```<Enter><Enter>```<Enter><++><Esc>2kA
-autocmd FileType rmd inoremap ;n $$<++><Esc>2T$i
-autocmd FileType rmd inoremap ;m <Tab>$$<Space><Space>$$<Enter><Backspace><++><Esc>k4li
 
 " ----- Vimwiki ----- "
 autocmd FileType vimwiki inoremap ;b **<++><Esc>F*i
@@ -132,6 +136,7 @@ autocmd FileType vimwiki inoremap ;h3 ===<Space><Space>===<Enter><++><Esc>k04li
 autocmd FileType vimwiki inoremap ;ul *<Space>
 autocmd FileType vimwiki inoremap ;l <Enter><Tab>-<Space>
 autocmd FileType vimwiki inoremap ;n $$<++><Esc>2T$i
+autocmd FileType vimwiki inoremap ;cs ``<++><Esc>F`i
 autocmd FileType vimwiki nnoremap <leader>c :Vimwiki2HTML<Enter>
 
 " ----- Haskell ----- "
