@@ -1,4 +1,9 @@
 backend = "glx";
 glx-no-stencil = true;
-vsync = "true";
+vsync = "opengl-swc";
 fading = false;
+
+blur-background = true;
+blur-background-frame = true;
+blur-method = "kawase";
+blur-strength = 5;
