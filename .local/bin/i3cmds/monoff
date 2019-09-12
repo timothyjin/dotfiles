@@ -3,7 +3,7 @@
 # Script to turn off a connected external monitor using bumblebee and intel-virtual-output.
 
 internal="eDP1"
-external="VIRTUAL1"
+external="$(xrandr | grep "primary" | awk '{print $1}')"
 
 print() {
     echo "$1"
