@@ -2,22 +2,40 @@
 
 # Script to activate an external monitor with bumblebee and intel-virtual-output.
 
-if [ "$1" = "-h" ]
-then
-    echo "Usage: $(basename $0) [-h] [DISPLAY] [RATE]"
-    exit 0
-fi
+usage() {
+    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ] [-d]"
+}
 
 internal="eDP1"
-[ -z "$1" ] && external="VIRTUAL1" || external="$1"
-[ -z "$2" ] && rate=119.98 || rate="$2"
+external="VIRTUAL1"
+rate=119.98
+dupe=false
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -o | --output )         shift
+                                external=$1
+                                ;;
+        -r | --rate )           shift
+                                rate=$1
+                                ;;
+        -d | --dupe )           dupe=true
+                                ;;
+        -h | --help )           usage
+                                exit
+                                ;;
+        * )                     usage
+                                exit 1
+    esac
+    shift
+done
 
 print() {
     echo "$1"
     notify-send "$(basename $0):" "$1"
 }
 
-# Exit if VIRTUAL1 is already on
+# Exit if external display is already on
 xrandr | grep "$external" | grep -q "primary" && print "$external is the current primary display, run 'monoff' before running this script" && exit 1
 
 # Prevent running this script as root, as it leads to bad window alignment on the external display
@@ -34,15 +52,16 @@ print "Starting Nvidia X server..."
 optirun true
 intel-virtual-output
 
-# Turn on the external display and turn off laptop display
-# When starting X server for the first time, VIRTUAL1 will be disconnected and so modes will not be available until connecting first
-xrandr --output "$external" --primary --auto --output "$internal" --off
+# Turn on the external display and optionally turn off laptop display
+# When starting X server for the first time, all virtual outputs will be disconnected and so modes will not be available until connecting first
+xrandr --output "$external" --primary --auto
+if [ "$dupe" = false ]
+then
+    xrandr --output "$internal" --off
+fi
 
 # Set peripheral properties
-[ -f ~/.xprofile ] && ~/.xprofile
-
-# Restart i3 to restart some display applications
-i3-msg restart
+[ -f ~/.xprofile ] && . ~/.xprofile
 
 # Find and use the monitor mode with the specified refresh rate; if not found, use xrandr's default mode
 mode=$(xrandr | grep "$rate" | awk '{print $1}')
@@ -52,5 +71,8 @@ then
 else
     echo "Error: Could not find mode with rate $rate, using default mode instead."
 fi
+
+# Restart i3 to restart some display applications
+i3-msg restart
 
 print "Display switched to $external with rate $(xrandr | grep '*' | awk '{print $2}' | cut -d'*' -f1)"
