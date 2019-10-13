@@ -97,7 +97,7 @@ plugins=(git tmux)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export FZF_DEFAULT_COMMAND="find . -printf '%P\n'"
+export FZF_DEFAULT_COMMAND="find ~ -type f -printf '%P\n'"
 
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then

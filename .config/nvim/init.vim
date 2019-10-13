@@ -61,7 +61,7 @@ map <leader>n :NERDTreeToggle<CR>
 map <leader>/ gcc
 
 " ----- Make fzf look through hidden directories as well ----- "
-let $FZF_DEFAULT_COMMAND="find . -printf '%P\n'"
+let $FZF_DEFAULT_COMMAND="find ~ -type f -printf '%P\n'"
 
 " ----- Grammar check (LanguageTool) ----- "
 let g:languagetool_jar='/usr/share/java/languagetool/languagetool-commandline.jar'
