@@ -12,12 +12,14 @@ alias e='$EDITOR' \
     diff='diff --color=auto' \
     upd='yay -Syu' \
     ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
-    wttr='curl wttr.in' \
+    wttr='curl wttr.in\/Cleveland' \
     tt='trash-put' \
     tem='trash-empty' \
     tls='trash-list' \
     tre='trash-restore' \
-    trm='trash-remove' \
+    trm='trash-rm' \
+    edpon='xrandr --output eDP1 --auto' \
+    edpoff='xrandr --output eDP1 --off' \
     glg='glxinfo | egrep "OpenGL vendor|OpenGL renderer"'
 
 # Directory shortcuts
