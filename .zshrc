@@ -110,3 +110,6 @@ source $ZSH/oh-my-zsh.sh
 compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
 
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+
+# Syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
