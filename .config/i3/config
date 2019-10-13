@@ -44,7 +44,7 @@ set_from_resource $white        color15 #000000
 set $transparent                #00000000
 
 #                       BORDER          BACKGROUND      TEXT        INDICATOR       CHILD_BORDER
-client.focused          $darkblack      $black          $darkblack  $darkblack      $darkred
+client.focused          $darkblack      $black          $darkblack  $darkyellow     $darkred
 client.focused_inactive $darkred        $darkblack      $darkred    $darkblack      $darkblack
 client.unfocused        $darkred        $darkblack      $darkred    $darkblack      $darkblack
 client.urgent           $darkblack      $darkred        $darkblack  $darkred        $darkred
@@ -80,8 +80,8 @@ floating_modifier $mod
 bindsym $mod+Return exec $term
 #bindsym $mod+Shift+Return
 
-bindsym $mod+space floating toggle
-bindsym $mod+Shift+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+Escape exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
 # bindsym $mod+Shift+Escape
@@ -119,7 +119,7 @@ bindsym $mod+Shift+u exec --no-startup-id i3resize down
 #bindsym $mod+i
 bindsym $mod+Shift+i exec --no-startup-id i3resize up
 
-#bindsym $mod+o
+bindsym $mod+o sticky toggle
 bindsym $mod+Shift+o exec --no-startup-id i3resize right
 
 bindsym $mod+p exec $term -e pulsemixer
@@ -152,8 +152,8 @@ bindsym $mod+Shift+k move up 30
 bindsym $mod+l focus right
 bindsym $mod+Shift+l move right 30
 
-#bindsym $mod+z
-#bindsym $mod+Shift+z
+bindsym $mod+z gaps outer current plus 5
+bindsym $mod+Shift+z gaps outer current minus 5
 
 #bindsym $mod+x
 #bindsym $mod+Shift+x
@@ -165,10 +165,10 @@ bindsym $mod+v exec $term -e cava
 #bindsym $mod+Shift+v
 
 bindsym $mod+b bar mode toggle
-#bindsym $mod+Shift+b
+bindsym $mod+Shift+b floating toggle; sticky toggle; exec --no-startup-id hover left
 
 bindsym $mod+n exec $term -e nmtui
-#bindsym $mod+Shift+n
+bindsym $mod+Shift+n floating toggle; sticky toggle; exec --no-startup-id hover right
 
 bindsym $mod+m exec $term -e ncmpcpp
 bindsym $mod+Shift+m exec --no-startup-id maim -u ~/Pictures/$(date +%s).png
