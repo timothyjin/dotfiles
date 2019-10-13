@@ -6,14 +6,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
 Plug 'dpelle/vim-LanguageTool'
-Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
+
+Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vimwiki/vimwiki'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
@@ -55,7 +59,7 @@ map <leader>u :PlugUpdate<CR>
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 map <leader>p :!opout <c-r>%<CR><CR>
 map <leader>f :Files<CR>
-map <leader>g :Goyo<CR>
+map <leader>g :Goyo \| set linebreak!<CR>
 map <leader>c :w! \| !compiler <c-r>%<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>/ gcc
@@ -125,7 +129,7 @@ autocmd FileType markdown,rmd inoremap ;h2 ##<Space><Enter><++><Esc>kA
 autocmd FileType markdown,rmd inoremap ;h3 ###<Space><Enter><++><Esc>kA
 autocmd FileType rmd inoremap ;pr ---<Enter><Enter>---<Enter><Enter><++><Esc>3kA
 autocmd FileType rmd inoremap ;cs ``<++><Esc>F`i
-autocmd FileType rmd inoremap ;cc ```<Enter><Enter>```<Enter><++><Esc>2kA
+autocmd FileType rmd inoremap ;cc ```<Enter><++><Enter>```<Enter><++><Esc>4kA
 
 " ----- Vimwiki ----- "
 autocmd FileType vimwiki inoremap ;b **<++><Esc>F*i
