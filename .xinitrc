@@ -7,6 +7,6 @@
 xset b off
 
 # Apply input peripheral properties
-[ -f ~/.xprofile ] && ~/.xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
 
 exec i3
