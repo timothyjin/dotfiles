@@ -2,7 +2,7 @@
 
 # ----- Definitions ----- #
 for_window [class="^.*"] border pixel 2
-for_window [class="St" title="float_*"] floating enable
+for_window [class="St" instance="float_*"] floating enable
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $shutdown sudo -A shutdown -h now
@@ -20,7 +20,8 @@ exec --no-startup-id feh --bg-scale --no-fehbg ~/.config/wallpaper.jpg
 exec_always --no-startup-id launch-compton
 exec_always --no-startup-id launch-redshift
 exec_always --no-startup-id launch-xautolock
-exec_always --no-startup-id ~/.config/polybar/launch-polybar
+exec_always --no-startup-id launch-polybar
+exec_always --no-startup-id ~/.config/i3/autoname_workspaces.py &
 exec --no-startup-id dunst
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
 
@@ -101,10 +102,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 
-bindsym $mod+e exec $term -e $EDITOR
 #bindsym $mod+Shift+e
+bindsym $mod+e exec $term -n $EDITOR -e $EDITOR
 
-bindsym $mod+r exec $term -e ranger
+bindsym $mod+r exec $term -n $FILE -e $FILE
 bindsym $mod+Shift+r exec $term -e sudo -A ranger
 
 bindsym $mod+t split toggle
@@ -125,7 +126,7 @@ bindsym $mod+Shift+o exec --no-startup-id i3resize right
 bindsym $mod+p exec $term -e pulsemixer
 bindsym $mod+Shift+p exec --no-startup-id pavucontrol
 
-bindsym $mod+a exec $term -t float_calcurse -e calcurse
+bindsym $mod+a exec $term -n float_calcurse -e calcurse
 bindsym $mod+Shift+a exec $term -e calcurse
 
 bindsym $mod+s gaps inner current plus 5
@@ -137,7 +138,7 @@ bindsym $mod+Shift+d exec --no-startup-id dmenu_file
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+f gaps inner current set 0; gaps outer current set 0
 
-bindsym $mod+g exec $term -e gtop
+bindsym $mod+g exec $term -n gtop -e gtop
 #bindsym $mod+Shift+g
 
 bindsym $mod+h focus left
@@ -158,19 +159,19 @@ bindsym $mod+Shift+z gaps outer current minus 5
 #bindsym $mod+x
 #bindsym $mod+Shift+x
 
-bindsym $mod+c exec $term -t float_calc -e bc -ql
+bindsym $mod+c exec $term -n float_calc -e bc -ql
 bindsym $mod+Shift+c exec --no-startup-id showclip
 
-bindsym $mod+v exec $term -e cava
+bindsym $mod+v exec $term -n cava -e cava
 #bindsym $mod+Shift+v
 
 bindsym $mod+b bar mode toggle
 bindsym $mod+Shift+b floating toggle; sticky toggle; exec --no-startup-id hover left
 
-bindsym $mod+n exec $term -e nmtui
+bindsym $mod+n exec $term -n nmtui -e nmtui
 bindsym $mod+Shift+n floating toggle; sticky toggle; exec --no-startup-id hover right
 
-bindsym $mod+m exec $term -e ncmpcpp
+bindsym $mod+m exec $term -n ncmpcpp -e ncmpcpp
 bindsym $mod+Shift+m exec --no-startup-id maim -u ~/Pictures/$(date +%s).png
 
 set $ws1 "1"
@@ -185,27 +186,27 @@ set $ws9 "9"
 set $ws10 "10"
 
 # ----- Number Keys ----- #
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # ----- Arrow Keys ----- #
 bindsym $mod+Up focus up

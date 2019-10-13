@@ -77,7 +77,7 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = i3
 modules-center = mpd
-modules-right = temperature cpu memory disk backlight audio wifi battery date time power-menu
+modules-right = temperature cpu memory disk backlight audio wifi battery date time
 
 tray-position = right
 tray-padding = 0
@@ -104,31 +104,23 @@ enable-scroll = true
 wrapping-scroll = false
 reverse-scroll = true
 
-; ws-icon-0 = term;
-; ws-icon-1 = web;
-; ws-icon-2 = code;
-; ws-icon-3 = music;
-; ws-icon-4 = irssi;
-; ws-icon-default = 
-; ws-icon-default = x
-
 format = <label-state> <label-mode>
 
 label-mode = %mode%
 label-mode-padding = 2
 label-mode-background = ${colors.red}
 
-label-focused = %index%
+label-focused = %name%
 label-focused-foreground = ${colors.foreground}
 ; label-focused-overline= ${colors.underline}
 label-focused-underline= ${colors.underline}
 label-focused-padding = 1
 
-label-unfocused = %index%
+label-unfocused = %name%
 label-unfocused-foreground = ${colors.icon}
 label-unfocused-padding = 1
 
-label-urgent = %index%
+label-urgent = %name%
 ; label-urgent-background = ${colors.darkblack}
 label-urgent-foreground = ${colors.darkred}
 label-urgent-padding = 1
@@ -354,7 +346,7 @@ date = %a %y.%m.%d
 interval = 5
 
 format = <label>
-label = %{A1:st -t float_calcurse -e calcurse:}%date%%{A}
+label = %{A1:st -n float_calcurse -e calcurse:}%date%%{A}
 format-underline = ${colors.underline}
 
 format-prefix = " "
