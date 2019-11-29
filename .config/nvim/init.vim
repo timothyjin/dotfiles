@@ -13,17 +13,18 @@ Plug 'junegunn/fzf.vim'
 Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'sheerun/vim-polyglot'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'neovimhaskell/haskell-vim'
+" Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 " ----- Themes ----- "
 color peachpuff
-let g:airline_theme='ouo'
+let g:airline_theme='serene'
 map <leader>t :AirlineTheme<Space>
 
 " ----- Basics ----- "
@@ -141,7 +142,6 @@ autocmd FileType vimwiki inoremap ;ul *<Space>
 autocmd FileType vimwiki inoremap ;l <Enter><Tab>-<Space>
 autocmd FileType vimwiki inoremap ;n $$<++><Esc>2T$i
 autocmd FileType vimwiki inoremap ;cs ``<++><Esc>F`i
-autocmd FileType vimwiki nnoremap <leader>c :Vimwiki2HTML<Enter>
 
 " ----- Haskell ----- "
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
