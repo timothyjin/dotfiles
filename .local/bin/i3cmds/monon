@@ -36,7 +36,7 @@ print() {
 }
 
 # Exit if external display is already on
-xrandr | grep "$external" | grep -q "primary" && print "$external is the current primary display, run 'monoff' before running this script" && exit 1
+[ "$(current-display)" = "$external" ] && print "$external is the current primary display, run 'monoff' before running this script" && exit 1
 
 # Prevent running this script as root, as it leads to bad window alignment on the external display
 [ "$(whoami)" = "root" ] && echo "Do not run this script as root! Exiting..." && exit 2
@@ -60,9 +60,6 @@ then
     xrandr --output "$internal" --off
 fi
 
-# Set peripheral properties
-[ -f ~/.xprofile ] && . ~/.xprofile
-
 # Find and use the monitor mode with the specified refresh rate; if not found, use xrandr's default mode
 mode=$(xrandr | grep "$rate" | awk '{print $1}')
 if [ -n "$mode" ]
@@ -74,5 +71,8 @@ fi
 
 # Restart i3 to restart some display applications
 i3-msg restart
+
+# Set peripheral properties
+[ -f ~/.xprofile ] && . ~/.xprofile
 
 print "Display switched to $external with rate $(xrandr | grep '*' | awk '{print $2}' | cut -d'*' -f1)"

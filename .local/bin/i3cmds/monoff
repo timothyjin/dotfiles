@@ -3,14 +3,14 @@
 # Script to turn off a connected external monitor using bumblebee and intel-virtual-output.
 
 internal="eDP1"
-external="$(xrandr | grep "primary" | awk '{print $1}')"
+external="$(current-display)"
 
 print() {
     echo "$1"
     notify-send "$(basename $0):" "$1"
 }
 
-xrandr | grep "$internal" | grep -q "primary" && print "$internal is the current primary display, use 'monon' before running this script" && exit 1
+[ "$external" = "$internal" ] && print "$internal is the current primary display, use 'monon' before running this script" && exit 1
 
 # Turn on the laptop screen and turn off the external (virtual) screen
 xrandr --output "$internal" --primary --auto --output "$external" --off
