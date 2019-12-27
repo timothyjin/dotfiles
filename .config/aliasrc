@@ -30,8 +30,7 @@ alias h='cd ~/' \
     p='cd ~/Pictures/' \
     P='cd ~/Projects/' \
     cf='cd ~/.config/' \
-    lb='cd ~/.local/bin/' \
-    lt='cd ~/.local/Trash/'
+    lb='cd ~/.local/bin/'
 
 # Config file shortcuts
 alias cfp='"$EDITOR" ~/.zprofile' \
@@ -45,11 +44,11 @@ alias cfp='"$EDITOR" ~/.zprofile' \
     cfa='"$EDITOR" ~/.config/aliasrc'
 
 # School directory shortcuts
-alias 293='cd ~/Documents/-Fall2019/EECS-293/' \
-    325='cd ~/Documents/-Fall2019/EECS-325/' \
-    341='cd ~/Documents/-Fall2019/EECS-341/' \
-    343='cd ~/Documents/-Fall2019/DSCI-343/' \
-    398='cd ~/Documents/-Fall2019/ENGL-398/'
+# alias 293='cd ~/Documents/-Fall2019/EECS-293/' \
+#     325='cd ~/Documents/-Fall2019/EECS-325/' \
+#     341='cd ~/Documents/-Fall2019/EECS-341/' \
+#     343='cd ~/Documents/-Fall2019/DSCI-343/' \
+#     398='cd ~/Documents/-Fall2019/ENGL-398/'
 
 calc() { echo "$1" | bc -l ;}
 
@@ -60,4 +59,5 @@ vf() { fzf | xargs -r -I % $EDITOR % ;}
 
 # TLP battery charging thresholds
 setb() { sudo tlp setcharge "$1" "$2" BAT0 ;}
+chrg() { sudo tlp chargeonce ;}
 clrb() { sudo tlp setcharge ;}
