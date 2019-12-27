@@ -106,7 +106,7 @@ bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 bindsym $mod+e exec $term -n $EDITOR -e $EDITOR
 
 bindsym $mod+r exec $term -n $FILE -e $FILE
-bindsym $mod+Shift+r exec $term -e sudo -A ranger
+bindsym $mod+Shift+r exec $term -e sudo -A $FILE
 
 bindsym $mod+t split toggle
 bindsym $mod+Shift+t gaps inner current set $inner; gaps outer current set $outer
