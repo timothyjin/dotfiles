@@ -16,7 +16,7 @@ gaps inner $inner
 gaps outer $outer
 
 # ----- External ----- #
-exec --no-startup-id feh --bg-scale --no-fehbg ~/.config/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale --no-fehbg ~/.config/wallpaper.jpg
 exec_always --no-startup-id launch-compton
 exec_always --no-startup-id launch-redshift
 exec_always --no-startup-id launch-xautolock
@@ -102,8 +102,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
 
-#bindsym $mod+Shift+e
 bindsym $mod+e exec $term -n $EDITOR -e $EDITOR
+bindsym $mod+Shift+e exec --no-startup-id dmenuunicode
 
 bindsym $mod+r exec $term -n $FILE -e $FILE
 bindsym $mod+Shift+r exec $term -e sudo -A $FILE
@@ -156,11 +156,11 @@ bindsym $mod+Shift+l move right 30
 bindsym $mod+z gaps outer current plus 5
 bindsym $mod+Shift+z gaps outer current minus 5
 
-#bindsym $mod+x
+bindsym $mod+x exec --no-startup-id showclip
 #bindsym $mod+Shift+x
 
 bindsym $mod+c exec $term -n float_calc -e bc -ql
-bindsym $mod+Shift+c exec --no-startup-id showclip
+# bindsym $mod+Shift+c
 
 bindsym $mod+v exec $term -n cava -e cava
 #bindsym $mod+Shift+v
