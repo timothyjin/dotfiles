@@ -4,10 +4,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/goyo.vim'
-Plug 'dpelle/vim-LanguageTool'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'haya14busa/is.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'jreybert/vimagit'
@@ -19,7 +17,6 @@ Plug 'vimwiki/vimwiki'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-rmarkdown'
-" Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 " ----- Themes ----- "
@@ -29,11 +26,14 @@ map <leader>t :AirlineTheme<Space>
 
 " ----- Basics ----- "
 set nocompatible
-filetype plugin indent on
+filetype plugin on
 syntax on
 set encoding=utf-8
 set number relativenumber
 set splitbelow splitright
+
+set go=a
+set mouse=a
 set clipboard+=unnamedplus
 
 " ----- Tabs ----- "
@@ -64,9 +64,6 @@ map <leader>g :Goyo \| set linebreak!<CR>
 map <leader>c :w! \| !compiler <c-r>%<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>/ gcc
-
-" ----- Make fzf use hidden directories and exclude trash directory ----- "
-let $FZF_DEFAULT_COMMAND="find ~ -path ~/.local/share/Trash -prune -o -type f -printf '%P\n'"
 
 " ----- Grammar check (LanguageTool) ----- "
 let g:languagetool_jar='/usr/share/java/languagetool/languagetool-commandline.jar'
@@ -142,12 +139,3 @@ autocmd FileType vimwiki inoremap ;ul *<Space>
 autocmd FileType vimwiki inoremap ;l <Enter><Tab>-<Space>
 autocmd FileType vimwiki inoremap ;n $$<++><Esc>2T$i
 autocmd FileType vimwiki inoremap ;cs ``<++><Esc>F`i
-
-" ----- Haskell ----- "
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
