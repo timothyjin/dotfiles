@@ -33,8 +33,8 @@ alias h='cd ~/' \
     lb='cd ~/.local/bin/'
 
 # Config file shortcuts
-alias cfp='"$EDITOR" ~/.zprofile' \
-    cfs='"$EDITOR" ~/.zshrc' \
+alias cfp='"$EDITOR" $ZDOTDIR/.zprofile' \
+    cfs='"$EDITOR" $ZDOTDIR/.zshrc' \
     cfx='"$EDITOR" ~/.xinitrc' \
     cfr='"$EDITOR" ~/.Xresources' \
     cfv='"$EDITOR" ~/.config/nvim/init.vim' \

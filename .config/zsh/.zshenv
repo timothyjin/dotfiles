@@ -6,11 +6,7 @@ export BROWSER="firefox"
 export FILE="lf"
 export READER="zathura"
 export LOCKER="lock"
-# export ZDOTDIR="$HOME/.config/zsh"
 export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
+export ZDOTDIR="$HOME/.config/zsh"
 
-[ -f $HOME/.zshrc ] && source "$HOME/.zshrc"
-
-if [ -z "$DISPLAY" -a $XDG_VTNR -eq 1 ]; then
-	startx
-fi
+export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
