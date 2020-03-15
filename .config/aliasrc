@@ -10,6 +10,7 @@ alias e='$EDITOR' \
     ls='ls -hN --color=auto --group-directories-first' \
     grep='grep --color=auto' \
     diff='diff --color=auto' \
+    hst='"$EDITOR" "$ZSH_CACHE_DIR"/.zsh_history' \
     upd='yay -Syu' \
     ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
     wttr='curl wttr.in\/Cleveland' \
@@ -20,7 +21,8 @@ alias e='$EDITOR' \
     trm='trash-rm' \
     edpon='xrandr --output eDP1 --auto' \
     edpoff='xrandr --output eDP1 --off' \
-    glg='glxinfo | egrep "OpenGL vendor|OpenGL renderer"'
+    glg='glxinfo | egrep "OpenGL vendor|OpenGL renderer"' \
+    jlab='jupyter lab'
 
 # Directory shortcuts
 alias h='cd ~/' \
@@ -44,11 +46,11 @@ alias cfp='"$EDITOR" $ZDOTDIR/.zprofile' \
     cfa='"$EDITOR" ~/.config/aliasrc'
 
 # School directory shortcuts
-# alias 293='cd ~/Documents/-Fall2019/EECS-293/' \
-#     325='cd ~/Documents/-Fall2019/EECS-325/' \
-#     341='cd ~/Documents/-Fall2019/EECS-341/' \
-#     343='cd ~/Documents/-Fall2019/DSCI-343/' \
-#     398='cd ~/Documents/-Fall2019/ENGL-398/'
+alias 343='cd ~/Documents/-Spring2020/EECS-343/' \
+    395='cd ~/Documents/-Spring2020/EECS-395/' \
+    491='cd ~/Documents/-Spring2020/EECS-491/' \
+    531='cd ~/Documents/-Spring2020/EECS-531/' \
+    408='cd ~/Documents/-Spring2020/MATH-408/'
 
 calc() { echo "$1" | bc -l ;}
 
