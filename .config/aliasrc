@@ -7,6 +7,7 @@ alias e='$EDITOR' \
     sf='sudo "$FILE"' \
     ssc='sudo systemctl' \
     sdn='shutdown -h now' \
+    kdex='startx ~/.xinitrc kde' \
     ls='ls -hN --color=auto --group-directories-first' \
     grep='grep --color=auto' \
     diff='diff --color=auto' \
