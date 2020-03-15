@@ -1,13 +1,13 @@
 insidecolor=00000000
 
-ringcolor=ff000099
-keyhlcolor=ff0000ff
+ringcolor=afc4db99
+keyhlcolor=afc4dbff
 
 bshlcolor=00000099
 separatorcolor=00000000
 insidevercolor=00000000
-insidewrongcolor=ff0000ff
-ringvercolor=ff0000ff
+insidewrongcolor=cf6a4cff
+ringvercolor=00000000
 ringwrongcolor=00000000
 verifcolor=00000000
 timecolor=ffffffff

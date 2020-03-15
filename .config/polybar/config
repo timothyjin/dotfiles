@@ -22,10 +22,8 @@ fullblack = #ff000000
 background = #00000000
 foreground = ${colors.white}
 icon = ${colors.darkwhite}
-underline = ${colors.darkred}
+underline = ${colors.cyan}
 menu-options = ${colors.darkred}
-
-accent = ${colors.darkblue}
 
 [settings]
 screenchange-reload = true
@@ -56,8 +54,8 @@ foreground = ${colors.foreground}
 
 overline-size = 2
 overline-color = ${colors.darkblack}
-underline-size = 0
-underline-color = ${colors.darkblack}
+underline-size = 1
+underline-color = ${colors.darkwhite}
 
 border-top-size = 0
 border-left-size = 0
@@ -75,7 +73,7 @@ font-0 = dejavusans:pixelsize=9;1
 font-1 = notosansmononerdfontmono:pixelsize=9;1
 font-2 = siji:pixelsize=10;1
 
-modules-left = i3
+modules-left = i3 xwindow
 modules-center = mpd
 modules-right = temperature cpu memory disk backlight audio wifi battery date time
 
@@ -97,7 +95,7 @@ scroll-down = i3wm-wsprev
 
 [module/i3]
 type = internal/i3
-pin-workspaces = true
+; pin-workspaces = true
 index-sort = true
 enable-click = true
 enable-scroll = true
@@ -117,7 +115,7 @@ label-focused-underline= ${colors.underline}
 label-focused-padding = 1
 
 label-unfocused = %name%
-label-unfocused-foreground = ${colors.icon}
+label-unfocused-foreground = ${colors.darkwhite}
 label-unfocused-padding = 1
 
 label-urgent = %name%
@@ -312,9 +310,7 @@ animation-charging-3 = 
 animation-charging-foreground = ${colors.icon}
 animation-charging-framerate = 750
 
-; label-charging = %percentage% | %time%↑
 label-charging = %percentage% | %time%
-; label-charging = %percentage%% ↑%time%
 format-charging-underline = ${colors.underline}
 
 format-discharging = <ramp-capacity> <label-discharging>
@@ -331,7 +327,6 @@ ramp-capacity-8 = 
 ramp-capacity-foreground = ${colors.icon}
 
 label-discharging = %percentage% | %time%
-; label-discharging = %percentage% | %time%↓
 format-discharging-underline = ${colors.underline}
 
 format-full = <label-full>
@@ -439,39 +434,13 @@ menu-2-0 = ⭘
 menu-2-0-foreground = ${colors.menu-options}
 menu-2-0-exec = sudo -A shutdown -h now
 
-[module/app-menu]
-type = custom/menu
-label-open = 
-label-close = 
-
-menu-0-0 = Vimperator
-menu-0-0-exec = web
-menu-0-1 = Termite
-menu-0-1-exec = termite
-menu-0-2 = Pcmanfm
-menu-0-2-exec = pcmanfm
-
-[module/xkeyboard]
-type = internal/xkeyboard
-
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = #666
-
-label-layout = %layout%
-
-label-indicator-padding = 2
-label-indicator-background = ${colors.accent}
-
 [module/xwindow]
 type = internal/xwindow
 format = <label>
+format-padding = 2
 label = %title%
 label-maxlen = 72
 label-ellipsis = true
 label-foreground = ${colors.foreground}
-; label-empty =
-; label-empty-foreground = ${colors.accent}
 
 ; vim:ft=dosini
