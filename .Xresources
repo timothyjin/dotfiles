@@ -32,7 +32,7 @@
 *color15: #ebdbb2
 
 !! Transparency
-*.alpha: 0.75
+*.alpha: 0.6
 
 !! xterm colors
 xterm*background: black
