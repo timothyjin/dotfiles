@@ -26,7 +26,16 @@ rmmod nvidia
 # Turn off the nvidia card
 echo OFF | sudo tee /proc/acpi/bbswitch
 
-# Restart i3 on the laptop display
-i3-msg restart
+# Set peripheral properties
+[ -f ~/.xprofile ] && . ~/.xprofile
+
+# Restart some display applications
+if [ -n "$(pgrep i3)" ]
+then
+    i3-msg restart
+else
+    launch-compton
+    launch-redshift
+fi
 
 print "Display switched to $internal"

@@ -69,10 +69,16 @@ else
     echo "Error: Could not find mode with rate $rate, using default mode instead."
 fi
 
-# Restart i3 to restart some display applications
-i3-msg restart
-
 # Set peripheral properties
 [ -f ~/.xprofile ] && . ~/.xprofile
 
-print "Display switched to $external with rate $(xrandr | grep '*' | awk '{print $2}' | cut -d'*' -f1)"
+# Restart some display applications
+if [ -n "pgrep i3" ]
+then
+    i3-msg restart
+else
+    launch-compton
+    launch-redshift
+fi
+
+print "Display switched to $external with rate $(xrandr | grep "$external" | grep '*' | awk '{print $2}' | cut -d'*' -f1)"
