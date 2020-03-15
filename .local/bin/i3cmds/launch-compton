@@ -2,7 +2,4 @@
 
 killall -q compton
 
-xrandr | grep -q 'VIRTUAL1 connected primary' && compton --config ~/.config/compton.conf.virtual &
-xrandr | grep -q 'eDP1 connected primary' && compton --config ~/.config/compton.conf.intel &
-
-# xrandr | grep -q 'DP-0 connected' && compton --config ~/.config/compton.conf.nvidia &
+compton -b --config ~/.config//compton.conf
