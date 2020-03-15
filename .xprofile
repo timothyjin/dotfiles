@@ -27,3 +27,7 @@ done
 
 # Turn on NumLock
 numlockx &
+
+COLOR_PROFILE="/usr/share/color/icc/colord/NV156FHM-N61-Linux.icc"
+
+[ -f $COLOR_PROFILE ] && xcalib -d :0 $COLOR_PROFILE
