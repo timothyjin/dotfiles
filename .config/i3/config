@@ -221,7 +221,7 @@ bindsym $mod+F3 exec --no-startup-id volctl up 2
 bindsym $mod+F4 exec --no-startup-id pactl set-source-mute 1 toggle
 bindsym $mod+F5 exec --no-startup-id brillo -A 10
 bindsym $mod+F6 exec --no-startup-id brillo -U 10
-bindsym $mod+F7 exec --no-startup-id prompt "Switch to external display?" monon
+bindsym $mod+F7 exec --no-startup-id prompt "Switch to external display?" "monon -d"
 bindsym $mod+Shift+F7 exec --no-startup-id prompt "Switch to laptop display?" monoff
 # bindsym $mod+F8 exec --no-startup-id $netrefresh
 # bindsym $mod+F9
