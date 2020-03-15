@@ -1,5 +1,5 @@
 # Miscellaneous
-export FZF_DEFAULT_COMMAND="find ~ -path ~/.local/share/Trash -prune -o -type f -printf '%P\n'"
+export FZF_DEFAULT_COMMAND="find ~ -path $TRASH_DIR -prune -o -type f -printf '%P\n'"
 autoload -U colors && colors
 
 ZSH_CACHE_DIR=$HOME/.cache/zsh
@@ -7,7 +7,7 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-HISTFILE="$ZDOTDIR/.zsh_history"
+HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -24,7 +24,7 @@ if ! zgen saved; then
     zgen oh-my-zsh
     zgen oh-my-zsh plugins/vi-mode
     zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/tmux
+    # zgen oh-my-zsh plugins/tmux
     zgen oh-my-zsh plugins/virtualenv
     zgen load subnixr/minimal
     zgen load zsh-users/zsh-syntax-highlighting
