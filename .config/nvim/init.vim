@@ -44,6 +44,7 @@ set expandtab
 
 " ----- Autocompletion ----- "
 set wildmode=longest,list,full
+inoremap <S-Tab> <C-n>
 
 " ----- Disable automatic commenting ----- "
 autocmd FileType * setlocal formatoptions-=c formatoptions -=r formatoptions-=o
@@ -76,6 +77,7 @@ autocmd VimLeave *.tex !texclear %
 
 " ----- Read files as desired ----- "
 autocmd BufRead,BufNewFile *.tex set filetype=tex
+au BufEnter,BufRead *.conf setf dosini
 
 " ----- Run xrdb whenever Xresources is updated ----- "
 autocmd BufWritePost ~/.Xresources !xrdb %
