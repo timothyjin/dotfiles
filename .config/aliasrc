@@ -2,26 +2,24 @@
 
 # Command aliases
 alias e='$EDITOR' \
-    se='sudo "$EDITOR"' \
+    se='sudoedit' \
     f='$FILE' \
-    sf='sudo "$FILE"' \
+    sf='sudo $FILE' \
+    sc='systemctl' \
     ssc='sudo systemctl' \
     sdn='shutdown -h now' \
-    kdex='startx ~/.xinitrc kde' \
     ls='ls -hN --color=auto --group-directories-first' \
     grep='grep --color=auto' \
     diff='diff --color=auto' \
-    hst='"$EDITOR" "$ZSH_CACHE_DIR"/.zsh_history' \
+    hst='$EDITOR "$ZSH_CACHE_DIR"/.zsh_history' \
     upd='yay -Syu' \
     ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
-    wttr='curl wttr.in\/Cleveland' \
+    wttr='curl wttr.in' \
     tt='trash-put' \
     tem='trash-empty' \
     tls='trash-list' \
     tre='trash-restore' \
     trm='trash-rm' \
-    edpon='xrandr --output eDP1 --auto' \
-    edpoff='xrandr --output eDP1 --off' \
     glg='glxinfo | egrep "OpenGL vendor|OpenGL renderer"' \
     jlab='jupyter lab'
 
@@ -36,22 +34,17 @@ alias h='cd ~/' \
     lb='cd ~/.local/bin/'
 
 # Config file shortcuts
-alias cfp='"$EDITOR" $ZDOTDIR/.zprofile' \
-    cfs='"$EDITOR" $ZDOTDIR/.zshrc' \
-    cfx='"$EDITOR" ~/.xinitrc' \
-    cfr='"$EDITOR" ~/.Xresources' \
-    cfv='"$EDITOR" ~/.config/nvim/init.vim' \
-    cfi='"$EDITOR" ~/.config/i3/config' \
-    cfb='"$EDITOR" ~/.config/polybar/config' \
-    cff='"$EDITOR" ~/.config/fontconfig/fonts.conf' \
-    cfa='"$EDITOR" ~/.config/aliasrc'
+alias cfp='$EDITOR $ZDOTDIR/.zprofile' \
+    cfs='$EDITOR $ZDOTDIR/.zshrc' \
+    cfx='$EDITOR ~/.xinitrc' \
+    cfr='$EDITOR ~/.Xresources' \
+    cfv='$EDITOR ~/.config/nvim/init.vim' \
+    cfi='$EDITOR ~/.config/i3/config' \
+    cfb='$EDITOR ~/.config/polybar/config' \
+    cff='$EDITOR ~/.config/fontconfig/fonts.conf' \
+    cfa='$EDITOR ~/.config/aliasrc'
 
 # School directory shortcuts
-alias 343='cd ~/Documents/-Spring2020/EECS-343/' \
-    395='cd ~/Documents/-Spring2020/EECS-395/' \
-    491='cd ~/Documents/-Spring2020/EECS-491/' \
-    531='cd ~/Documents/-Spring2020/EECS-531/' \
-    408='cd ~/Documents/-Spring2020/MATH-408/'
 
 calc() { echo "$1" | bc -l ;}
 
