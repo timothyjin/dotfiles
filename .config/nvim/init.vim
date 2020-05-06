@@ -31,6 +31,7 @@ syntax on
 set encoding=utf-8
 set number relativenumber
 set splitbelow splitright
+set linebreak
 
 set go=a
 set mouse=a
@@ -61,7 +62,6 @@ map <leader>u :PlugUpdate<CR>
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 map <leader>p :!opout <c-r>%<CR><CR>
 map <leader>f :Files<CR>
-map <leader>g :Goyo \| set linebreak!<CR>
 map <leader>c :w! \| !compiler <c-r>%<CR>
 map <leader>n :NERDTreeToggle<CR>
 map <leader>/ gcc
@@ -77,7 +77,7 @@ autocmd VimLeave *.tex !texclear %
 
 " ----- Read files as desired ----- "
 autocmd BufRead,BufNewFile *.tex set filetype=tex
-au BufEnter,BufRead *.conf setf dosini
+au BufEnter,BufRead *.conf setf conf
 
 " ----- Run xrdb whenever Xresources is updated ----- "
 autocmd BufWritePost ~/.Xresources !xrdb %
