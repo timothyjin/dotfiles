@@ -1,4 +1,0 @@
-#!/bin/sh
-
-#date '+%Y %b %d (%a) %H:%M'
-date '+%a %b %d %Y - %H:%M '
