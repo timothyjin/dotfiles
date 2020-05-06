@@ -6,6 +6,10 @@ xset b off
 # Speed up X rate
 xset r rate 300 50
 
+# Screen blanking/DPMS settings
+xset s 1800
+xset dpms 1800 1800 1800
+
 # Remap Escape and CapsLock
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 
@@ -28,6 +32,12 @@ done
 # Turn on NumLock
 numlockx &
 
+# Apply color profile
 COLOR_PROFILE="/usr/share/color/icc/colord/NV156FHM-N61-Linux.icc"
-
 [ -f $COLOR_PROFILE ] && xcalib -d :0 $COLOR_PROFILE
+
+# Universal external applications
+pgrep mpd || mpd ~/.config/mpd/mpd.conf &
+pgrep dunst || dunst &
+pgrep unclutter || unclutter &
+setbg &
