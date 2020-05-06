@@ -41,9 +41,8 @@ screenchange-reload = true
 margin-top = 0
 margin-bottom = 0
 
-[bar/top]
+[bar/master]
 ;override-redirect = true
-bottom = false
 ;fixed-center = false
 width = 100%
 height = 24
@@ -52,7 +51,7 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-overline-size = 2
+overline-size = 1
 overline-color = ${colors.darkblack}
 underline-size = 1
 underline-color = ${colors.darkwhite}
@@ -73,10 +72,6 @@ font-0 = dejavusans:pixelsize=9;1
 font-1 = notosansmononerdfontmono:pixelsize=9;1
 font-2 = siji:pixelsize=10;1
 
-modules-left = i3 xwindow
-modules-center = mpd
-modules-right = temperature cpu memory disk backlight audio wifi battery date time
-
 tray-position = right
 tray-padding = 0
 tray-detached = false
@@ -93,14 +88,43 @@ scroll-down = i3wm-wsprev
 ;double-click-left = notify-send -u low doubleclick
 ;double-click-right = notify-send -u low doubleclick2
 
+[bar/top]
+inherit = bar/master
+bottom = false
+
+modules-left = i3 xwindow
+modules-center = mpd
+modules-right = temperature cpu memory disk backlight audio wifi battery date time
+
+[bar/main]
+inherit = bar/master
+bottom = false
+monitor = VIRTUAL1
+
+modules-left = i3 xwindow
+modules-center = mpd
+modules-right = temperature cpu memory disk backlight audio wifi battery date time
+
+tray-position = none
+
+[bar/side]
+inherit = bar/master
+bottom = false
+monitor = eDP1
+
+modules-left = i3 xwindow
+modules-right = date time
+
+tray-position = center
+
 [module/i3]
 type = internal/i3
-; pin-workspaces = true
+pin-workspaces = false
 index-sort = true
 enable-click = true
 enable-scroll = true
 wrapping-scroll = false
-reverse-scroll = true
+reverse-scroll = false
 
 format = <label-state> <label-mode>
 
@@ -111,15 +135,47 @@ label-mode-background = ${colors.red}
 label-focused = %name%
 label-focused-foreground = ${colors.foreground}
 ; label-focused-overline= ${colors.underline}
-label-focused-underline= ${colors.underline}
+label-focused-underline = ${colors.underline}
 label-focused-padding = 1
 
 label-unfocused = %name%
-label-unfocused-foreground = ${colors.darkwhite}
+label-unfocused-foreground = ${colors.black}
 label-unfocused-padding = 1
+
+label-visible = %name%
+label-visible-foreground = ${colors.foreground}
+label-visible-underline= ${colors.black}
+label-visible-padding = 1
 
 label-urgent = %name%
 ; label-urgent-background = ${colors.darkblack}
+label-urgent-foreground = ${colors.darkred}
+label-urgent-padding = 1
+
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = ${colors.icon}
+
+[module/bspwm]
+type = internal/bspwm
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${colors.red}
+
+label-focused = %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-underline= ${colors.underline}
+label-focused-padding = 1
+
+label-urgent = %name%
 label-urgent-foreground = ${colors.darkred}
 label-urgent-padding = 1
 
@@ -185,7 +241,7 @@ type = internal/fs
 mount-0 = /
 
 format-mounted = <label-mounted>
-label-mounted = %{A1:st -e ranger:}%percentage_used%%{A}
+label-mounted = %{A1:st -n $FILE -e $FILE:}%percentage_used%%{A}
 format-mounted-underline = ${colors.underline}
 
 format-mounted-prefix = " "
@@ -365,8 +421,8 @@ type = internal/mpd
 ;format-online = <label-time>  <bar-progress>  <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>
 format-online = <label-time>  <label-song> <icon-prev><icon-stop><toggle><icon-next> <icon-repeat><icon-random>
 format-online-spacing = 0
-format-online-background = #ee333333
-format-online-underline = #cc333333
+format-online-background = ${colors.darkblack}
+format-online-underline =
 format-online-padding = 3
 
 format-offline = <label-offline>
@@ -377,7 +433,7 @@ label-offline = mpd is off
 label-song-maxlen = 45
 label-song-ellipsis = true
 
-label-time-foreground = #777
+label-time-foreground = ${colors.icon}
 
 icon-prev = 
 icon-stop = 
@@ -388,7 +444,7 @@ icon-next = 
 icon-random = 
 icon-repeat = 
 
-toggle-on-foreground = ${colors.accent}
+toggle-on-foreground = ${colors.foreground}
 toggle-off-foreground = #777
 
 ; bar-progress-width = 10

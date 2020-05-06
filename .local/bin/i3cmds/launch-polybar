@@ -7,5 +7,9 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bars
-# polybar -r top &
-polybar top &
+if [ "$(current-display)" = "eDP1" ]; then
+    polybar top &
+else
+    polybar main &
+    polybar side &
+fi

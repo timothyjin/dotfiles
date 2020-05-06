@@ -3,13 +3,13 @@
 # Script to activate an external monitor with bumblebee and intel-virtual-output.
 
 usage() {
-    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ] [-d]"
+    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ] [-l [same|left|right]]"
 }
 
 internal="eDP1"
 external="VIRTUAL1"
 rate=119.98
-dupe=false
+layout="same"
 
 while [ "$1" != "" ]; do
     case $1 in
@@ -19,7 +19,8 @@ while [ "$1" != "" ]; do
         -r | --rate )           shift
                                 rate=$1
                                 ;;
-        -d | --dupe )           dupe=true
+        -l | --layout )         shift
+                                layout=$1
                                 ;;
         -h | --help )           usage
                                 exit
@@ -32,7 +33,7 @@ done
 
 print() {
     echo "$1"
-    notify-send "$(basename $0):" "$1"
+    notify-send "$(basename $0)" "$1"
 }
 
 # Exit if external display is already on
@@ -55,10 +56,11 @@ intel-virtual-output
 # Turn on the external display and optionally turn off laptop display
 # When starting X server for the first time, all virtual outputs will be disconnected and so modes will not be available until connecting first
 xrandr --output "$external" --primary --auto
-if [ "$dupe" = false ]
-then
-    xrandr --output "$internal" --off
-fi
+case $layout in
+    same    ) xrandr --output "$internal" --same-as "$external" ;;
+    right   ) xrandr --output "$internal" --right-of "$external" ;;
+    left    ) xrandr --output "$internal" --left-of "$external" ;;
+esac
 
 # Find and use the monitor mode with the specified refresh rate; if not found, use xrandr's default mode
 mode=$(xrandr | grep "$rate" | awk '{print $1}')
@@ -73,11 +75,11 @@ fi
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Restart some display applications
-if [ -n "pgrep i3" ]
+if [ -n "$I3SOCK" ]
 then
     i3-msg restart
 else
-    launch-compton
+    launch-comp
     launch-redshift
 fi
 

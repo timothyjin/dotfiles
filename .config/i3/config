@@ -9,6 +9,8 @@ set $shutdown sudo -A shutdown -h now
 set $reboot sudo -A reboot
 set $netrefresh sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
+set $monitoron monon -l right
+set $monitoroff monoff
 set $inner 10
 set $outer 0
 
@@ -44,7 +46,6 @@ set $transparent                #00000000
 
 #                       BORDER          BACKGROUND      TEXT        INDICATOR       CHILD_BORDER
 client.focused          $darkblack      $black          $darkblack  $magenta        $blue
-# client.focused          $darkblack      $black          $darkblack  $darkyellow     $darkred
 client.focused_inactive $darkred        $darkblack      $darkred    $darkblack      $darkblack
 client.unfocused        $darkred        $darkblack      $darkred    $darkblack      $darkblack
 client.urgent           $darkblack      $darkred        $darkblack  $darkred        $darkred
@@ -119,6 +120,7 @@ bindsym $mod+g exec $term -n gtop -e gtop
 
 bindsym $mod+h focus left
 bindsym $mod+Shift+h move left 30
+bindsym $mod+Ctrl+h move workspace to output left
 
 bindsym $mod+j focus down
 bindsym $mod+Shift+j move down 30
@@ -188,7 +190,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Up focus up
 bindsym $mod+Down focus down
 bindsym $mod+Left focus left
+bindsym $mod+Ctrl+Left move workspace to output left
 bindsym $mod+Right focus right
+bindsym $mod+Ctrl+Right move workspace to output left
 
 # ----- Function Keys ----- #
 bindsym $mod+F1 exec --no-startup-id volctl mute
@@ -197,8 +201,8 @@ bindsym $mod+F3 exec --no-startup-id volctl up 2
 bindsym $mod+F4 exec --no-startup-id pactl set-source-mute 1 toggle
 bindsym $mod+F5 exec --no-startup-id brillo -U 10
 bindsym $mod+F6 exec --no-startup-id brillo -A 10
-bindsym $mod+F7 exec --no-startup-id prompt "Switch to external display?" "monon -d"
-bindsym $mod+Shift+F7 exec --no-startup-id prompt "Switch to laptop display?" monoff
+bindsym $mod+F7 exec --no-startup-id prompt "Switch to external display?" "$monitoron"
+bindsym $mod+Shift+F7 exec --no-startup-id prompt "Switch to laptop display?" "$monitoroff"
 # bindsym $mod+F8 exec --no-startup-id $netrefresh
 # bindsym $mod+F9
 # bindsym $mod+F10
@@ -212,8 +216,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id volctl up 2
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
 bindsym XF86MonBrightnessDown exec --no-startup-id brillo -U 10
 bindsym XF86MonBrightnessUp exec --no-startup-id brillo -A 10
-bindsym XF86Display exec --no-startup-id prompt "Switch to external display?" "monon -d"
-bindsym Shift+XF86Display exec --no-startup-id prompt "Switch to laptop display?" monoff
+bindsym XF86Display exec --no-startup-id prompt "Switch to external display?" "$monitoron"
+bindsym Shift+XF86Display exec --no-startup-id prompt "Switch to laptop display?" "$monitoroff"
 # bindsym XF86WLAN -> airplane mode
 # bindsym XF86Tools
 # bindsym XF86Bluetooth

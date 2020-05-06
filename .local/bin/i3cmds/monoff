@@ -7,7 +7,7 @@ external="$(current-display)"
 
 print() {
     echo "$1"
-    notify-send "$(basename $0):" "$1"
+    notify-send "$(basename $0)" "$1"
 }
 
 [ "$external" = "$internal" ] && print "$internal is the current primary display, use 'monon' before running this script" && exit 1
@@ -30,11 +30,11 @@ echo OFF | sudo tee /proc/acpi/bbswitch
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Restart some display applications
-if [ -n "$(pgrep i3)" ]
+if [ -n "$I3SOCK" ]
 then
     i3-msg restart
 else
-    launch-compton
+    launch-comp
     launch-redshift
 fi
 

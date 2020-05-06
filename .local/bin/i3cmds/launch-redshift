@@ -1,15 +1,15 @@
 #!/bin/sh
 
 # Wrapper script for starting redshift.
-# Kills all existing redshift instances and starts a new one based on the active display.
+# Kills all existing redshift instances and starts a new one based on the active display(s).
 
 killall -q redshift
 
-# Redshift needs to be started in a special way to work on nvidia's X server
-# If not using external display, then restart redshift normally
-if [ -n "$(xrandr | grep "VIRTUAL1" | grep "primary")" ]
+# Start redshift on external display
+if [ "$(current-display)" = "VIRTUAL1" ]
 then
     DISPLAY=:8 redshift &
-else
-    redshift &
 fi
+
+# Start redshift on laptop display
+redshift &
