@@ -1,3 +1,5 @@
+set window-title-home-tilde true
+set statusbar-home-tilde true
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set page-padding 1
@@ -10,3 +12,6 @@ map K zoom in
 map J zoom out
 map i recolor
 map p print
+
+set recolor-darkcolor "#A7A7A7"
+set index-active-bg "#AFC4DB"
