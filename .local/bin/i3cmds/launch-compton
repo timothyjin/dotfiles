@@ -1,5 +1,0 @@
-#!/bin/sh
-
-killall -q compton
-
-compton -b --config ~/.config//compton.conf

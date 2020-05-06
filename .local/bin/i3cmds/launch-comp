@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Start a composite manager.
+
+usage() {
+    echo "Usage: $(basename $0) [-x] [-t] [-s]"
+}
+
+stopcomp() {
+    pgrep "compton" && killall compton
+    pgrep "xcompmgr" && killall xcompmgr
+}
+
+toggle() {
+    pgrep "compton" && comp=1 || unset comp
+    notify=true
+}
+
+startcomp() {
+    stopcomp
+    if [ -z $comp ]
+    then
+        compton -b --config ~/.config/compton.conf
+        $notify && notify-send "Compositor" "Switched to compton."
+    else
+        xcompmgr -CcfF -I0.03 -O0.03 -D4 &
+        $notify && notify-send "Compositor" "Switched to xcompmgr."
+    fi
+}
+
+notify=false
+
+case "$1" in
+    "")   startcomp ;;
+    "-x") startcomp ;;
+    "-t") toggle; startcomp ;;
+    "-s") stopcomp ;;
+    "-h") usage ;;
+    *)    usage; exit 1 ;;
+esac
