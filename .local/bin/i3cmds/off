@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Wrapper script to shutdown X server and shutdown/reboot computer
+
+usage() {
+    echo "Usage: $(basename $0) [-h] [-r] [-w]"
+}
+
+reboot=false
+windows=false
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -r | --reboot   ) reboot=true ;;
+        -w | --windows  ) windows=true ;;
+        *               ) usage
+                          exit 1
+    esac
+    shift
+done
+
+[ "$(current-display)" != "eDP1" ] && monoff
+
+[ "$windows" = true ] && sudo -A efibootmgr -n 0000
+
+if [ "$reboot" = true ]
+then
+    sudo -A reboot
+else
+    sudo -A shutdown -h now
+fi
