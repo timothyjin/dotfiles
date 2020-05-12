@@ -16,6 +16,14 @@ zmodload zsh/complist
 # Include hidden files.
 _comp_options+=(globdots)
 
+# Load aliases
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+
+# tmux variables
+ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"
+ZSH_TMUX_UNICODE=true
+
 # Load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
@@ -24,7 +32,7 @@ if ! zgen saved; then
     zgen oh-my-zsh
     zgen oh-my-zsh plugins/vi-mode
     zgen oh-my-zsh plugins/git
-    # zgen oh-my-zsh plugins/tmux
+    zgen oh-my-zsh plugins/tmux
     zgen oh-my-zsh plugins/virtualenv
     zgen load subnixr/minimal
     zgen load zsh-users/zsh-syntax-highlighting
@@ -82,6 +90,3 @@ lfcd () {
     fi
 }
 bindkey -s '^f' 'lfcd\n'
-
-# Load aliases
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
