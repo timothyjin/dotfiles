@@ -10,8 +10,8 @@ xset r rate 300 50
 xset s 1800
 xset dpms 1800 1800 1800
 
-# Remap Escape and CapsLock
-[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+# Swap Escape and CapsLock
+setxkbmap -option caps:swapescape
 
 TPOINT="TPPS/2 Elan TrackPoint"
 TPAD="SynPS/2 Synaptics TouchPad"
