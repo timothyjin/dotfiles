@@ -2,7 +2,6 @@
 
 # Apply colors and transparency
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
-wal --theme base16-twilight
 
 # Apply input peripheral properties, start external applications
 [ -f ~/.xprofile ] && . ~/.xprofile
