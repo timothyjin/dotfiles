@@ -65,7 +65,7 @@ bindsym $mod+Escape restart
 # bindsym $mod+Shift+Escape
 
 bindsym $mod+BackSpace exec --no-startup-id prompt "Shutdown?" "$shutdown"
-bindsym $mod+Shift+BackSpace exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
+# bindsym $mod+Shift+BackSpace
 
 bindsym $mod+Delete exec --no-startup-id prompt "Reboot Linux?" "$reboot"
 bindsym $mod+Shift+Delete exec --no-startup-id prompt "Reboot Windows?" "$winboot"
@@ -77,7 +77,7 @@ bindsym $mod+Shift+Tab workspace prev
 
 # ----- Letter Keys ----- #
 bindsym $mod+q kill
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+q exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
 
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+Shift+w exec --no-startup-id firefox --private-window
