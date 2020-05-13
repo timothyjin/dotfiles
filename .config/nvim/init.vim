@@ -1,6 +1,6 @@
 let mapleader=" "
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('$XDG_DATA_HOME/nvim/plugged')
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -19,12 +19,12 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-rmarkdown'
 call plug#end()
 
-" ----- Themes ----- "
+" Themes
 color peachpuff
 let g:airline_theme='serene'
 map <leader>t :AirlineTheme<Space>
 
-" ----- Basics ----- "
+" Basics
 set nocompatible
 filetype plugin on
 syntax on
@@ -32,57 +32,62 @@ set encoding=utf-8
 set number relativenumber
 set splitbelow splitright
 set linebreak
+set updatetime=100
 
 set go=a
 set mouse=a
 set clipboard+=unnamedplus
 
-" ----- Tabs ----- "
+highlight! link SignColumn LineNr
+
+" Tabs
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-" ----- Autocompletion ----- "
+" Autocompletion
 set wildmode=longest,list,full
 inoremap <S-Tab> <C-n>
 
-" ----- Disable automatic commenting ----- "
+" Disable automatic commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions -=r formatoptions-=o
 
-" ----- Split navigation ----- "
+" Split navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" ----- Leader key bindings ----- "
+" Leader key bindings
 map <leader>r :set relativenumber!<CR>
 map <leader>u :PlugUpdate<CR>
 map <leader>o :setlocal spell! spelllang=en_us<CR>
 map <leader>p :!opout <c-r>%<CR><CR>
 map <leader>f :Files<CR>
+map <leader>g :GitGutterLineHighlightsToggle<CR>
 map <leader>c :w! \| !compiler <c-r>%<CR>
 map <leader>n :NERDTreeToggle<CR>
-map <leader>/ gcc
 
-" ----- Grammar check (LanguageTool) ----- "
-let g:languagetool_jar='/usr/share/java/languagetool/languagetool-commandline.jar'
-let g:languagetool_lang="en-US"
-map <leader>l :LanguageToolCheck<CR>
-map <leader>k :LanguageToolClear<CR>
-
-" ----- Clean out TeX build files ----- "
+" Clean out TeX build files
 autocmd VimLeave *.tex !texclear %
 
-" ----- Read files as desired ----- "
+" Read files as desired
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 au BufEnter,BufRead *.conf setf conf
 
-" ----- Run xrdb whenever Xresources is updated ----- "
-autocmd BufWritePost ~/.Xresources !xrdb %
+" Run xrdb whenever Xresources is updated
+autocmd BufWritePost *Xresources !xrdb %
 
-" ----- Guides ----- " [Deletes guide after finding it.]
+" Automatically delete all trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
+
+" Turn off highlighting on diffs
+if &diff
+    highlight! link DiffText MatchParen
+endif
+
+" Guides
 inoremap \<leader> <Esc>/<++><Enter><Esc>4s
 vnoremap \<leader> <Esc>/<++><Enter><Esc>4s
 map \<leader> <Esc>/<++><Enter><Esc>4s
