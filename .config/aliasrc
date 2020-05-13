@@ -1,6 +1,13 @@
 #!/bin/sh
 
 # Command aliases
+alias cp="cp -v" \
+    mv="mv -v" \
+    rm="rm -vI" \
+    ls='ls -hN --color=auto --group-directories-first' \
+    grep='grep --color=auto'
+    diff='diff --color=auto' \
+
 alias e='$EDITOR' \
     se='sudoedit' \
     f='$FILE' \
@@ -8,11 +15,9 @@ alias e='$EDITOR' \
     sc='systemctl' \
     ssc='sudo systemctl' \
     sdn='shutdown -h now' \
-    ls='ls -hN --color=auto --group-directories-first' \
-    grep='grep --color=auto' \
-    diff='diff --color=auto' \
     hst='$EDITOR "$ZSH_CACHE_DIR"/.zsh_history' \
     upd='yay -Syu' \
+    magit='nvim -c MagitOnly'
     ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
     wttr='curl wttr.in' \
     tt='trash-put' \
