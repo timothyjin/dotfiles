@@ -35,7 +35,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/tmux
     zgen oh-my-zsh plugins/virtualenv
     zgen load subnixr/minimal
-    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zdharma/fast-syntax-highlighting
 
     zgen save
 fi
