@@ -58,8 +58,8 @@ intel-virtual-output
 xrandr --output "$external" --primary --auto
 case $layout in
     same    ) xrandr --output "$internal" --same-as "$external" ;;
-    right   ) xrandr --output "$internal" --right-of "$external" ;;
-    left    ) xrandr --output "$internal" --left-of "$external" ;;
+    right   ) xrandr --output "$internal" --left-of "$external" ;;
+    left    ) xrandr --output "$internal" --right-of "$external" ;;
 esac
 
 # Find and use the monitor mode with the specified refresh rate; if not found, use xrandr's default mode
