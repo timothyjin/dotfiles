@@ -18,7 +18,7 @@ xrandr --output "$internal" --primary --auto --output "$external" --off
 # Kill X server running on the nvidia card and wait for it to die
 sudo kill $(ps ax | grep Xorg | grep :8 | awk '{print $1}')
 print "Waiting for Nvidia X server to die..."
-sleep 3
+while pgrep -u 0 -x Xorg >/dev/null; do sleep 1; done
 
 # Remove the nvidia kernel module so we can shut down the card
 rmmod nvidia
