@@ -7,8 +7,8 @@ xset b off
 xset r rate 300 50
 
 # Screen blanking/DPMS settings
-xset s 1800
-xset dpms 1800 1800 1800
+xset s 1200 600
+xset dpms 0 3600 0
 
 # Swap Escape and CapsLock
 setxkbmap -option caps:swapescape
@@ -40,4 +40,5 @@ COLOR_PROFILE="/usr/share/color/icc/colord/NV156FHM-N61-Linux.icc"
 pgrep mpd || mpd ~/.config/mpd/mpd.conf &
 pgrep dunst || dunst &
 pgrep unclutter || unclutter &
+pgrep xss-lock || xss-lock -l -- $LOCKER &
 setbg &

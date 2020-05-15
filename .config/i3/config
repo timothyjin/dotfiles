@@ -21,7 +21,6 @@ gaps outer $outer
 # ----- External ----- #
 exec_always --no-startup-id autotiling &
 exec_always --no-startup-id ~/.config/i3/autoname_workspaces.py --icon_list_format mathematician &
-exec_always --no-startup-id launch-xautolock
 exec_always --no-startup-id launch-redshift
 exec_always --no-startup-id launch-comp
 exec_always --no-startup-id launch-polybar
