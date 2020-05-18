@@ -1,0 +1,122 @@
+set shell bash
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set period 1
+set color256
+# set icons
+
+$lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
+
+cmd open ${{
+    case $(file --mime-type $f -b) in
+        # image/vnd.djvu|application/pdf|application/octet-stream) setsid zathura $fx >/dev/null 2>&1 & ;;
+        text/troff) man ./ $f;;
+        text/*) $EDITOR $fx;;
+        # image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
+        # image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\)\(_large\)*$" | setsid sxiv -aio 2>/dev/null | lf-select & ;;
+        audio/*) mpv $f ;;
+        video/*) setsid mpv $f -quiet >/dev/null 2>&1 & ;;
+        application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
+        *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
+    esac
+}}
+
+cmd rename %[ -e $1 ] && printf "File $1 already exists" || mv $f $1
+
+# Edit filename
+cmd rename-end ${{
+    filename="${f##*/}"
+    name="$(printf '%q' "$filename")"
+    name="${name// /<space>}"
+    lf -remote "send $id push :rename<space>$name"
+}}
+
+# Edit filename before extension
+cmd rename-before-ext ${{
+    filename="${f##*/}"
+    name="$(printf '%q' "$filename")"
+    name="${name// /<space>}"
+
+    if [ "$(file "$filename" | grep "directory")" ]; then
+        lf -remote "send $id push :rename<space>$name"
+    else
+        lf -remote "send $id push :rename<space>$name<a-b><c-b>"
+    fi
+}}
+
+cmd trash %trash-put $fx
+
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf ":: Delete selected files? [y/N] "
+    read ans
+    [ $ans = "y" ] && rm -rf $fx
+}}
+
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+
+cmd touch $touch "$(echo $* | tr ' ' '\ ')"
+
+cmd extract ${{
+    aunpack $f
+}}
+
+cmd tar ${{
+    printf ":: Archive name (*.tar): "
+    read ans
+    name="${ans}.tar"
+    apack -F tar "$name" $fx
+}}
+
+cmd zip ${{
+    set -f
+    printf ":: Archive name (*.zip): "
+    read ans
+    name="${ans}.zip"
+    apack -F zip "$name" $fx
+}}
+
+cmd bulkrename ${{
+    vidir
+}}
+
+# Key bindings
+map <enter> shell
+
+map r
+map r push :rename<space>
+map R reload
+
+map tt trash
+map tT delete
+
+map u
+map ux extract
+map ut tar
+map uz zip
+
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+map a rename-before-ext
+map A rename-end
+
+map gh
+map g top
+
+map H half-up
+map L half-down
+
+map b bulkrename
+map x $$f
+map X !$f
+map n
+map n push :touch<space>
+map m push :mkdir<space>
+
+map <c-y> up
+map <c-e> down
+
+# vim:filetype=conf
