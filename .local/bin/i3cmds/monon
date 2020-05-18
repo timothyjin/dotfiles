@@ -3,7 +3,7 @@
 # Script to activate an external monitor with bumblebee and intel-virtual-output.
 
 usage() {
-    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ] [-l [same|left|right]]"
+    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ] [-l LAYOUT]"
 }
 
 internal="eDP1"
