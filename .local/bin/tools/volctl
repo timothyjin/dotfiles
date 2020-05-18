@@ -15,6 +15,3 @@ case "$1" in
 	p*) mpc pause ;;
 	r*) mpc seek 0% ;;
 esac
-
-pkill -RTMIN+10 i3blocks
-pkill -RTMIN+11 i3blocks
