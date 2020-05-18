@@ -139,7 +139,7 @@ label-focused-underline = ${colors.underline}
 label-focused-padding = 1
 
 label-unfocused = %name%
-label-unfocused-foreground = ${colors.black}
+label-unfocused-foreground = ${colors.darkwhite}
 label-unfocused-padding = 1
 
 label-visible = %name%
@@ -192,7 +192,7 @@ type = internal/cpu
 interval = 5
 
 format = <label>
-label = %{A1:st -e gtop:}%percentage%%{A}
+label = %{A1:$TERMINAL -n ytop -e ytop -p &:}%percentage%%{A}
 format-underline = ${colors.underline}
 
 format-prefix = " "
@@ -203,7 +203,7 @@ type = internal/memory
 interval = 5
 
 format = <label>
-label = %{A1:st -e gtop:}%percentage_used%%{A}
+label = %{A1:$TERMINAL -n htop -e htop &:}%percentage_used%%{A}
 format-underline = ${colors.underline}
 
 format-prefix = " "
@@ -214,7 +214,7 @@ type = internal/fs
 mount-0 = /
 
 format-mounted = <label-mounted>
-label-mounted = %{A1:st -n $FILE -e $FILE:}%percentage_used%%{A}
+label-mounted = %{A1:$TERMINAL -n $FILE -e $FILE &:}%percentage_used%%{A}
 format-mounted-underline = ${colors.underline}
 
 format-mounted-prefix = " "
@@ -271,11 +271,11 @@ ramp-volume-19 = 墳
 ramp-volume-20 = 墳
 ramp-volume-foreground = ${colors.icon}
 
-label-volume = %{A3:pavucontrol:}%percentage%%{A}
+label-volume = %{A3:pavucontrol &:}%percentage%%{A}
 format-volume-foreground = ${colors.foreground}
 format-volume-underline = ${colors.underline}
 
-label-muted = %{A3:pavucontrol:}~%{A}
+label-muted = %{A3:pavucontrol &:}~%{A}
 format-muted-foreground = ${colors.foreground}
 format-muted-underline = ${colors.underline}
 
@@ -370,7 +370,7 @@ date = %a %y.%m.%d
 interval = 5
 
 format = <label>
-label = %{A1:st -n float_calcurse -e calcurse:}%date%%{A}
+label = %{A1:$TERMINAL -n float_calcurse -e calcurse &:}%date%%{A}
 format-underline = ${colors.underline}
 
 format-prefix = " "
