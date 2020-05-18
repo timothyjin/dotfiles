@@ -156,33 +156,6 @@ label-separator = |
 label-separator-padding = 0
 label-separator-foreground = ${colors.icon}
 
-[module/bspwm]
-type = internal/bspwm
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
-enable-click = true
-enable-scroll = true
-reverse-scroll = true
-
-format = <label-state> <label-mode>
-
-label-mode = %mode%
-label-mode-padding = 2
-label-mode-background = ${colors.red}
-
-label-focused = %name%
-label-focused-foreground = ${colors.foreground}
-label-focused-underline= ${colors.underline}
-label-focused-padding = 1
-
-label-urgent = %name%
-label-urgent-foreground = ${colors.darkred}
-label-urgent-padding = 1
-
-label-separator = |
-label-separator-padding = 0
-label-separator-foreground = ${colors.icon}
-
 [module/temperature]
 type = internal/temperature
 interval = 5
