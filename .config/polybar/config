@@ -93,7 +93,7 @@ inherit = bar/master
 bottom = false
 
 modules-left = i3 xwindow
-modules-center = mpd
+modules-center = mpd spotify
 modules-right = temperature cpu memory disk backlight audio wifi battery date time
 
 [bar/main]
@@ -102,7 +102,7 @@ bottom = false
 monitor = VIRTUAL1
 
 modules-left = i3 xwindow
-modules-center = mpd
+modules-center = mpd spotify
 modules-right = temperature cpu memory disk backlight audio wifi battery date time
 
 tray-position = none
@@ -429,6 +429,15 @@ toggle-off-foreground = #777
 ; bar-progress-empty = ─
 ; bar-progress-empty-foreground = #44
 ; bar-progress-empty-font = 3
+
+[module/spotify]
+type = custom/script
+interval = 1
+format = <label>
+exec = python /usr/share/polybar/scripts/spotify_status.py -f '{play_pause} {artist} - {song}'
+format-background = ${colors.darkblack}
+format-underline = #1db954
+format-padding = 3
 
 [module/power-menu]
 type = custom/menu
