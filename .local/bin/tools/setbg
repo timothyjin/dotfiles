@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Wallpaper
-feh --no-fehbg --bg-fill ~/.config/wallpaper0.png --bg-fill ~/.config/wallpaper1.png
+xwallpaper --output VIRTUAL1 --zoom ~/.config/wallpaper0.png --output eDP1 --zoom ~/.config/wallpaper1.png
 
 # wal colorscheme
 wal --theme base16-twilight
