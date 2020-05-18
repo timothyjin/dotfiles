@@ -114,7 +114,7 @@ WINDOW_ICONS = {
     'nvim': fa.icons['edit'],
     'lf': fa.icons['copy'],
     'ranger': fa.icons['copy'],
-    'gtop': fa.icons['chart-line'],
+    'ytop': fa.icons['chart-line'],
     'ncmpcpp': fa.icons['music'],
     'cava': fa.icons['chart-bar'],
     'nmtui': fa.icons['wifi'],
