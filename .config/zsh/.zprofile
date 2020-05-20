@@ -26,6 +26,7 @@ export LESSHISTFILE="-"
 
 [ -f "$ZDOTDIR/.zshrc" ] && source "$ZDOTDIR/.zshrc"
 
-if [ -z "$DISPLAY" -a $XDG_VTNR -eq 1 ]; then
-	startx
-fi
+# if [ -z "$DISPLAY" -a $XDG_VTNR -eq 1 ]; then
+# 	startx
+# fi
+[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx
