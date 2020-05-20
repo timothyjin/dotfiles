@@ -57,9 +57,9 @@ intel-virtual-output
 # When starting X server for the first time, all virtual outputs will be disconnected and so modes will not be available until connecting first
 xrandr --output "$external" --primary --auto
 case $layout in
-    same    ) xrandr --output "$internal" --same-as "$external" ;;
-    right   ) xrandr --output "$internal" --left-of "$external" ;;
-    left    ) xrandr --output "$internal" --right-of "$external" ;;
+    same    ) xrandr --output "$external" --same-as "$internal" ;;
+    right   ) xrandr --output "$external" --right-of "$internal" ;;
+    left    ) xrandr --output "$external" --left-of "$internal" ;;
 esac
 
 # Find and use the monitor mode with the specified refresh rate; if not found, use xrandr's default mode
