@@ -4,9 +4,10 @@
 # Kills all existing redshift instances and starts a new one based on the active display(s).
 
 killall -q redshift
+while pgrep -u $(id -u) -x redshift >/dev/null; do sleep 1; done
 
 # Start redshift on external display
 [ "$(current-display)" = "VIRTUAL1" ] && DISPLAY=:8 redshift &
 
-# Start redshift on laptop display
+# Start redshift on internal display
 redshift &
