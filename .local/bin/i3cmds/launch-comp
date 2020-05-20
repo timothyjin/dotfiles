@@ -12,13 +12,13 @@ stopcomp() {
 }
 
 toggle() {
-    pgrep "compton" && comp=1 || unset comp
+    comp=`expr 1 - $comp`
     notify=true
 }
 
 startcomp() {
     stopcomp
-    if [ -z $comp ]
+    if [ $comp -eq 0 ]
     then
         compton -b --config ~/.config/compton.conf
         $notify && notify-send "Compositor" "Switched to compton."
@@ -28,6 +28,7 @@ startcomp() {
     fi
 }
 
+pgrep "xcompmgr" && comp=1 || comp=0
 notify=false
 
 case "$1" in
