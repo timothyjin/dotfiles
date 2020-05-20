@@ -8,7 +8,6 @@ set $mod Mod4
 set $shutdown off
 set $reboot off -r
 set $winboot off -r -w
-set $netrefresh sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
 set $monitoron monon -l right
 set $monitoroff monoff
@@ -20,7 +19,7 @@ gaps outer $outer
 
 # ----- External ----- #
 exec_always --no-startup-id autotiling &
-exec_always --no-startup-id ~/.config/i3/autoname_workspaces.py --icon_list_format mathematician &
+exec_always --no-startup-id ~/.config/i3/autoname_workspaces.py &
 exec_always --no-startup-id launch-redshift
 exec_always --no-startup-id launch-comp
 exec_always --no-startup-id launch-polybar
@@ -74,6 +73,9 @@ bindsym $mod+grave exec --no-startup-id "rofi -modi emoji -show"
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
+bindsym Print exec --no-startup-id maim -u ~/Pictures/$(date +%s).png
+bindsym Shift+Print exec --no-startup-id maim -u -s ~/Pictures/$(date +%s).png
+
 # ----- Letter Keys ----- #
 bindsym $mod+q kill
 bindsym $mod+Shift+q exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
@@ -108,8 +110,6 @@ bindsym $mod+Shift+p exec --no-startup-id pavucontrol
 bindsym $mod+a exec $term -n float_calcurse -e calcurse
 bindsym $mod+Shift+a exec $term -e calcurse
 
-# bindsym $mod+s gaps inner current plus 5
-# bindsym $mod+Shift+s gaps inner current minus 5
 bindsym $mod+s scratchpad show
 bindsym $mod+Shift+s move scratchpad
 
@@ -136,8 +136,8 @@ bindsym $mod+l focus right
 bindsym $mod+Shift+l move right 30
 bindsym $mod+Ctrl+l move workspace to output right
 
-bindsym $mod+z gaps outer current plus 5
-bindsym $mod+Shift+z gaps outer current minus 5
+# bindsym $mod+z
+# bindsym $mod+Shift+z
 
 bindsym $mod+x exec --no-startup-id showclip
 # bindsym $mod+Shift+x
@@ -156,6 +156,12 @@ bindsym $mod+Shift+n floating toggle; sticky toggle; exec --no-startup-id hover 
 
 bindsym $mod+m exec $term -n ncmpcpp -e ncmpcpp
 # bindsym $mod+Shift+m
+
+bindsym $mod+minus gaps inner current plus 5
+bindsym $mod+Shift+minus gaps inner current minus 5
+
+bindsym $mod+plus gaps outer current plus 5
+bindsym $mod+Shift+plus gaps outer current minus 5
 
 set $ws1 "1"
 set $ws2 "2"
@@ -208,7 +214,7 @@ bindsym $mod+F5 exec --no-startup-id brillo -U 10
 bindsym $mod+F6 exec --no-startup-id brillo -A 10
 bindsym $mod+F7 exec --no-startup-id prompt "Switch to external display?" "$monitoron"
 bindsym $mod+Shift+F7 exec --no-startup-id prompt "Switch to laptop display?" "$monitoroff"
-# bindsym $mod+F8 exec --no-startup-id $netrefresh
+# bindsym $mod+F8
 # bindsym $mod+F9
 # bindsym $mod+F10
 # bindsym $mod+F11
@@ -223,10 +229,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brillo -U 10
 bindsym XF86MonBrightnessUp exec --no-startup-id brillo -A 10
 bindsym XF86Display exec --no-startup-id prompt "Switch to external display?" "$monitoron"
 bindsym Shift+XF86Display exec --no-startup-id prompt "Switch to laptop display?" "$monitoroff"
-# bindsym XF86WLAN -> airplane mode
+# bindsym XF86WLAN
 # bindsym XF86Tools
 # bindsym XF86Bluetooth
 # bindsym ^F11?
 bindsym XF86Favorites exec --no-startup-id lock
-bindsym Print exec --no-startup-id maim -u ~/Pictures/$(date +%s).png
-bindsym Shift+Print exec --no-startup-id maim -u -s ~/Pictures/$(date +%s).png
