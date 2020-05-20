@@ -15,6 +15,7 @@ cmd open ${{
         text/*) $EDITOR $fx;;
         # image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
         # image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\)\(_large\)*$" | setsid sxiv -aio 2>/dev/null | lf-select & ;;
+        image/*) setsid sxiv -ap $f ;;
         audio/*) mpv $f ;;
         video/*) setsid mpv $f -quiet >/dev/null 2>&1 & ;;
         application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;

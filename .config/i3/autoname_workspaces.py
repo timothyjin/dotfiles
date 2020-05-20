@@ -101,6 +101,7 @@ WINDOW_ICONS = {
     'subl': fa.icons['file-alt'],
     'subl3': fa.icons['file-alt'],
     'sublime_text': fa.icons['file-alt'],
+    'sxiv': fa.icons['image'],
     'thunar': fa.icons['copy'],
     'thunderbird': fa.icons['envelope'],
     'totem': fa.icons['play'],
