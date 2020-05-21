@@ -34,13 +34,7 @@
 !! Transparency
 *.alpha: 0.6
 
-!! urxvt
-URxvt*font: xft:mono:pixelsize=14;antialias=true;autohint=true;
-URxvt*depth: 32
-URxvt*background: [60]#000000
-URxvt*scrollBar: false
-
 !! xterm colors
 xterm*font: xft:mono:pixelsize=14;antialias=true;autohint=true;
-xterm*background: black
-xterm*foreground: lightgray
+xterm*font2: JoyPixels:pixelsize=10:antialias=true:autohint=true;
+xterm*internalBorder: 4
