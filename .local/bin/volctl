@@ -5,9 +5,9 @@
 [ -z "$2" ] && num="2" || num="$2"
 
 case "$1" in
-	u*) pulsemixer --change-volume +"$num" ;;
-	d*) pulsemixer --change-volume -"$num" ;;
-	m*) pulsemixer --toggle-mute ;;
+	u*) pamixer -i "$num" ;;
+	d*) pamixer -d "$num" ;;
+	m*) pamixer -t ;;
 	play) mpc play ;;
 	n*) mpc next ;;
 	prev) mpc prev ;;
