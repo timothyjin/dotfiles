@@ -10,12 +10,9 @@ $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 
 cmd open ${{
     case $(file --mime-type $f -b) in
-        # image/vnd.djvu|application/pdf|application/octet-stream) setsid zathura $fx >/dev/null 2>&1 & ;;
         text/troff) man ./ $f;;
         text/*) $EDITOR $fx;;
-        # image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
-        # image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\)\(_large\)*$" | setsid sxiv -aio 2>/dev/null | lf-select & ;;
-        image/*) setsid sxiv -ap $f ;;
+        image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|svg\|pgm\)\(_large\)*$" | setsid sxiv -aip 2>/dev/null & ;;
         audio/*) mpv $f ;;
         video/*) setsid mpv $f -quiet >/dev/null 2>&1 & ;;
         application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
