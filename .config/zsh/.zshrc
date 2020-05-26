@@ -1,5 +1,5 @@
 # Miscellaneous
-export FZF_DEFAULT_COMMAND="find ~ -path $TRASH_DIR -prune -o -type f -printf '%P\n'"
+export FZF_DEFAULT_COMMAND="find $HOME -path $TRASH_DIR -prune -o -type f -printf '%P\n'"
 autoload -U colors && colors
 
 ZSH_CACHE_DIR=$HOME/.cache/zsh
@@ -85,7 +85,7 @@ lfcd () {
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
-        rm -f "$tmp"
+        rm -f "$tmp" >/dev/null
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
