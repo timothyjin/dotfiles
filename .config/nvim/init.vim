@@ -21,7 +21,7 @@ call plug#end()
 
 " Themes
 color peachpuff
-let g:airline_theme='serene'
+let g:airline_theme='afterglow'
 map <leader>t :AirlineTheme<Space>
 
 " Basics
