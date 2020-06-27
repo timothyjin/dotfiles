@@ -6,17 +6,17 @@ set period 1
 set color256
 # set icons
 
-$lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
+set previewer ~/.config/lf/scope
 
 cmd open ${{
     case $(file --mime-type $f -b) in
         text/troff) man ./ $f;;
         text/*) $EDITOR $fx;;
-        image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|svg\|pgm\)\(_large\)*$" | setsid sxiv -aip 2>/dev/null & ;;
+        image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|svg\|pgm\)\(_large\)*$" | sxiv -aip 2>/dev/null & ;;
         audio/*) mpv $f ;;
-        video/*) setsid mpv $f -quiet >/dev/null 2>&1 & ;;
-        application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
-        *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
+        video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 & ;;
+        application/pdf) setsid -f zathura $fx >/dev/null 2>&1 & ;;
+        *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1 & done ;;
     esac
 }}
 
@@ -36,10 +36,10 @@ cmd rename-before-ext ${{
     name="$(printf '%q' "$filename")"
     name="${name// /<space>}"
 
-    if [ "$(file "$filename" | grep "directory")" ]; then
-        lf -remote "send $id push :rename<space>$name"
-    else
+    if [ "$(echo "$filename" | grep "\.")" ] && [ "$(file --brief --mime-type "$filename" | grep -v "directory")" ]; then
         lf -remote "send $id push :rename<space>$name<a-b><c-b>"
+    else
+        lf -remote "send $id push :rename<space>$name"
     fi
 }}
 
