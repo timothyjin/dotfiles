@@ -19,7 +19,7 @@ gaps outer $outer
 
 # ----- External ----- #
 exec_always --no-startup-id autotiling &
-exec_always --no-startup-id i3wsr --no-names --icons awesome --config ~/.config/i3/icons.toml &
+exec_always --no-startup-id i3wsr --icons awesome --config ~/.config/i3/config.toml &
 exec_always --no-startup-id launch-redshift
 exec_always --no-startup-id launch-comp
 exec_always --no-startup-id launch-polybar
