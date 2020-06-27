@@ -7,8 +7,6 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
-
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
