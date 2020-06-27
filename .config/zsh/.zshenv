@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
+
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"
@@ -9,5 +11,3 @@ export LOCKER="lock"
 export TRASH_DIR="$HOME/.local/share/Trash"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export ZDOTDIR="$HOME/.config/zsh"
-
-export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
