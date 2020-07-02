@@ -1,5 +1,4 @@
 [icons]
-_default = "_"
 cava = ""
 code-oss = ""
 discord = "ﭮ"
@@ -10,6 +9,7 @@ firefox-esr = ""
 float_calc = ""
 float_calcurse = ""
 inkscape = ""
+"org.inkscape.Inkscape" = ""
 java = ""
 julia = ""
 jetbrains-idea = ""
@@ -30,9 +30,17 @@ sxiv = ""
 xterm = ""
 ytop = ""
 zathura = ""
+"org.pwmt.zathura" = ""
 zoom = ""
 
 [aliases]
 
 [general]
 separator = " "
+# default_icon = ""
+default_icon = "_"
+
+[options]
+remove_duplicates = false
+use_instance = true
+no_names = true
