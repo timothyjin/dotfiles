@@ -5,9 +5,8 @@ for_window [class="^.*"] border pixel 2
 for_window [class="St" instance="float_*"] floating enable
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
-set $shutdown off
-set $reboot off -r
-set $winboot off -r -w
+set $shutdown sudo shutdown -h now
+set $reboot sudo reboot
 set $hibernate sudo -A systemctl suspend
 set $monitoron monon
 set $monitoroff monoff
@@ -63,10 +62,10 @@ bindsym $mod+Escape restart
 # bindsym $mod+Shift+Escape
 
 bindsym $mod+BackSpace exec --no-startup-id prompt "Shutdown?" "$shutdown"
-# bindsym $mod+Shift+BackSpace
+bindsym $mod+Shift+BackSpace exec --no-startup-id prompt "Reboot?" "$reboot"
 
-bindsym $mod+Delete exec --no-startup-id prompt "Reboot Linux?" "$reboot"
-bindsym $mod+Shift+Delete exec --no-startup-id prompt "Reboot Windows?" "$winboot"
+# bindsym $mod+Delete exec --no-startup-id prompt "Reboot Linux?" "$reboot"
+# bindsym $mod+Shift+Delete exec --no-startup-id prompt "Reboot Windows?" "$winboot"
 
 bindsym $mod+grave exec --no-startup-id "rofi -modi emoji -show"
 
