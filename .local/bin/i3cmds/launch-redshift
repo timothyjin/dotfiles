@@ -6,8 +6,8 @@
 killall -q redshift
 while pgrep -u $(id -u) -x redshift >/dev/null; do sleep 1; done
 
-# Start redshift on external display
-[ "$(current-display)" = "VIRTUAL1" ] && DISPLAY=:8 redshift &
+# Start redshift on external display(s) if any are being used.
+[ "$(current-display)" != "$INTERNAL" ] && DISPLAY=:8 redshift &
 
 # Start redshift on internal display
 redshift &

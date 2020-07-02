@@ -2,6 +2,9 @@
 
 export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
 
+export INTERNAL="eDP1"
+export EXTERNAL="VIRTUAL1"
+
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"

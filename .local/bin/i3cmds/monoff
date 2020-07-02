@@ -1,41 +1,35 @@
 #!/bin/sh
 
-# Script to turn off a connected external monitor using bumblebee and intel-virtual-output.
+# Script to turn off external monitor(s) using bumblebee and intel-virtual-output.
 
-internal="eDP1"
-external="$(current-display)"
+internal=$INTERNAL
 
 print() {
     echo "$1"
     notify-send "$(basename $0)" "$1"
 }
 
-[ "$external" = "$internal" ] && print "$internal is the current primary display, use 'monon' before running this script" && exit 1
-
-# Turn on the laptop screen and turn off the external (virtual) screen
-xrandr --output "$internal" --primary --auto --output "$external" --off
+current="$(current-display)"
+[ "$current" = "$internal" ] && print "$internal is the current primary display, use 'monon' before running this script" && exit 1
 
 # Kill X server running on the nvidia card and wait for it to die
 sudo kill $(ps ax | grep Xorg | grep :8 | awk '{print $1}')
 print "Waiting for Nvidia X server to die..."
 while pgrep -u 0 -x Xorg >/dev/null; do sleep 1; done
 
+# Turn on the laptop screen and turn off all other outputs
+layout-off
+
 # Remove the nvidia kernel module so we can shut down the card
 rmmod nvidia
 
-# Turn off the nvidia card
-echo OFF | sudo tee /proc/acpi/bbswitch
-
 # Set peripheral properties
-[ -f ~/.xprofile ] && . ~/.xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile &
 
 # Restart some display applications
-if [ -n "$I3SOCK" ]
-then
-    i3-msg restart
-else
-    launch-comp
-    launch-redshift
-fi
+launch-redshift &
+launch-comp &
+# launch-polybar &
+[ -n "$I3SOCK" ] && i3-msg restart
 
 print "Display switched to $internal"

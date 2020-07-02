@@ -9,7 +9,7 @@ set $shutdown off
 set $reboot off -r
 set $winboot off -r -w
 set $hibernate sudo -A systemctl suspend
-set $monitoron monon -l right
+set $monitoron monon
 set $monitoroff monoff
 set $inner 10
 set $outer 0

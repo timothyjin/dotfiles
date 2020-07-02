@@ -1,32 +1,28 @@
 #!/bin/sh
 
 # Script to activate an external monitor with bumblebee and intel-virtual-output.
+# To use a specific layout, edit the `~/.local/bin/layout-on` script.
 
 usage() {
-    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ] [-l LAYOUT]"
+    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ]"
 }
 
-internal="eDP1"
-external="VIRTUAL1"
-rate=119.98
-layout="same"
+internal=$INTERNAL
+external=$EXTERNAL
 
 while [ "$1" != "" ]; do
     case $1 in
-        -o | --output )         shift
-                                external=$1
-                                ;;
-        -r | --rate )           shift
-                                rate=$1
-                                ;;
-        -l | --layout )         shift
-                                layout=$1
-                                ;;
-        -h | --help )           usage
-                                exit
-                                ;;
-        * )                     usage
-                                exit 1
+        -o | --output ) shift
+                        external=$1
+                        ;;
+        -r | --rate )   shift
+                        rate=$1
+                        ;;
+        -h | --help )   usage
+                        exit
+                        ;;
+        * )             usage
+                        exit 1
     esac
     shift
 done
@@ -37,7 +33,8 @@ print() {
 }
 
 # Exit if external display is already on
-[ "$(current-display)" = "$external" ] && print "$external is the current primary display, run 'monoff' before running this script" && exit 1
+current=$(current-display)
+[ "$current" != "$internal" ] && print "$internal is not the current primary display, run 'monoff' before running this script" && exit 1
 
 # Prevent running this script as root, as it leads to bad window alignment on the external display
 [ "$(whoami)" = "root" ] && echo "Do not run this script as root! Exiting..." && exit 2
@@ -45,42 +42,28 @@ print() {
 # Add the bbswitch kernel module so we can turn on the card
 modprobe bbswitch
 
-# Turn on the nvidia card
-echo ON | sudo tee /proc/acpi/bbswitch
-
 # Start X server on the nvidia card and start intel-virtual-output
 print "Starting Nvidia X server..."
-optirun true
-intel-virtual-output
+optirun intel-virtual-output
 
-# Turn on the external display and optionally turn off laptop display
+# Turn on the external display
 # When starting X server for the first time, all virtual outputs will be disconnected and so modes will not be available until connecting first
 xrandr --output "$external" --primary --auto
-case $layout in
-    same    ) xrandr --output "$external" --same-as "$internal" ;;
-    right   ) xrandr --output "$external" --right-of "$internal" ;;
-    left    ) xrandr --output "$external" --left-of "$internal" ;;
-esac
 
-# Find and use the monitor mode with the specified refresh rate; if not found, use xrandr's default mode
-mode=$(xrandr | grep "$rate" | awk '{print $1}')
-if [ -n "$mode" ]
+# Run script to set configured on-layout
+layout-on
+
+# Set peripheral properties on both X servers
+if [ -f ~/.xprofile ]
 then
-    xrandr --output "$external" --primary --mode "$mode"
-else
-    echo "Error: Could not find mode with rate $rate, using default mode instead."
+    . ~/.xprofile &
+    DISPLAY=:8 . ~/.xprofile &
 fi
-
-# Set peripheral properties
-[ -f ~/.xprofile ] && . ~/.xprofile
 
 # Restart some display applications
-if [ -n "$I3SOCK" ]
-then
-    i3-msg restart
-else
-    launch-comp
-    launch-redshift
-fi
+launch-redshift &
+launch-comp &
+# launch-polybar &
+[ -n "$I3SOCK" ] && i3-msg restart
 
-print "Display switched to $external with rate $(xrandr | grep "$external" | grep '*' | awk '{print $2}' | cut -d'*' -f1)"
+print "Now using displays:\n$( current-display | paste -sd',' )"

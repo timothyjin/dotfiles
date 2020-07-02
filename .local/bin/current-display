@@ -1,3 +1,5 @@
 #!/bin/sh
 
-xrandr | grep "primary" | awk '{print $1}'
+# Returns a list of active monitors. The first line is the primary output.
+
+xrandr --listactivemonitors | sed 1d | awk '{print $4}'
