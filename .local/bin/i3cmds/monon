@@ -62,8 +62,6 @@ fi
 
 # Restart some display applications
 launch-redshift &
-launch-comp &
-# launch-polybar &
 [ -n "$I3SOCK" ] && i3-msg restart
 
 print "Now using displays:\n$( current-display | paste -sd',' )"

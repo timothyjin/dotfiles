@@ -7,7 +7,7 @@ usage() {
 }
 
 stopcomp() {
-    pgrep "compton" && killall compton
+    pgrep "picom" && killall picom
     pgrep "xcompmgr" && killall xcompmgr
 }
 
@@ -20,8 +20,8 @@ startcomp() {
     stopcomp
     if [ $comp -eq 0 ]
     then
-        compton -b --config ~/.config/compton.conf
-        $notify && notify-send "Compositor" "Switched to compton."
+        picom -b --config ~/.config/picom/picom.conf
+        $notify && notify-send "Compositor" "Switched to picom."
     else
         xcompmgr -CcfF -I0.03 -O0.03 -D4 &
         $notify && notify-send "Compositor" "Switched to xcompmgr."

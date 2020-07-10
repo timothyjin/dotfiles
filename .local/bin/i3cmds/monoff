@@ -28,8 +28,6 @@ rmmod nvidia
 
 # Restart some display applications
 launch-redshift &
-launch-comp &
-# launch-polybar &
 [ -n "$I3SOCK" ] && i3-msg restart
 
 print "Display switched to $internal"

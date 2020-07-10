@@ -17,11 +17,11 @@ gaps inner $inner
 gaps outer $outer
 
 # ----- External ----- #
+exec --no-startup-id launch-redshift &
+exec --no-startup-id picom -b --config ~/.config/picom/picom.conf &
+exec_always --no-startup-id launch-polybar &
 exec_always --no-startup-id autotiling &
 exec_always --no-startup-id i3wsr --icons awesome --config ~/.config/i3/config.toml &
-exec_always --no-startup-id launch-redshift
-exec_always --no-startup-id launch-comp
-exec_always --no-startup-id launch-polybar
 
 # ----- Colors ----- #
 set_from_resource $darkblack    color0  #000000
