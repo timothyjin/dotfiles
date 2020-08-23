@@ -13,6 +13,9 @@ xset dpms 0 3600 0
 # Swap Escape and CapsLock
 setxkbmap -option caps:swapescape
 
+# Set cursor shape
+xsetroot -cursor_name left_ptr
+
 TPOINT="TPPS/2 Elan TrackPoint"
 TPAD="SynPS/2 Synaptics TouchPad"
 MOUSE="Logitech G403"

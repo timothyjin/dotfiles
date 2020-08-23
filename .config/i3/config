@@ -1,7 +1,7 @@
 # vim:filetype=i3
 
 # ----- Definitions ----- #
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 for_window [class="St" instance="float_*"] floating enable
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
