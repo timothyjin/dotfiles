@@ -15,8 +15,7 @@ alias e='$EDITOR' \
     sc='systemctl' \
     ssc='sudo systemctl' \
     sdn='shutdown -h now' \
-    hst='$EDITOR "$XDG_DATA_HOME"/zsh_history' \
-    upd='yay -Syu' \
+    h='history' \
     magit='nvim -c MagitOnly' \
     ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
     wttr='curl wttr.in' \
@@ -29,12 +28,12 @@ alias e='$EDITOR' \
     jlab='jupyter lab'
 
 # Directory shortcuts
-alias h='cd ~/' \
-    d='cd ~/Documents/' \
+alias d='cd ~/Documents/' \
     D='cd ~/Downloads/' \
     m='cd ~/Music/' \
     p='cd ~/Pictures/' \
     P='cd ~/Projects/' \
+    re='cd ~/Repos/' \
     cf='cd ~/.config/' \
     lb='cd ~/.local/bin/'
 
