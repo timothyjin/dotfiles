@@ -17,7 +17,7 @@ setxkbmap -option caps:swapescape
 xsetroot -cursor_name left_ptr
 
 TPOINT="TPPS/2 Elan TrackPoint"
-TPAD="SynPS/2 Synaptics TouchPad"
+TPAD="Synaptics TM3418-002"
 MOUSE="Logitech G403"
 SPEED_PROP="libinput Accel Speed"
 MSPEED=0.4
@@ -40,6 +40,7 @@ COLOR_PROFILE="/usr/share/color/icc/colord/NV156FHM-N61-Linux.icc"
 [ -f $COLOR_PROFILE ] && xcalib -d :0 $COLOR_PROFILE
 
 # Universal external applications
+pgrep gebaard || gebaard -b &
 pgrep mpd || mpd ~/.config/mpd/mpd.conf &
 pgrep dunst || dunst &
 pgrep unclutter || unclutter &

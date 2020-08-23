@@ -1,0 +1,32 @@
+[swipe.commands.three]
+left_up = ""
+right_up = ""
+up = "xdotool key Super_L+j"
+left_down = ""
+right_down = ""
+down = "xdotool key Super_L+k"
+left = "xdotool set_desktop --relative 1"
+right = "xdotool set_desktop --relative -- -1"
+
+[swipe.commands.four]
+left_up = ""
+right_up = ""
+up = "$LAUNCHER"
+left_down = ""
+right_down = ""
+down = "dmenu_file"
+left = "xdotool set_desktop --relative 1"
+right = "xdotool set_desktop --relative -- -1"
+
+[pinch.commands]
+in = ""
+out = ""
+
+[pinch.settings]
+threshold = 0.25
+one_shot = false
+
+[swipe.settings]
+threshold = 0.5
+one_shot = true
+trigger_on_release = false
