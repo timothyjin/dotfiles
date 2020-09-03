@@ -146,7 +146,7 @@ bindsym $mod+Shift+c exec --no-startup-id "launch-comp -t"
 bindsym $mod+v exec $term -n cava -e cava
 #bindsym $mod+Shift+v
 
-bindsym $mod+b bar mode toggle
+bindsym $mod+b exec --no-startup-id "polybar-msg cmd toggle"
 bindsym $mod+Shift+b floating toggle; sticky toggle; exec --no-startup-id hover left
 
 bindsym $mod+n exec $term -n nmtui -e nmtui

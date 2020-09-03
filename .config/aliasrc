@@ -16,6 +16,7 @@ alias e='$EDITOR' \
     ssc='sudo systemctl' \
     sdn='shutdown -h now' \
     h='history' \
+    zup='zgen update' \
     magit='nvim -c MagitOnly' \
     ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
     wttr='curl wttr.in' \
