@@ -18,7 +18,7 @@ print "Waiting for Nvidia X server to die..."
 while pgrep -u 0 -x Xorg >/dev/null; do sleep 1; done
 
 # Turn on the laptop screen and turn off all other outputs
-layout-off
+~/.screenlayout/eDP1.sh
 
 # Remove the nvidia kernel module so we can shut down the card
 rmmod nvidia

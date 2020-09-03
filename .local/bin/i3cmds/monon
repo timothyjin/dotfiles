@@ -1,40 +1,35 @@
 #!/bin/sh
 
 # Script to activate an external monitor with bumblebee and intel-virtual-output.
-# To use a specific layout, edit the `~/.local/bin/layout-on` script.
+# By default, this script uses the script path stored in $XDG_CACHE_HOME/monon-layout.
+# To use a specific layout, pass in the path of the layout script as an argument.
 
 usage() {
-    echo "Usage: $(basename $0) [-h] [ -o OUTPUT ] [ -r RATE ]"
+    echo "Usage: $(basename $0) [-h] [layout script]"
 }
-
-internal=$INTERNAL
-external=$EXTERNAL
-
-while [ "$1" != "" ]; do
-    case $1 in
-        -o | --output ) shift
-                        external=$1
-                        ;;
-        -r | --rate )   shift
-                        rate=$1
-                        ;;
-        -h | --help )   usage
-                        exit
-                        ;;
-        * )             usage
-                        exit 1
-    esac
-    shift
-done
 
 print() {
     echo "$1"
     notify-send "$(basename $0)" "$1"
 }
 
+# Use cached layout by default
+layout="$(cat "$XDG_CACHE_HOME/monon-layout")"
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -h | --help )   usage
+                        exit
+                        ;;
+        * )             layout=$1
+                        ;;
+    esac
+    shift
+done
+
 # Exit if external display is already on
 current=$(current-display)
-[ "$current" != "$internal" ] && print "$internal is not the current primary display, run 'monoff' before running this script" && exit 1
+[ "$current" != "$INTERNAL" ] && print "$INTERNAL is not the current primary display, run 'monoff' before running this script" && exit 1
 
 # Prevent running this script as root, as it leads to bad window alignment on the external display
 [ "$(whoami)" = "root" ] && echo "Do not run this script as root! Exiting..." && exit 2
@@ -48,10 +43,10 @@ optirun intel-virtual-output
 
 # Turn on the external display
 # When starting X server for the first time, all virtual outputs will be disconnected and so modes will not be available until connecting first
-xrandr --output "$external" --primary --auto
+xrandr --output "$EXTERNAL" --primary --auto
 
-# Run script to set configured on-layout
-layout-on
+# Run layout script
+$layout
 
 # Set peripheral properties on both X servers
 if [ -f ~/.xprofile ]

@@ -8,8 +8,7 @@ set $mod Mod4
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
 set $hibernate sudo -A systemctl suspend
-set $monitoron monon
-set $monitoroff monoff
+set $monitoron monon-select
 set $inner 10
 set $outer 0
 
@@ -211,8 +210,8 @@ bindsym $mod+F3 exec --no-startup-id volctl up 2
 bindsym $mod+F4 exec --no-startup-id pactl set-source-mute 1 toggle
 bindsym $mod+F5 exec --no-startup-id brillo -U 10
 bindsym $mod+F6 exec --no-startup-id brillo -A 10
-bindsym $mod+F7 exec --no-startup-id prompt "Switch to external display?" "$monitoron"
-bindsym $mod+Shift+F7 exec --no-startup-id prompt "Switch to laptop display?" "$monitoroff"
+bindsym $mod+F7 exec --no-startup-id "$monitoron"
+bindsym $mod+Shift+F7 exec --no-startup-id "prompt 'Switch to laptop display?' monoff"
 # bindsym $mod+F8
 # bindsym $mod+F9
 # bindsym $mod+F10
@@ -226,8 +225,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id volctl up 2
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
 bindsym XF86MonBrightnessDown exec --no-startup-id brillo -U 10
 bindsym XF86MonBrightnessUp exec --no-startup-id brillo -A 10
-bindsym XF86Display exec --no-startup-id prompt "Switch to external display?" "$monitoron"
-bindsym Shift+XF86Display exec --no-startup-id prompt "Switch to laptop display?" "$monitoroff"
+bindsym XF86Display exec --no-startup-id "$monitoron"
+bindsym Shift+XF86Display exec --no-startup-id "prompt 'Switch to laptop display?' monoff"
 # bindsym XF86WLAN
 # bindsym XF86Tools
 # bindsym XF86Bluetooth
