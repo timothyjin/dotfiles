@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Wrapper script for monon to select from multiple pre-defined multi-monitor layouts in $HOME/.screenlayout
+
+layoutdir="$HOME/.screenlayout"
+cachefile="$XDG_CACHE_HOME/monon-layout"
+
+# Get cached layout name
+cached="$(cat "$cachefile" | xargs -r -I % basename -a %)"
+
+# Make options list with cached layout as first option
+no="No"
+yes="Yes ($cached)"
+others="$(find $layoutdir -type f | grep -v "$cached" | xargs -r -I % basename -a %)"
+options="$(printf "%s\\n%s\\n%s" "$no" "$yes" "$others")"
+
+# Use rofi to make selection
+choice="$(printf "$options" | rofi -dmenu -i -p "Switch to external display?" -l 5 -location 0)"
+
+[ $? -ne 0 ] && exit 1
+[ "$choice" = "$no" ] && exit
+
+# Run monon with selection and cache it if successful
+if [ "$choice" = "$yes" ]
+then
+    monon
+else
+    monon "$layoutdir/$choice" && echo "$longchoice" > "$cachefile"
+fi
