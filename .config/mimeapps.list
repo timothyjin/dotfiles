@@ -1,0 +1,16 @@
+[Added Associations]
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=firefox.desktop;
+
+[Default Applications]
+application/pdf=pdf.desktop;
+application/postscript=pdf.desktop;
+image/gif=img.desktop;
+image/jpeg=img.desktop;
+image/png=img.desktop;
+inode/directory=file.desktop;
+text/plain=text.desktop;
+text/x-shellscript=text.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
+x-scheme-handler/slack=slack.desktop
