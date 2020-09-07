@@ -16,7 +16,7 @@ gaps inner $inner
 gaps outer $outer
 
 # ----- External ----- #
-exec_always --no-startup-id launch-polybar &
+exec_always --no-startup-id launch-polybar i3 &
 exec_always --no-startup-id autotiling &
 exec_always --no-startup-id i3wsr --icons awesome --config ~/.config/i3/config.toml &
 

@@ -15,15 +15,9 @@ darkcyan =    ${xrdb:color6}
 cyan =        ${xrdb:color14}
 darkwhite =   ${xrdb:color7}
 white =       ${xrdb:color15}
+
 transparent = #00000000
-
 fullblack = #ff000000
-
-background = #00000000
-foreground = ${colors.white}
-icon = ${colors.darkwhite}
-underline = ${colors.cyan}
-menu-options = ${colors.darkred}
 
 [settings]
 ;screenchange-reload = true
@@ -49,19 +43,19 @@ height = 24
 enable-ipc = true
 monitor = ${env:MONITOR}
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+; background = ${colors.background}
+; foreground = ${colors.foreground}
 
-overline-size = 1
-overline-color = ${colors.darkblack}
-underline-size = 1
-underline-color = ${colors.darkwhite}
+; overline-size = 1
+; overline-color = ${colors.darkblack}
+; underline-size = 1
+; underline-color = ${colors.darkwhite}
 
-border-top-size = 0
-border-left-size = 0
-border-right-size = 0
-border-bottom-size = 0
-border-color = ${colors.transparent}
+; border-top-size = 0
+; border-left-size = 0
+; border-right-size = 0
+; border-bottom-size = 0
+; border-color = ${colors.transparent}
 
 padding-left = 1
 padding-right = 2
@@ -69,9 +63,9 @@ padding-right = 2
 module-margin-left = 0
 module-margin-right = 2
 
-font-0 = dejavusans:pixelsize=9;1
-font-1 = notosansmononerdfontmono:pixelsize=9;1
-font-2 = notosanscjkjp:pixelsize=9;1
+font-0 = dejavusans:pixelsize=10;1
+font-1 = notosansmononerdfontmono:pixelsize=10;1
+font-2 = notosanscjkjp:pixelsize=10;1
 font-3 = siji:pixelsize=10;1
 
 tray-position = right
@@ -85,37 +79,119 @@ locale = en_US.UTF-8
 ; click-left =
 ; click-middle =
 ; click-right =
+; scroll-up =
+; scroll-down =
+; double-click-left =
+; double-click-right =
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; i3 BARS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[bar/i3]
+inherit = bar/master
+
+background = ${colors.transparent}
+foreground = ${colors.white}
+icon = ${colors.darkwhite}
+underline = ${colors.cyan}
+menu-options = ${colors.darkred}
+
+overline-size = 1
+overline-color = ${colors.darkblack}
+underline-size = 1
+underline-color = ${colors.darkwhite}
+
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
+border-bottom-size = 0
+border-color = ${colors.transparent}
+
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
-;double-click-left = notify-send -u low doubleclick
-;double-click-right = notify-send -u low doubleclick2
 
-[bar/top]
-inherit = bar/master
+[bar/i3-top]
+inherit = bar/i3
 bottom = false
 
 modules-left = i3 xwindow
-modules-center = mpd spotify
+modules-center = mpd
 modules-right = temperature cpu memory disk backlight audio wifi battery date time
 
-[bar/main]
-inherit = bar/master
+[bar/i3-main]
+inherit = bar/i3
 bottom = false
 
 modules-left = i3 xwindow
-modules-center = mpd spotify
+modules-center = mpd
 modules-right = temperature cpu memory disk backlight audio wifi battery date time
 
 tray-position = none
 
-[bar/side]
-inherit = bar/master
+[bar/i3-side]
+inherit = bar/i3
 bottom = false
 
 modules-left = i3 xwindow
 modules-right = date time
 
 tray-position = center
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Xmonad BARS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[bar/xmonad]
+inherit = bar/master
+
+background = ${colors.darkblack}
+foreground = ${colors.white}
+icon = ${colors.darkwhite}
+underline = ${colors.transparent}
+menu-options = ${colors.darkblue}
+
+overline-size = 0
+overline-color = ${colors.darkblack}
+underline-size = 0
+underline-color = ${colors.darkwhite}
+
+border-top-size = 3
+border-left-size = 0
+border-right-size = 0
+border-bottom-size = 3
+border-color = ${colors.darkblack}
+
+[bar/xmonad-top]
+inherit = bar/xmonad
+bottom = false
+
+modules-left = xmonad
+modules-center = mpd
+modules-right = temperature cpu memory disk backlight audio wifi battery date time
+
+[bar/xmonad-main]
+inherit = bar/xmonad
+bottom = false
+
+modules-left = xmonad
+modules-center = mpd
+modules-right = temperature cpu memory disk backlight audio wifi battery date time
+
+tray-position = none
+
+[bar/xmonad-side]
+inherit = bar/xmonad
+bottom = false
+
+modules-left = xmonad
+modules-right = date time
+
+tray-position = center
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; MODULES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [module/i3]
 type = internal/i3
@@ -133,9 +209,9 @@ label-mode-padding = 2
 label-mode-background = ${colors.red}
 
 label-focused = %name%
-label-focused-foreground = ${colors.foreground}
-; label-focused-overline= ${colors.underline}
-label-focused-underline = ${colors.underline}
+label-focused-foreground = ${root.foreground}
+; label-focused-overline= ${root.underline}
+label-focused-underline = ${root.underline}
 label-focused-padding = 1
 
 label-unfocused = %name%
@@ -143,18 +219,24 @@ label-unfocused-foreground = ${colors.darkwhite}
 label-unfocused-padding = 1
 
 label-visible = %name%
-label-visible-foreground = ${colors.foreground}
+label-visible-foreground = ${root.foreground}
 label-visible-underline= ${colors.black}
 label-visible-padding = 1
 
 label-urgent = %name%
 ; label-urgent-background = ${colors.darkblack}
-label-urgent-foreground = ${colors.darkred}
+label-urgent-foreground = ${colors.red}
 label-urgent-padding = 1
 
 label-separator = |
 label-separator-padding = 0
-label-separator-foreground = ${colors.icon}
+label-separator-foreground = ${root.icon}
+
+[module/xmonad]
+type = custom/script
+exec = xmonad-log
+
+tail = true
 
 [module/temperature]
 type = internal/temperature
@@ -171,21 +253,21 @@ format = <label>
 ; ramp-2 = 
 ; ramp-3 = 
 ; ramp-4 = 
-; ramp-foreground = ${colors.icon}
+; ramp-foreground = ${root.icon}
 
 label = %temperature-c%
-format-underline = ${colors.underline}
+format-underline = ${root.underline}
 
 format-prefix = " "
-format-prefix-foreground = ${colors.icon}
+format-prefix-foreground = ${root.icon}
 
 format-warn = <label-warn>
 
 label-warn = %temperature-c%
-format-warn-underline = ${colors.underline}
+format-warn-underline = ${root.underline}
 
 format-warn-prefix = " "
-format-warn-prefix-foreground = ${colors.icon}
+format-warn-prefix-foreground = ${root.icon}
 
 [module/cpu]
 type = internal/cpu
@@ -193,10 +275,10 @@ interval = 5
 
 format = <label>
 label = %{A1:$TERMINAL -n ytop -e ytop -p &:}%percentage%%{A}
-format-underline = ${colors.underline}
+format-underline = ${root.underline}
 
 format-prefix = " "
-format-prefix-foreground = ${colors.icon}
+format-prefix-foreground = ${root.icon}
 
 [module/memory]
 type = internal/memory
@@ -204,10 +286,10 @@ interval = 5
 
 format = <label>
 label = %{A1:$TERMINAL -n htop -e htop &:}%percentage_used%%{A}
-format-underline = ${colors.underline}
+format-underline = ${root.underline}
 
 format-prefix = " "
-format-prefix-foreground = ${colors.icon}
+format-prefix-foreground = ${root.icon}
 
 [module/disk]
 type = internal/fs
@@ -215,10 +297,10 @@ mount-0 = /
 
 format-mounted = <label-mounted>
 label-mounted = %{A1:$TERMINAL -n $FILE -e $FILE &:}%percentage_used%%{A}
-format-mounted-underline = ${colors.underline}
+format-mounted-underline = ${root.underline}
 
 format-mounted-prefix = " "
-format-mounted-prefix-foreground = ${colors.icon}
+format-mounted-prefix-foreground = ${root.icon}
 
 [module/backlight]
 type = internal/backlight
@@ -236,10 +318,10 @@ ramp-7 = 
 ramp-8 = 
 ramp-9 = 
 ramp-10 = 
-ramp-foreground = ${colors.icon}
+ramp-foreground = ${root.icon}
 
 label = %percentage%
-format-underline = ${colors.underline}
+format-underline = ${root.underline}
 
 [module/audio]
 type = internal/pulseaudio
@@ -269,18 +351,18 @@ ramp-volume-17 = 墳
 ramp-volume-18 = 墳
 ramp-volume-19 = 墳
 ramp-volume-20 = 墳
-ramp-volume-foreground = ${colors.icon}
+ramp-volume-foreground = ${root.icon}
 
 label-volume = %{A3:pavucontrol &:}%percentage%%{A}
-format-volume-foreground = ${colors.foreground}
-format-volume-underline = ${colors.underline}
+format-volume-foreground = ${root.foreground}
+format-volume-underline = ${root.underline}
 
 label-muted = %{A3:pavucontrol &:}~%{A}
-format-muted-foreground = ${colors.foreground}
-format-muted-underline = ${colors.underline}
+format-muted-foreground = ${root.foreground}
+format-muted-underline = ${root.underline}
 
 format-muted-prefix = "ﱝ "
-format-muted-prefix-foreground = ${colors.icon}
+format-muted-prefix-foreground = ${root.icon}
 
 [module/wifi]
 type = internal/network
@@ -296,19 +378,19 @@ ramp-signal-2 = 喝
 ramp-signal-3 = ﰊ
 ramp-signal-4 = ﯿ
 ; ramp-signal-5 = 
-ramp-signal-foreground = ${colors.icon}
+ramp-signal-foreground = ${root.icon}
 
 label-connected = %{A1:st -e nm-applet &:}%essid%%{A}
 ; label-connected = %downspeed:8%
-format-connected-underline = ${colors.underline}
+format-connected-underline = ${root.underline}
 
 format-disconnected = <label-disconnected>
 label-disconnected = %{A1:st -e nm-applet:}~%{A}
-label-disconnected-foreground = ${colors.foreground}
-format-disconnected-underline = ${colors.underline}
+label-disconnected-foreground = ${root.foreground}
+format-disconnected-underline = ${root.underline}
 
 format-disconnected-prefix = " "
-format-disconnected-prefix-foreground = ${colors.icon}
+format-disconnected-prefix-foreground = ${root.icon}
 
 [module/wired]
 type = internal/network
@@ -336,11 +418,11 @@ animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
-animation-charging-foreground = ${colors.icon}
+animation-charging-foreground = ${root.icon}
 animation-charging-framerate = 750
 
 label-charging = %percentage% | %time%
-format-charging-underline = ${colors.underline}
+format-charging-underline = ${root.underline}
 
 format-discharging = <ramp-capacity> <label-discharging>
 
@@ -353,16 +435,16 @@ ramp-capacity-5 = 
 ramp-capacity-6 = 
 ramp-capacity-7 = 
 ramp-capacity-8 = 
-ramp-capacity-foreground = ${colors.icon}
+ramp-capacity-foreground = ${root.icon}
 
 label-discharging = %percentage% | %time%
-format-discharging-underline = ${colors.underline}
+format-discharging-underline = ${root.underline}
 
 format-full = <label-full>
-format-full-underline = ${colors.underline}
+format-full-underline = ${root.underline}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.icon}
+format-full-prefix-foreground = ${root.icon}
 
 [module/date]
 type = internal/date
@@ -371,10 +453,10 @@ interval = 5
 
 format = <label>
 label = %{A1:$TERMINAL -n float_calcurse -e calcurse &:}%date%%{A}
-format-underline = ${colors.underline}
+format-underline = ${root.underline}
 
 format-prefix = " "
-format-prefix-foreground = ${colors.icon}
+format-prefix-foreground = ${root.icon}
 
 [module/time]
 type = internal/date
@@ -383,10 +465,10 @@ interval = 5
 
 format = <label>
 label = %time%
-format-underline = ${colors.underline}
+format-underline = ${root.underline}
 
 format-prefix = " "
-format-prefix-foreground = ${colors.icon}
+format-prefix-foreground = ${root.icon}
 
 [module/mpd]
 type = internal/mpd
@@ -406,7 +488,7 @@ label-offline = mpd is off
 label-song-maxlen = 45
 label-song-ellipsis = true
 
-label-time-foreground = ${colors.icon}
+label-time-foreground = ${root.icon}
 
 icon-prev = 
 icon-stop = 
@@ -417,7 +499,7 @@ icon-next = 
 icon-random = 
 icon-repeat = 
 
-toggle-on-foreground = ${colors.foreground}
+toggle-on-foreground = ${root.foreground}
 toggle-off-foreground = #777
 
 ; bar-progress-width = 10
@@ -449,27 +531,27 @@ label-separator-margin = 1
 format-foreground = ${colors.icon}
 
 menu-0-0 = 
-menu-0-0-foreground = ${colors.menu-options}
+menu-0-0-foreground = ${root.menu-options}
 menu-0-0-exec = i3-msg exit
 menu-0-1 = 
-menu-0-1-foreground = ${colors.menu-options}
+menu-0-1-foreground = ${root.menu-options}
 menu-0-1-exec = lock
 menu-0-2 = ⏼
-menu-0-2-foreground = ${colors.menu-options}
+menu-0-2-foreground = ${root.menu-options}
 menu-0-2-exec = menu-open-1
 menu-0-3 = ⭘
-menu-0-3-foreground = ${colors.menu-options}
+menu-0-3-foreground = ${root.menu-options}
 menu-0-3-exec = menu-open-2
 
 menu-1-0 = 
-menu-1-0-foreground = ${colors.menu-options}
+menu-1-0-foreground = ${root.menu-options}
 menu-1-0-exec = winboot
 menu-1-1 = 
-menu-1-1-foreground = ${colors.menu-options}
+menu-1-1-foreground = ${root.menu-options}
 menu-1-1-exec = sudo -A reboot
 
 menu-2-0 = ⭘
-menu-2-0-foreground = ${colors.menu-options}
+menu-2-0-foreground = ${root.menu-options}
 menu-2-0-exec = sudo -A shutdown -h now
 
 [module/xwindow]
@@ -479,6 +561,6 @@ format-padding = 2
 label = %title%
 label-maxlen = 72
 label-ellipsis = true
-label-foreground = ${colors.foreground}
+label-foreground = ${root.foreground}
 
 ; vim:ft=dosini

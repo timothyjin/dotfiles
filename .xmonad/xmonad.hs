@@ -307,10 +307,10 @@ dbusOutput dbus str = do
             D.signalBody = [D.toVariant $ UTF8.decodeString str]
         }
     D.emit dbus signal
-  where
-    objectPath = D.objectPath_ "/org/xmonad/Log"
-    interfaceName = D.interfaceName_ "org.xmonad.Log"
-    memberName = D.memberName_ "Update"
+        where
+        objectPath = D.objectPath_ "/org/xmonad/Log"
+        interfaceName = D.interfaceName_ "org.xmonad.Log"
+        memberName = D.memberName_ "Update"
 
 ppPad :: String -> String
 ppPad = DLog.pad . DLog.pad
@@ -330,7 +330,7 @@ ppFg fg = DLog.wrap ("%{F" ++ fg ++ "}") "%{F-}"
 --
 -- By default, do nothing.
 myStartupHook = do
-    spawn "launch-polybar-xmonad &"
+    spawn "launch-polybar xmonad &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

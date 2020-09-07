@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Wrapper script for starting polybar instances.
+# First argument is the current WM. If no argument is given, use i3 as the default.
+
+[ -z "$1" ] && wm="i3" || wm="$1"
+
 # Terminate already running bar instances
 killall -q polybar
 
@@ -9,15 +14,15 @@ while pidof polybar >/dev/null; do sleep 1; done
 # Launch bars
 current=$(current-display)
 if [ "$current" = "$INTERNAL" ]; then
-    MONITOR="$INTERNAL" polybar top &
+    MONITOR="$INTERNAL" polybar "${wm}-top" &
 else
     for output in $current
     do
         if [ "$output" = "$INTERNAL" ]
         then
-            MONITOR="$output" polybar side &
+            MONITOR="$output" polybar "${wm}-side" &
         else
-            MONITOR="$output" polybar main &
+            MONITOR="$output" polybar "${wm}-main" &
         fi
     done
 fi
