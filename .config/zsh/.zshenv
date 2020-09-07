@@ -3,7 +3,7 @@
 export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
 
 export INTERNAL="eDP1"
-export EXTERNAL="VIRTUAL1"
+export EXTERNAL="VIRTUAL2"
 
 export EDITOR="nvim"
 export TERMINAL="st"

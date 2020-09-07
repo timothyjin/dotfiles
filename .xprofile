@@ -45,5 +45,6 @@ pgrep mpd || mpd ~/.config/mpd/mpd.conf &
 pgrep dunst || dunst &
 pgrep unclutter || unclutter &
 pgrep xss-lock || xss-lock -l -- $LOCKER &
-pgrep picom || picom -b --config ~/.config/picom/picom.conf &
+pgrep picom || picom -b &
+launch-redshift &
 setbg &

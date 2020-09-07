@@ -1,13 +1,9 @@
 #!/bin/sh
 
 # Wrapper script for starting redshift.
-# Kills all existing redshift instances and starts a new one based on the active display(s).
+# Starts new redshift instances based on any existing instances and the active display(s).
 
-killall -q redshift
-while pgrep -u $(id -u) -x redshift >/dev/null; do sleep 1; done
+instances="$(pgrep -x redshift | wc -l)"
 
-# Start redshift on external display(s) if any are being used.
-[ "$(current-display)" != "$INTERNAL" ] && DISPLAY=:8 redshift &
-
-# Start redshift on internal display
-redshift &
+[ "$instances" -eq 0 ] && redshift &
+[ "$(current-display)" != "$INTERNAL" ] && [ "$instances" -le 1 ] && DISPLAY=:8 redshift &
