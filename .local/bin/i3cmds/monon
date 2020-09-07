@@ -57,6 +57,6 @@ fi
 
 # Restart some display applications
 launch-redshift &
-[ -n "$I3SOCK" ] && i3-msg restart
+[ -n "$I3SOCK" ] && i3-msg restart || xmonad --restart
 
 print "Now using displays:\n$( current-display | paste -sd',' )"

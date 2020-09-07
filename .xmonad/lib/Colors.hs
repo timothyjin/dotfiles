@@ -1,0 +1,1 @@
+/home/timothy/.cache/wal/colors.hs
