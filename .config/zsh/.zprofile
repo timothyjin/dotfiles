@@ -35,6 +35,10 @@ export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 [ -f "$ZDOTDIR/.zshrc" ] && source "$ZDOTDIR/.zshrc"
 
 [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx
