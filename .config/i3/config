@@ -135,8 +135,8 @@ bindsym $mod+Ctrl+l move workspace to output right
 bindsym $mod+x scratchpad show
 bindsym $mod+Shift+x move scratchpad
 
-bindsym $mod+c exec $term -n float_calc -e bc -ql
-bindsym $mod+Shift+c exec --no-startup-id "launch-comp -t"
+bindsym $mod+c exec --no-startup-id rofi-calc
+# bindsym $mod+Shift+c
 
 bindsym $mod+v exec --no-startup-id showclip
 bindsym $mod+Shift+v exec $term -n cava -e cava

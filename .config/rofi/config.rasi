@@ -1,7 +1,7 @@
 configuration {
     modi: "window,drun,ssh";
     width: 30;
-    lines: 40;
+    lines: 30;
     columns: 1;
     font: "mono 14";
     bw: 0;

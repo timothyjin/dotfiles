@@ -151,7 +151,6 @@ myKeys = \conf -> mkKeymap conf $
     , ("M-S-l",            onNextNeighbour def W.shift >> onNextNeighbour def W.view)
     -- , ("M-z",              )
     , ("M-x",              namedScratchpadAction myScratchpads "terminal")
-    , ("M-c",              spawn "$TERMINAL -n float_calc -e bc -ql")
     , ("M-c",              spawn "rofi-calc")
     , ("M-v",              spawn "showclip")
     , ("M-S-v",            spawn "$TERMINAL -n cava -e cava")
@@ -271,7 +270,6 @@ myManageHook = composeOne $
     [ transience
     , isDialog                       -?> doFloat
     , appName =? "float_calcurse"    -?> doCenterFloat
-    , appName =? "float_calc"        -?> doCenterFloat
     , appName =? "float_mixer"       -?> doCenterFloat
     , appName =? "forticlientsslvpn" -?> doCenterFloat
     , appName =? "desktop_window"    -?> doIgnore

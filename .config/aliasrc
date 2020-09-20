@@ -49,10 +49,6 @@ alias cfp='$EDITOR $ZDOTDIR/.zprofile' \
     cff='$EDITOR ~/.config/fontconfig/fonts.conf' \
     cfa='$EDITOR ~/.config/aliasrc'
 
-# School directory shortcuts
-
-calc() { echo "$1" | bc -l ;}
-
 # Vim -> Neovim
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
