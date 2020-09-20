@@ -32,19 +32,18 @@ do
     xinput --list-props "$id" | grep -q "$SPEED_PROP" && xinput set-prop "$id" "$SPEED_PROP" "$MSPEED"
 done
 
-# Turn on NumLock
-numlockx &
-
 # Apply color profile
 COLOR_PROFILE="/usr/share/color/icc/colord/NV156FHM-N61-Linux.icc"
 [ -f $COLOR_PROFILE ] && xcalib -d :0 $COLOR_PROFILE
 
 # Universal external applications
+pgrep fcitx || fcitx &
 pgrep gebaard || gebaard -b &
-pgrep mpd || mpd ~/.config/mpd/mpd.conf &
+pgrep mpd || mpd &
 pgrep dunst || dunst &
 pgrep unclutter || unclutter &
 pgrep xss-lock || xss-lock -l -- $LOCKER &
 pgrep picom || picom -b &
-launch-redshift &
+pgrep redshift || redshift &
+numlockx &
 setbg &
