@@ -110,7 +110,7 @@ myFocusedBorderColor = darkBlue
 myKeys = \conf -> mkKeymap conf $
     [ ("M-<Return>",       spawn $ XMonad.terminal conf)
     , ("M-`",              spawn "rofi -modi emoji -show")
-    , ("M-<Esc>",          restart "xmonad" True)
+    , ("M-<Esc>",          spawn "xmonad --recompile && xmonad --restart")
     , ("M-<Space>",        sendMessage NextLayout)
     , ("M-S-<Space>",      setLayout $ XMonad.layoutHook conf)
     , ("M-<Backspace>",    spawn "prompt 'Shutdown?' 'sudo shutdown -h now'")
@@ -276,7 +276,6 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
--- myEventHook = mempty
 myEventHook = composeAll
     [ fullscreenEventHook ]
 
@@ -307,7 +306,7 @@ dbusOutput dbus str = do
             D.signalBody = [D.toVariant $ UTF8.decodeString str]
         }
     D.emit dbus signal
-        where
+    where
         objectPath = D.objectPath_ "/org/xmonad/Log"
         interfaceName = D.interfaceName_ "org.xmonad.Log"
         memberName = D.memberName_ "Update"
@@ -365,6 +364,12 @@ main = do
         startupHook        = myStartupHook >> addEWMHFullscreen
     }
 
+addEWMHFullscreen :: X ()
+addEWMHFullscreen   = do
+    wms <- getAtom "_NET_WM_STATE"
+    wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
+    mapM_ addNETSupported [wms, wfs]
+
 addNETSupported :: Atom -> X ()
 addNETSupported x   = withDisplay $ \dpy -> do
     r               <- asks theRoot
@@ -374,9 +379,3 @@ addNETSupported x   = withDisplay $ \dpy -> do
        sup <- (join . maybeToList) <$> getWindowProperty32 dpy a_NET_SUPPORTED r
        when (fromIntegral x `notElem` sup) $
          changeProperty32 dpy r a_NET_SUPPORTED a propModeAppend [fromIntegral x]
-
-addEWMHFullscreen :: X ()
-addEWMHFullscreen   = do
-    wms <- getAtom "_NET_WM_STATE"
-    wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
-    mapM_ addNETSupported [wms, wfs]
