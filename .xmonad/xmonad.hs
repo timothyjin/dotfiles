@@ -1,16 +1,10 @@
 {-# LANGUAGE DeriveDataTypeable, TypeSynonymInstances, MultiParamTypeClasses #-}
 
 import XMonad hiding ( (|||) )
-import Data.Monoid
-import System.Exit
-
 import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
-
-import Control.Monad ((>=>), join, liftM, when)
-import Data.Maybe (maybeToList)
 
 import XMonad.Actions.PhysicalScreens
+import XMonad.Actions.SwapWorkspaces
 import XMonad.Actions.UpdatePointer
 
 import qualified XMonad.Hooks.DynamicLog as DLog
@@ -27,14 +21,24 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.SimpleDecoration (shrinkText)
 import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.TwoPane
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
+import XMonad.Util.XUtils
+
+import Control.Monad
+import Data.List
+import Data.Maybe (maybeToList)
+import qualified Data.Map as M
+import Data.Monoid
+
+import Foreign.C.String
+import System.Exit
 
 import qualified DBus as D
 import qualified DBus.Client as D
@@ -121,21 +125,22 @@ myKeys = \conf -> mkKeymap conf $
     , ("M-S-q",            io (exitWith ExitSuccess))
     , ("M-w",              spawn "firefox")
     , ("M-S-w",            spawn "firefox --private-window")
-    , ("M-e",              spawn "$TERMINAL -e $EDITOR -c Files")
-    , ("M-r",              spawn "$TERMINAL -e $FILE")
+    , ("M-e",              spawn "$TERMINAL -n $EDITOR -e $EDITOR -c Files")
+    , ("M-r",              spawn "$TERMINAL -n $FILE -e $FILE")
     , ("M-t",              withFocused $ windows . W.sink)
     , ("M-y",              sendMessage $ JumpToLayout $ myLayoutNames !! 1)
     , ("M-u",              sendMessage $ JumpToLayout $ myLayoutNames !! 2)
     , ("M-i",              sendMessage $ JumpToLayout $ myLayoutNames !! 3)
     , ("M-o",              sendMessage $ JumpToLayout $ myLayoutNames !! 4)
-    , ("M-p",              spawn "$TERMINAL -e ncmpcpp")
-    , ("M-S-p",            spawn "$TERMINAL -e pulsemixer")
-    , ("M-a",              spawn "$TERMINAL -c float_calcurse -e calcurse")
-    , ("M-s",              spawn "$TERMINAL -e ytop -p")
+    , ("M-p",              spawn "$TERMINAL -n ncmpcpp -e ncmpcpp")
+    , ("M-S-p",            spawn "pavucontrol")
+    , ("M-a",              spawn "$TERMINAL -n float_calcurse -e calcurse")
+    , ("M-s",              spawn "$TERMINAL -n float_mixer -e pulsemixer")
     , ("M-d",              spawn "$LAUNCHER")
     , ("M-S-d",            spawn "dmenu_file")
     , ("M-f",              sendMessage $ Toggle RNBFULL)
-    , ("M-g",              sendMessage $ Toggle RMIRROR)
+    , ("M-S-f",            sendMessage $ Toggle RMIRROR)
+    , ("M-g",              spawn "$TERMINAL -n ytop -e ytop -p")
     , ("M-h",              onPrevNeighbour def W.view)
     , ("M-S-h",            onPrevNeighbour def W.shift >> onPrevNeighbour def W.view)
     , ("M-j",              windows W.focusDown)
@@ -144,12 +149,14 @@ myKeys = \conf -> mkKeymap conf $
     , ("M-S-k",            windows W.swapUp)
     , ("M-l",              onNextNeighbour def W.view)
     , ("M-S-l",            onNextNeighbour def W.shift >> onNextNeighbour def W.view)
-    , ("M-x",              spawn "showclip")
-    , ("M-c",              spawn "$TERMINAL -c float_calc -e bc -ql")
-    , ("M-S-c",            spawn "launch-comp -t")
-    , ("M-v",              spawn "$TERMINAL -e cava")
-    , ("M-b",              sendMessage ToggleStruts >> spawn "polybar-msg cmd toggle")
-    , ("M-n",              spawn "$TERMINAL -e nmtui")
+    -- , ("M-z",              )
+    , ("M-x",              namedScratchpadAction myScratchpads "terminal")
+    , ("M-c",              spawn "$TERMINAL -n float_calc -e bc -ql")
+    , ("M-c",              spawn "rofi-calc")
+    , ("M-v",              spawn "showclip")
+    , ("M-S-v",            spawn "$TERMINAL -n cava -e cava")
+    , ("M-b",              sendMessage ToggleStruts)
+    , ("M-n",              spawn "$TERMINAL -n nmtui -e nmtui")
     , ("M-m",              windows W.focusMaster)
     , ("M-S-m",            windows W.shiftMaster)
     , ("M-,",              sendMessage (IncMasterN 1))
@@ -288,15 +295,15 @@ myEventHook = composeAll
 myLogHook :: D.Client -> DLog.PP
 myLogHook dbus = def
     { DLog.ppOutput = dbusOutput dbus
-    , DLog.ppCurrent = (ppFg darkBlack) . (ppBg white) . ppPad
-    , DLog.ppVisible = (ppFg darkBlack) . (ppBg darkWhite) . ppPad
-    , DLog.ppHidden = (ppBg black) . ppPad
-    , DLog.ppVisibleNoWindows = return $ (ppFg darkBlack) . (ppBg darkWhite) . ppPad
-    , DLog.ppHiddenNoWindows = ppPad
+    , DLog.ppCurrent = \s -> (ppFg darkBlack) . (ppBg white) . (ppAct s) . ppPad $ s
+    , DLog.ppVisible = \s -> (ppFg darkBlack) . (ppBg darkWhite) . (ppAct s) . ppPad $ s
+    , DLog.ppHidden = \s -> (ppBg black) . (ppAct s) . ppPad $ s
+    , DLog.ppVisibleNoWindows = return $ \s -> (ppFg darkBlack) . (ppBg darkWhite) . (ppAct s) . ppPad $ s
+    , DLog.ppHiddenNoWindows = \s -> (ppAct s) . ppPad $ s
     , DLog.ppUrgent = (ppFg darkBlack) . (ppBg red) . ppPad
     , DLog.ppSep = (ppFg transparent) $ "."
     , DLog.ppWsSep = (ppFg transparent) "."
-    , DLog.ppTitle = ppPad . DLog.shorten 75
+    , DLog.ppTitle = ppPad . DLog.shorten 65
     , DLog.ppLayout = (ppFg darkBlack) . (ppBg cyan) . ppPad
     }
 
@@ -320,6 +327,11 @@ ppBg bg = DLog.wrap ("%{B" ++ bg ++ "}") "%{B-}"
 ppFg :: String -> (String -> String)
 ppFg fg = DLog.wrap ("%{F" ++ fg ++ "}") "%{F-}"
 
+ppAct :: String -> (String -> String)
+ppAct s = DLog.wrap ("%{A1:xdotool set_desktop " ++ i ++ ":}") "%{A}"
+    where
+        d = read s :: Integer
+        i = show $ d - 1
 ------------------------------------------------------------------------
 -- Startup hook
 
