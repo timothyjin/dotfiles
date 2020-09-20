@@ -100,8 +100,8 @@ myModMask       = mod4Mask
 --
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
-simpleWorkspaces :: [WorkspaceId]
-simpleWorkspaces = [[w] | w <- "1234567890-="]
+myScratchpads =
+    [ NS "terminal" "$TERMINAL -c _nsp" (className =? "_nsp") (customFloating $ W.RationalRect 0.25 0.25 0.5 0.5) ]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -267,12 +267,16 @@ myLayoutNames = ["高", "两", "中", "二", "螺"]
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
-    [ insertPosition Below Newer
-    , className =? "float_calcurse" --> doCenterFloat
-    , className =? "float_calc"     --> doCenterFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , isFullscreen                  --> doFullFloat ]
+myManageHook = composeOne $
+    [ transience
+    , isDialog                       -?> doFloat
+    , appName =? "float_calcurse"    -?> doCenterFloat
+    , appName =? "float_calc"        -?> doCenterFloat
+    , appName =? "float_mixer"       -?> doCenterFloat
+    , appName =? "forticlientsslvpn" -?> doCenterFloat
+    , appName =? "desktop_window"    -?> doIgnore
+    , isFullscreen                   -?> doFullFloat
+    , return True -?> namedScratchpadManageHook myScratchpads <+> insertPosition Below Newer ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -293,7 +297,7 @@ myEventHook = composeAll
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
 myLogHook :: D.Client -> DLog.PP
-myLogHook dbus = def
+myLogHook dbus = namedScratchpadFilterOutWorkspacePP $ def
     { DLog.ppOutput = dbusOutput dbus
     , DLog.ppCurrent = \s -> (ppFg darkBlack) . (ppBg white) . (ppAct s) . ppPad $ s
     , DLog.ppVisible = \s -> (ppFg darkBlack) . (ppBg darkWhite) . (ppAct s) . ppPad $ s
