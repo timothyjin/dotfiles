@@ -185,7 +185,7 @@ myKeys = \conf -> mkKeymap conf $
     ++
     [ (m ++ i, windows $ f j)
         | (i, j) <- zip (map show [1..9]) (XMonad.workspaces conf)
-        , (m, f) <- [("M-", W.view), ("M-S-", W.shift)]
+        , (m, f) <- [("M-", W.view), ("M-S-", W.shift), ("M-C-", swapWithCurrent) ]
     ]
 
 ------------------------------------------------------------------------
