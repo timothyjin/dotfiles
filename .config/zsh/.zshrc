@@ -12,9 +12,6 @@ zmodload zsh/complist
 # Include hidden files.
 _comp_options+=(globdots)
 
-# Load aliases
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
-
 # tmux variables
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"
@@ -89,3 +86,6 @@ lfcd () {
     fi
 }
 bindkey -s '^f' 'lfcd\n'
+
+# Load aliases
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"

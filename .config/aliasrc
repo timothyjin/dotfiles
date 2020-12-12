@@ -4,7 +4,8 @@
 alias cp="cp -v" \
     mv="mv -v" \
     rm="rm -vI" \
-    ls='ls -hN --color=auto --group-directories-first' \
+    ls='exa' \
+    ll='exa -lah' \
     grep='grep --color=auto' \
     diff='diff --color=auto'
 
