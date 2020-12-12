@@ -51,11 +51,10 @@ alias d='cd ~/Documents/' \
 
 # Config file shortcuts
 alias cfp='$EDITOR $ZDOTDIR/.zprofile' \
-    cfs='$EDITOR $ZDOTDIR/.zshrc' \
-    cfx='$EDITOR ~/.xinitrc' \
-    cfr='$EDITOR ~/.Xresources' \
+    cfz='$EDITOR $ZDOTDIR/.zshrc' \
     cfv='$EDITOR ~/.config/nvim/init.vim' \
     cfi='$EDITOR ~/.config/i3/config' \
+    cfx='$EDITOR ~/.xmonad/xmonad.hs' \
     cfb='$EDITOR ~/.config/polybar/config' \
     cff='$EDITOR ~/.config/fontconfig/fonts.conf' \
     cfa='$EDITOR ~/.config/aliasrc'

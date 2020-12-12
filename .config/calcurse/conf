@@ -20,7 +20,6 @@ general.confirmdelete=yes
 general.confirmquit=no
 general.firstdayofweek=sunday
 general.periodicsave=0
-general.systemdialogs=no
 notification.command=printf '\a'
 notification.notifyall=flagged-only
 notification.warning=300
