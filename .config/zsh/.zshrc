@@ -1,5 +1,3 @@
-# Miscellaneous
-export FZF_DEFAULT_COMMAND="find $HOME -path $TRASH_DIR -prune -o -type f -printf '%P\n'"
 autoload -U colors && colors
 
 ZSH_CACHE_DIR=$HOME/.cache/zsh
@@ -21,6 +19,9 @@ _comp_options+=(globdots)
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"
 ZSH_TMUX_UNICODE=true
+
+export DISABLE_AUTO_UPDATE="true"
+export FZF_DEFAULT_COMMAND="fd -H --no-ignore-vcs --full-path -a -t f --ignore-file ~/.config/fd/ignore $HOME"
 
 # Load zgen
 source "${HOME}/.zgen/zgen.zsh"
