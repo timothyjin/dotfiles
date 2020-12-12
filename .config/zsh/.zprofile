@@ -41,4 +41,4 @@ export XMODIFIERS=@im=fcitx
 
 [ -f "$ZDOTDIR/.zshrc" ] && source "$ZDOTDIR/.zshrc"
 
-[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx
+# [ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx

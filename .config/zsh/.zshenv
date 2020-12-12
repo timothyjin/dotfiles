@@ -2,8 +2,9 @@
 
 export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
 
-export INTERNAL="eDP1"
-export EXTERNAL="VIRTUAL2"
+export INTERNAL_INTEL="eDP-1"
+export INTERNAL_NVIDIA="eDP-1-1"
+export EXTERNAL="DP-1"
 
 export EDITOR="nvim"
 export TERMINAL="st"

@@ -12,21 +12,31 @@ alias e='$EDITOR' \
     se='sudoedit' \
     f='$FILE' \
     sf='sudo $FILE' \
+    sx='startx ~/.xinitrc' \
+    sxi='startx ~/.xinitrc i3' \
+    sxx='startx ~/.xinitrc xmonad' \
     sc='systemctl' \
     ssc='sudo systemctl' \
-    sdn='shutdown -h now' \
+    sdn='sudo shutdown -h now' \
     h='history' \
     zup='zgen update' \
     magit='nvim -c MagitOnly' \
-    ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
-    wttr='curl wttr.in' \
     tt='trash-put' \
     tem='trash-empty' \
     tls='trash-list | sort' \
     tre='trash-restore' \
     trm='trash-rm' \
-    glg='glxinfo | egrep "OpenGL vendor|OpenGL renderer"' \
-    jlab='jupyter lab'
+    glx='glxinfo | grep "server glx vendor string"' \
+    omi='optimus-manager --switch intel' \
+    omn='optimus-manager --switch nvidia' \
+    sps='sudo prime-switch' \
+    xr='xmonad --recompile && xmonad --restart' \
+    wttr='curl wttr.in' \
+    jlab='jupyter lab' \
+    ytdl='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0' \
+    ytdl4='youtube-dl -f "bestaudio[ext=m4a]"' \
+    ytdl4e='youtube-dl -f "bestaudio[ext=m4a]" --embed-thumbnail' \
+    yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 
 # Directory shortcuts
 alias d='cd ~/Documents/' \

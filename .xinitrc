@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Nvidia KMS
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+
+prime-offload
+
 # Apply colors and transparency
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 

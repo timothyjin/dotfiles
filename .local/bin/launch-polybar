@@ -13,16 +13,16 @@ while pidof polybar >/dev/null; do sleep 1; done
 
 # Launch bars
 current=$(current-display)
-if [ "$current" = "$INTERNAL" ]; then
-    MONITOR="$INTERNAL" polybar "${wm}-top" &
+if [ "$current" = "$INTERNAL_INTEL" ]; then
+    MONITOR="$INTERNAL_INTEL" polybar -r "${wm}-top" &
 else
     for output in $current
     do
-        if [ "$output" = "$INTERNAL" ]
+        if [ "$output" = "$INTERNAL_NVIDIA" ]
         then
-            MONITOR="$output" polybar "${wm}-side" &
+            MONITOR="$output" polybar -r "${wm}-side" &
         else
-            MONITOR="$output" polybar "${wm}-main" &
+            MONITOR="$output" polybar -r "${wm}-main" &
         fi
     done
 fi
