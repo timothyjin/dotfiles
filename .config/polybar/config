@@ -476,7 +476,7 @@ type = internal/mpd
 format-online = <label-time>  <label-song> %{T3}<icon-prev>%{T3}<icon-stop>%{T3}<toggle>%{T3}<icon-next> %{T3}<icon-repeat>%{T3}<icon-random>
 format-online-spacing = 0
 format-online-background = ${colors.darkblack}
-format-online-underline =
+format-online-underline = ${colors.darkblack}
 format-online-padding = 3
 
 format-offline = <label-offline>
