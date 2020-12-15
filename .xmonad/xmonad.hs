@@ -222,12 +222,12 @@ myLayout = smartBorders
     . mkToggle1 RNBFULL
     . avoidStruts
     . mkToggle1 RMIRROR
-    $ tiled ||| twopane ||| threecol ||| bsp ||| fib
+    $ bsp ||| tiled ||| twopane ||| threecol ||| fib
     where
-        tiled = renamed [Replace $ myLayoutNames !! 0] $ spacing $ ResizableTall nmaster delta ratio []
-        twopane = renamed [Replace $ myLayoutNames !! 1] $ spacing $ TwoPane delta ratio
-        threecol = renamed [Replace $ myLayoutNames !! 2] $ spacing $ ThreeColMid 1 delta ratio
-        bsp = renamed [Replace $ myLayoutNames !! 3] $ spacing $ emptyBSP
+        bsp = renamed [Replace $ myLayoutNames !! 0] $ spacing $ emptyBSP
+        tiled = renamed [Replace $ myLayoutNames !! 1] $ spacing $ ResizableTall nmaster delta ratio []
+        twopane = renamed [Replace $ myLayoutNames !! 2] $ spacing $ TwoPane delta ratio
+        threecol = renamed [Replace $ myLayoutNames !! 3] $ spacing $ ThreeColMid 1 delta ratio
         fib = renamed [Replace $ myLayoutNames !! 4] $ spacing $ Spiral L XMonad.Layout.Dwindle.CW (3/2) (11/10)
 
         -- Spacing between the edges of the screen and windows
@@ -249,7 +249,7 @@ data RMIRROR = RMIRROR deriving (Read, Show, Eq, Typeable)
 instance Transformer RMIRROR Window where
     transform _ x k = k (renamed [CutWordsLeft 1, Prepend "反"] $ Mirror x) (const x)
 
-myLayoutNames = ["高", "两", "中", "二", "螺"]
+myLayoutNames = ["二","高", "双", "中", "螺"]
 
 ------------------------------------------------------------------------
 -- Window rules:
