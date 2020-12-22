@@ -1,19 +1,26 @@
-# vim:filetype=i3
+# vim:filetype=i3config
 
 # ----- Definitions ----- #
-for_window [class="^.*"] border pixel 1
-for_window [class="St" instance="float_*"] floating enable
-set $term --no-startup-id $TERMINAL
 set $mod Mod4
+set $term --no-startup-id $TERMINAL
 set $shutdown sudo shutdown -h now
 set $reboot sudo reboot
 set $hibernate sudo -A systemctl suspend
 set $monitoron monon-select
-set $inner 10
 set $outer 0
+set $inner 10
 
-gaps inner $inner
+# ----- Borders ----- #
+for_window [class="^.*"] border pixel 1
+smart_borders on
+
+# ----- Gaps ----- #
 gaps outer $outer
+gaps inner $inner
+smart_gaps on
+
+# ----- Window Rules ----- #
+for_window [class="St" instance="float_*"] floating enable
 
 # ----- External ----- #
 exec_always --no-startup-id launch-polybar i3 &

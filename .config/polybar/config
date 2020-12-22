@@ -91,9 +91,11 @@ locale = en_US.UTF-8
 [bar/i3]
 inherit = bar/master
 
-background = ${colors.transparent}
+height = 28
+background = ${colors.darkblack}
 foreground = ${colors.white}
 icon = ${colors.darkwhite}
+overline = ${colors.cyan}
 underline = ${colors.cyan}
 menu-options = ${colors.darkred}
 
@@ -106,7 +108,7 @@ border-top-size = 0
 border-left-size = 0
 border-right-size = 0
 border-bottom-size = 0
-border-color = ${colors.transparent}
+border-color = ${colors.darkblack}
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
@@ -210,8 +212,8 @@ label-mode-background = ${colors.red}
 
 label-focused = %name%
 label-focused-foreground = ${root.foreground}
-; label-focused-overline= ${root.underline}
-label-focused-underline = ${root.underline}
+label-focused-overline= ${root.overline}
+; label-focused-underline = ${root.underline}
 label-focused-padding = 1
 
 label-unfocused = %name%
@@ -220,7 +222,8 @@ label-unfocused-padding = 1
 
 label-visible = %name%
 label-visible-foreground = ${root.foreground}
-label-visible-underline= ${colors.black}
+; label-visible-overline= ${colors.black}
+; label-visible-underline= ${colors.black}
 label-visible-padding = 1
 
 label-urgent = %name%
@@ -256,7 +259,8 @@ format = <label>
 ; ramp-foreground = ${root.icon}
 
 label = %temperature-c%
-format-underline = ${root.underline}
+format-overline = ${root.overline}
+; format-underline = ${root.underline}
 
 format-prefix = " "
 format-prefix-foreground = ${root.icon}
@@ -264,7 +268,8 @@ format-prefix-foreground = ${root.icon}
 format-warn = <label-warn>
 
 label-warn = %temperature-c%
-format-warn-underline = ${root.underline}
+format-warn-overline = ${root.overline}
+; format-warn-underline = ${root.underline}
 
 format-warn-prefix = " "
 format-warn-prefix-foreground = ${root.icon}
@@ -275,7 +280,8 @@ interval = 5
 
 format = <label>
 label = %{A1:$TERMINAL -n ytop -e ytop -p &:}%percentage%%{A}
-format-underline = ${root.underline}
+format-overline = ${root.overline}
+; format-underline = ${root.underline}
 
 format-prefix = " "
 format-prefix-foreground = ${root.icon}
@@ -286,7 +292,8 @@ interval = 5
 
 format = <label>
 label = %{A1:$TERMINAL -n htop -e htop &:}%percentage_used%%{A}
-format-underline = ${root.underline}
+format-overline = ${root.overline}
+; format-underline = ${root.underline}
 
 format-prefix = " "
 format-prefix-foreground = ${root.icon}
@@ -297,7 +304,8 @@ mount-0 = /
 
 format-mounted = <label-mounted>
 label-mounted = %{A1:$TERMINAL -n $FILE -e $FILE &:}%percentage_used%%{A}
-format-mounted-underline = ${root.underline}
+format-mounted-overline = ${root.overline}
+; format-mounted-underline = ${root.underline}
 
 format-mounted-prefix = " "
 format-mounted-prefix-foreground = ${root.icon}
@@ -321,7 +329,8 @@ ramp-10 = 
 ramp-foreground = ${root.icon}
 
 label = %percentage%
-format-underline = ${root.underline}
+format-overline = ${root.overline}
+; format-underline = ${root.underline}
 
 [module/audio]
 type = internal/pulseaudio
@@ -355,11 +364,13 @@ ramp-volume-foreground = ${root.icon}
 
 label-volume = %{A3:pavucontrol &:}%percentage%%{A}
 format-volume-foreground = ${root.foreground}
-format-volume-underline = ${root.underline}
+format-volume-overline = ${root.overline}
+; format-volume-underline = ${root.underline}
 
 label-muted = %{A3:pavucontrol &:}~%{A}
 format-muted-foreground = ${root.foreground}
-format-muted-underline = ${root.underline}
+format-muted-overline = ${root.overline}
+; format-muted-underline = ${root.underline}
 
 format-muted-prefix = "ﱝ "
 format-muted-prefix-foreground = ${root.icon}
@@ -382,12 +393,14 @@ ramp-signal-foreground = ${root.icon}
 
 label-connected = %{A1:st -e nm-applet &:}%essid%%{A}
 ; label-connected = %downspeed:8%
-format-connected-underline = ${root.underline}
+format-connected-overline = ${root.overline}
+; format-connected-underline = ${root.underline}
 
 format-disconnected = <label-disconnected>
 label-disconnected = %{A1:st -e nm-applet:}~%{A}
 label-disconnected-foreground = ${root.foreground}
-format-disconnected-underline = ${root.underline}
+format-disconnected-overline = ${root.overline}
+; format-disconnected-underline = ${root.underline}
 
 format-disconnected-prefix = " "
 format-disconnected-prefix-foreground = ${root.icon}
@@ -422,7 +435,8 @@ animation-charging-foreground = ${root.icon}
 animation-charging-framerate = 750
 
 label-charging = %percentage% | %time%
-format-charging-underline = ${root.underline}
+format-charging-overline = ${root.overline}
+; format-charging-underline = ${root.underline}
 
 format-discharging = <ramp-capacity> <label-discharging>
 
@@ -438,10 +452,12 @@ ramp-capacity-8 = 
 ramp-capacity-foreground = ${root.icon}
 
 label-discharging = %percentage% | %time%
-format-discharging-underline = ${root.underline}
+format-discharging-overline = ${root.overline}
+; format-discharging-underline = ${root.underline}
 
 format-full = <label-full>
-format-full-underline = ${root.underline}
+format-full-overline = ${root.overline}
+; format-full-underline = ${root.underline}
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${root.icon}
@@ -453,7 +469,8 @@ interval = 5
 
 format = <label>
 label = %{A1:$TERMINAL -n float_calcurse -e calcurse &:}%date%%{A}
-format-underline = ${root.underline}
+format-overline = ${root.overline}
+; format-underline = ${root.underline}
 
 format-prefix = " "
 format-prefix-foreground = ${root.icon}
@@ -465,7 +482,8 @@ interval = 5
 
 format = <label>
 label = %time%
-format-underline = ${root.underline}
+format-overline = ${root.overline}
+; format-underline = ${root.underline}
 
 format-prefix = " "
 format-prefix-foreground = ${root.icon}
@@ -476,7 +494,7 @@ type = internal/mpd
 format-online = <label-time>  <label-song> %{T3}<icon-prev>%{T3}<icon-stop>%{T3}<toggle>%{T3}<icon-next> %{T3}<icon-repeat>%{T3}<icon-random>
 format-online-spacing = 0
 format-online-background = ${colors.darkblack}
-format-online-underline = ${colors.darkblack}
+; format-online-underline = ${colors.darkblack}
 format-online-padding = 3
 
 format-offline = <label-offline>
