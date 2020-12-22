@@ -136,6 +136,7 @@ myKeys = \conf -> mkKeymap conf $
     , ("M-S-p",            spawn "pavucontrol")
     , ("M-a",              spawn "$TERMINAL -n float_calcurse -e calcurse")
     , ("M-s",              spawn "$TERMINAL -n float_mixer -e pulsemixer")
+    , ("M-S-s",            spawn "slack")
     , ("M-d",              spawn "$LAUNCHER")
     , ("M-S-d",            spawn "dmenu_file")
     , ("M-f",              sendMessage $ Toggle RNBFULL)
@@ -152,6 +153,7 @@ myKeys = \conf -> mkKeymap conf $
     -- , ("M-z",              )
     , ("M-x",              namedScratchpadAction myScratchpads "terminal")
     , ("M-c",              spawn "rofi-calc")
+    , ("M-S-c",            spawn "$TERMINAL -n float_calc -e bc -ql")
     , ("M-v",              spawn "showclip")
     , ("M-S-v",            spawn "$TERMINAL -n cava -e cava")
     , ("M-b",              sendMessage ToggleStruts)
@@ -269,6 +271,7 @@ myLayoutNames = ["二","高", "双", "中", "螺"]
 myManageHook = composeOne $
     [ transience
     , isDialog                       -?> doFloat
+    , appName =? "float_calc"        -?> doCenterFloat
     , appName =? "float_calcurse"    -?> doCenterFloat
     , appName =? "float_mixer"       -?> doCenterFloat
     , appName =? "forticlientsslvpn" -?> doCenterFloat

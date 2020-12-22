@@ -111,7 +111,7 @@ bindsym $mod+a exec $term -n float_calcurse -e calcurse
 bindsym $mod+Shift+a exec $term -e calcurse
 
 bindsym $mod+s exec $term -n float_mixer -e pulsemixer
-# bindsym $mod+Shift+s
+bindsym $mod+Shift+s exec slack
 
 bindsym $mod+d exec --no-startup-id "$LAUNCHER"
 bindsym $mod+Shift+d exec --no-startup-id dmenu_file
@@ -143,7 +143,7 @@ bindsym $mod+x scratchpad show
 bindsym $mod+Shift+x move scratchpad
 
 bindsym $mod+c exec --no-startup-id rofi-calc
-# bindsym $mod+Shift+c
+bindsym $mod+Shift+c exec $term -n float_calc -e bc -ql
 
 bindsym $mod+v exec --no-startup-id showclip
 bindsym $mod+Shift+v exec $term -n cava -e cava
@@ -218,7 +218,7 @@ bindsym $mod+Shift+F7 exec --no-startup-id "prompt 'Switch to laptop display?' m
 # bindsym $mod+F9
 # bindsym $mod+F10
 # bindsym $mod+F11
-bindsym $mod+F12 exec --no-startup-id lock
+# bindsym $mod+F12
 
 # ----- Multimedia Keys ----- #
 bindsym XF86AudioMute exec --no-startup-id volctl mute
@@ -233,4 +233,4 @@ bindsym Shift+XF86Display exec --no-startup-id "prompt 'Switch to laptop display
 # bindsym XF86Tools
 # bindsym XF86Bluetooth
 # bindsym ^F11?
-bindsym XF86Favorites exec --no-startup-id lock
+# bindsym XF86Favorites
