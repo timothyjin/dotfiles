@@ -333,10 +333,11 @@ ppFg :: String -> (String -> String)
 ppFg fg = DLog.wrap ("%{F" ++ fg ++ "}") "%{F-}"
 
 ppAct :: String -> (String -> String)
-ppAct s = DLog.wrap ("%{A1:xdotool set_desktop " ++ i ++ ":}") "%{A}"
+ppAct s = DLog.wrap ("%{A1:wmctrl -s " ++ i ++ ":}") "%{A}"
     where
         d = read s :: Integer
         i = show $ d - 1
+
 ------------------------------------------------------------------------
 -- Startup hook
 
