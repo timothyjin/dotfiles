@@ -1,3 +1,4 @@
 #!/bin/sh
 
-find $HOME/Documents $HOME/Downloads $HOME/Projects -name '*.pdf' -type f | cut -sd / -f 4- | rofi -dmenu -p "file" -i -width 100 -l 10 -location 2 | xargs -r -I % "$READER" %
+# find $HOME/Documents $HOME/Downloads $HOME/Projects -name '*.pdf' -type f | cut -sd / -f 4- | rofi -dmenu -p "file" -i | xargs -r -I % "$READER" %
+fd -ag -t f '*.pdf' $HOME/Documents $HOME/Downloads $HOME/Projects | cut -sd / -f 4- | rofi -dmenu -p "file" -i | xargs -r -I % "$READER" %
