@@ -1,0 +1,16 @@
+# Numeric, multi-monitor setup for 10 desktops.
+#
+# BSPWM starts with one desktop per monitor.
+# If there are n occupied desktops on a monitor, the
+# monitor will have n+1 desktops, with the highest
+# number desktop on the monitor being empty.
+# Otherwise, empty desktops are automatically removed.
+# Desktops are renumbered such that the desktop numbers
+# increase going left-to-right across monitors.
+
+min = 1
+max = 10
+remove-empty = true
+append-when-occupied = true
+watch-config = true
+renamers = ["numeric"]
