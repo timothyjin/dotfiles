@@ -1,17 +1,14 @@
 #!/bin/sh
 
-# Sets the wallpaper for all active displays and applies a wal colorscheme.
+# Sets the wallpaper for all active displays.
 
 # Wallpaper
 cmd="xwallpaper"
 for output in $(current-display)
 do
-    wallpaper="$HOME/.config/wallpaper-${output}.png"
-    [ ! -f $wallpaper ] && wallpaper="$HOME/.config/wallpaper.png"
+    wallpaper="$HOME/.config/wallpaper_${output}.png"
+    [ -f "$wallpaper" ] || wallpaper="$HOME/.config/wallpaper.png"
     cmd="${cmd} --output $output --zoom $wallpaper"
 done
 
 eval " $cmd"
-
-# wal colorscheme
-wal --theme base16-twilight

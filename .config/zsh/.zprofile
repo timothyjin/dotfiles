@@ -13,6 +13,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export GEM_HOME="$XDG_DATA_HOME/gem"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GOPATH="$XDG_DATA_HOME/go"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export HISTFILE="$XDG_DATA_HOME/zsh_history"
 export NPM_CONFIG_USER_CONFIG="$XDG_CONFIG_HOME/npm/npmrc"
@@ -25,8 +26,6 @@ export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 export XDG_CACHE_HOME="$HOME/.cache"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/gem"
 
-export LESSHISTFILE="-"
-
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
 export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
@@ -36,10 +35,14 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
+export LESSHISTFILE="-"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
+
+# Fix for Java programs in BSPWM
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 [ -f "$ZDOTDIR/.zshrc" ] && source "$ZDOTDIR/.zshrc"
 

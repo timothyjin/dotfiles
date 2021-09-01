@@ -9,6 +9,9 @@ prime-offload
 # Apply colors and transparency
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
+# Set wal colorscheme
+wal --theme base16-twilight
+
 # Apply input peripheral properties, start external applications
 [ -f ~/.xprofile ] && . ~/.xprofile
 
@@ -20,8 +23,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-session=${1:-i3}
+session=${1:-bspwm}
 case $session in
+    bspwm             ) exec bspwm ;;
     i3|i3wm           ) exec i3 ;;
     xmonad|Xmonad     ) exec xmonad ;;
     kde               ) exec startplasma-x11 ;;

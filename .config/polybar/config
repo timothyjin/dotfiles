@@ -57,7 +57,7 @@ monitor = ${env:MONITOR}
 ; border-bottom-size = 0
 ; border-color = ${colors.transparent}
 
-padding-left = 1
+padding-left = 0
 padding-right = 2
 
 module-margin-left = 0
@@ -83,6 +83,63 @@ locale = en_US.UTF-8
 ; scroll-down =
 ; double-click-left =
 ; double-click-right =
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; bspwm BARS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[bar/bspwm]
+inherit = bar/master
+wm-restack = bspwm
+
+height = 28
+background = ${colors.darkblack}
+foreground = ${colors.white}
+icon = ${colors.darkwhite}
+overline = ${colors.cyan}
+underline = ${colors.cyan}
+menu-options = ${colors.darkred}
+
+overline-size = 1
+overline-color = ${colors.darkblack}
+underline-size = 0
+underline-color = ${colors.darkwhite}
+
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
+border-bottom-size = 0
+border-color = ${colors.darkblack}
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+[bar/bspwm-top]
+inherit = bar/bspwm
+bottom = false
+
+modules-left = bspwm xwindow
+modules-center = mpd
+modules-right = temperature cpu memory disk backlight audio wifi battery date time
+
+[bar/bspwm-main]
+inherit = bar/bspwm
+bottom = false
+
+modules-left = bspwm xwindow
+modules-center = mpd
+modules-right = temperature cpu memory disk backlight audio wifi battery date time
+
+tray-position = none
+
+[bar/bspwm-side]
+inherit = bar/bspwm
+bottom = false
+
+modules-left = bspwm xwindow
+modules-right = date time
+
+tray-position = center
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; i3 BARS
@@ -194,6 +251,64 @@ tray-position = center
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; MODULES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+inline-mode = false
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+fuzzy-match = false
+
+format = <label-state>  <label-mode>
+
+; If any values for label-dimmed-N are defined, the workspace/mode
+; colors will get overridden with those values if the monitor is out of focus
+label-dimmed-focused-background = ${colors.darkwhite}
+label-dimmed-occupied-overline = ${colors.darkwhite}
+label-dimmed-empty-foreground = ${colors.darkblack}
+
+label-focused = %name%
+label-focused-foreground = ${colors.darkblack}
+label-focused-background = ${colors.cyan}
+label-focused-overline = ${root.overline}
+label-focused-underline = ${root.underline}
+label-focused-padding = 2
+
+label-occupied = %name%
+label-occupied-overline = ${root.overline}
+label-occupied-underline = ${root.underline}
+label-occupied-padding = 2
+
+label-urgent = %name%
+label-urgent-foreground = ${colors.darkblack}
+label-urgent-background = ${colors.red}
+label-urgent-padding = 2
+
+label-empty = %name%
+label-empty-foreground = ${colors.black}
+label-empty-padding = 2
+
+; Available tokens:
+;   None
+label-monocle = 一
+label-tiled = 窗
+label-fullscreen = 全
+; label-floating = fl
+; label-pseudotiled = ps
+;label-locked = 
+;label-locked-foreground = #bd2c40
+;label-sticky = 
+;label-sticky-foreground = #fba922
+;label-private = 
+;label-private-foreground = #bd2c40
+;label-marked = M
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = ${root.background}
 
 [module/i3]
 type = internal/i3
@@ -388,7 +503,7 @@ ramp-signal-1 = 
 ramp-signal-2 = 喝
 ramp-signal-3 = ﰊ
 ramp-signal-4 = ﯿ
-; ramp-signal-5 = 
+ramp-signal-5 = 
 ramp-signal-foreground = ${root.icon}
 
 label-connected = %{A1:st -e nm-applet &:}%essid%%{A}
